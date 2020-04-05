@@ -1,0 +1,70 @@
+
+parameters:
+  name: ''
+  displayName: 'Release'
+  buildConfiguration: 'Release'
+  vmImage: 'ubuntu-18.04'
+  publisherId: 'bewhite'
+  extensionId: 'ps-rule'
+  extensionTag: '-canary'
+ 
+jobs:
+- job:
+  displayName: Release
+  pool:
+    vmImage: ${{ parameters.vmImage }}
+  steps:
+
+  # Install pipeline dependencies
+  - powershell: ./.azure-pipelines/pipeline-deps.ps1
+    displayName: 'Install dependencies'
+
+  # Install TFS CLI
+  - task: TfxInstaller@2
+    displayName: 'Install tfx-cli'
+
+  # Download extension
+  - task: DownloadPipelineArtifact@1
+    displayName: 'Download extension package'
+    inputs:
+      artifactName: Extension
+      downloadPath: $(Build.SourcesDirectory)/out/extension
+
+  # Determine current published version
+  - task: QueryAzureDevOpsExtensionVersion@2
+    displayName: 'Query published version'
+    inputs:
+      connectTo: 'VsTeam'
+      connectedServiceName: 'Visual Studio Marketplace (bewhite)'
+      publisherId: ${{ parameters.publisherId }}
+      extensionId: ${{ parameters.extensionId }}
+      extensionTag: ${{ parameters.extensionTag }}
+      versionAction: 'Patch'
+
+  # Get extension version
+  - powershell: Invoke-Build GetVersionInfo
+    displayName: 'Get extension version'
+
+  # Publish extension
+  - task: PublishAzureDevOpsExtension@2
+    displayName: 'Publish extension to marketplace'
+    inputs:
+      connectedServiceName: 'Visual Studio Marketplace (bewhite)'
+      fileType: vsix
+      vsixFile: $(Build.SourcesDirectory)/out/extension/bewhite.ps-rule-*.vsix
+      publisherId: ${{ parameters.publisherId }}
+      extensionId: ${{ parameters.extensionId }}
+      extensionTag: ${{ parameters.extensionTag }}
+      extensionVersion: $(EXTENSION_VERSION)
+      updateTasksVersion: true
+      updateTasksVersionType: patch
+
+  # Check extension
+  - task: IsAzureDevOpsExtensionValid@2
+    displayName: 'Check extension'
+    inputs:
+      connectedServiceName: 'Visual Studio Marketplace (bewhite)'
+      publisherId: ${{ parameters.publisherId }}
+      extensionId: ${{ parameters.extensionId }}
+      extensionTag: ${{ parameters.extensionTag }}
+      extensionVersion: $(EXTENSION_VERSION)

@@ -1,0 +1,122 @@
+{
+    "$schema": "https://raw.githubusercontent.com/microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+    "id": "8804fc31-b62f-4d49-b2a1-c80dc0879dae",
+    "name": "ps-rule-assert",
+    "friendlyName": "PSRule analysis",
+    "description": "Run analysis with PSRule.",
+    "helpUrl": "https://github.com/BernieWhite/PSRule-pipelines/blob/master/docs/tasks.md#ps-rule-assert",
+    "helpMarkDown": "[Learn more about this task](https://github.com/BernieWhite/PSRule-pipelines/blob/master/docs/tasks.md#ps-rule-assert)",
+    "category": "Utility",
+    "visibility": [
+        "Build",
+        "Release"
+    ],
+    "runsOn": [
+        "Agent",
+        "DeploymentGroup"
+    ],
+    "author": "Bernie White",
+    "version": {
+        "Major": 0,
+        "Minor": 0,
+        "Patch": 1
+    },
+    "preview": true,
+    "releaseNotes": "",
+    "groups": [
+        {
+            "name": "advanced",
+            "displayName": "Advanced",
+            "isExpanded": false
+        }
+    ],
+    "minimumAgentVersion": "2.115.0",
+    "inputs": [
+        {
+            "name": "path",
+            "type": "filePath",
+            "label": "Working directory",
+            "groupName": "advanced",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Working directory where PSRule is run from."
+        },
+        {
+            "name": "inputType",
+            "type": "pickList",
+            "label": "Input type",
+            "options": {
+                "repository": "Repository",
+                "inputPath": "Input Path"
+            },
+            "defaultValue": "repository",
+            "required": true,
+            "helpMarkDown": "Determines the type of input to use for PSRule."
+        },
+        {
+            "name": "inputPath",
+            "type": "filePath",
+            "label": "Input file(s)",
+            "defaultValue": "*.json",
+            "required": false,
+            "helpMarkDown": "One or more input files containing objects for PSRule to validate. This binds to the `-InputPath` parameter. File type is detected based on file extension.",
+            "visibleRule": "inputType = inputPath"
+        },
+        {
+            "name": "source",
+            "type": "filePath",
+            "label": "Source path",
+            "defaultValue": ".ps-rule/",
+            "required": false,
+            "helpMarkDown": "Path to the rule source location."
+        },
+        {
+            "name": "modules",
+            "type": "string",
+            "label": "Modules",
+            "required": false,
+            "defaultValue": "",
+            "helpMarkDown": "A comma separated list of modules to use for analysis."
+        },
+        {
+            "name": "outputFormat",
+            "type": "pickList",
+            "label": "Output format",
+            "options": {
+                "None": "None",
+                "Yaml": "Yaml",
+                "Json": "Json",
+                "NUnit3": "NUnit3",
+                "Csv": "Csv"
+            },
+            "required": true,
+            "defaultValue": "None",
+            "helpMarkDown": "The format to use when writing results to disk. When set to `None` results are not written to disk."
+        },
+        {
+            "name": "outputPath",
+            "type": "filePath",
+            "label": "Output path",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "The file path to write results to.",
+            "visibleRule": "outputFormat != None"
+        }
+    ],
+    "instanceNameFormat": "PSRule analysis",
+    "execution": {
+        "PowerShell3": {
+            "target": "powershell.ps1",
+            "platforms": [
+                "windows"
+            ]
+        },
+        "Node": {
+            "target": "powershell.js",
+            "argumentFormat": ""
+        }
+    },
+    "messages": {
+        "AssertFailed": "One or more assertions failed."
+    }
+}

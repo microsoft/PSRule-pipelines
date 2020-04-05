@@ -1,0 +1,48 @@
+
+# Azure DevOps
+# Loopback pipeline for PSRule-pipelines
+
+variables:
+  version: '0.0.0'
+
+# Use build number format, i.e. 0.1.0-B1811001
+name: $(version)-C$(date:yyMM)$(rev:rrr)
+
+resources:
+  pipelines:
+  - pipeline: CI
+    source: PSRule-pipelines-CI
+    trigger:
+      enabled: true
+      branches:
+        include:
+        - bewhite/dev
+        - master
+
+trigger: none
+pr: none
+
+stages:
+
+# Test pipeline
+- stage: Test
+  displayName: Test
+  jobs:
+  - job:
+    pool:
+      vmImage: 'ubuntu-latest'
+    displayName: 'Extension'
+    steps:
+
+    - task: ps-rule-install@0
+      displayName: Test install task
+      inputs:
+        modules: PSRule.Rules.Azure
+
+    - task: ps-rule-assert@0
+      displayName: Test assert task
+      inputs:
+        source: '.ps-rule/'
+        inputType: repository
+        outputType: NUnit3
+        outputPath: reports/ps-rule-loopback.xml
