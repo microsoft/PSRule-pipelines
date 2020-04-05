@@ -1,0 +1,125 @@
+# Azure DevOps
+# CI pipeline for PSRule-pipelines
+
+variables:
+  version: '0.0.0'
+  buildConfiguration: 'Release'
+  publish: 'true'
+
+# Use build number format, i.e. 0.1.0-B1811001
+name: $(version)-B$(date:yyMM)$(rev:rrr)
+
+trigger:
+  branches:
+    include:
+    - 'master'
+    - 'bewhite/dev'
+  tags:
+    include:
+    - 'v0.*'
+
+pr:
+  branches:
+    include:
+    - 'master'
+
+stages:
+
+# Build pipeline
+- stage: Build
+  displayName: Build
+  jobs:
+  - job:
+    pool:
+      vmImage: 'ubuntu-latest'
+    displayName: 'Extension'
+    variables:
+      BUILD_TAG: '-canary'
+    steps:
+
+    # Install pipeline dependencies
+    - powershell: ./.azure-pipelines/pipeline-deps.ps1
+      displayName: 'Install dependencies'
+
+    # Install TFS CLI
+    - task: TfxInstaller@2
+      displayName: 'Install tfx-cli'
+
+    # # Determine current published version
+    # - task: QueryAzureDevOpsExtensionVersion@2
+    #   displayName: 'Query published version'
+    #   inputs:
+    #     connectTo: 'VsTeam'
+    #     connectedServiceName: 'Visual Studio Marketplace (bewhite)'
+    #     publisherId: 'bewhite'
+    #     extensionId: 'ps-rule$(BUILD_TAG)'
+    #     versionAction: 'Patch'
+    #   condition: and(succeeded(), not(startsWith(variables['Build.SourceBranch'], 'refs/tags/v0.')))
+
+    # Build extension
+    - powershell: Invoke-Build -Configuration $(buildConfiguration) -Build $(Build.BuildNumber)
+      displayName: 'Build extension'
+
+    # Package extension
+    - task: PackageAzureDevOpsExtension@2
+      displayName: 'Package extension'
+      inputs:
+        rootFolder: out/dist
+        outputPath: out/extension
+        extensionVisibility: private
+        # updateTasksVersion: true
+
+    # Generate artifacts
+    - publish: out/extension
+      displayName: 'Publish extension package'
+      artifact: Extension
+      condition: and(succeeded(), eq(variables['publish'], 'true'))
+
+# Analysis pipeline
+- stage: Analysis
+  displayName: Analysis
+  dependsOn: []
+  jobs:
+  - job: Secret_Scan
+    pool: 'Hosted VS2017'
+    displayName: Secret scan
+
+    steps:
+    - task: securedevelopmentteam.vss-secure-development-tools.build-task-credscan.CredScan@2
+      displayName: 'Scan for secrets'
+      inputs:
+        debugMode: false
+        toolMajorVersion: V2
+
+    - task: securedevelopmentteam.vss-secure-development-tools.build-task-publishsecurityanalysislogs.PublishSecurityAnalysisLogs@2
+      displayName: 'Publish scan logs'
+      continueOnError: true
+
+    - task: securedevelopmentteam.vss-secure-development-tools.build-task-postanalysis.PostAnalysis@1
+      displayName: 'Check for failures'
+      inputs:
+        CredScan: true
+        ToolLogsNotFoundAction: Error
+
+# Release pipeline
+- stage: Canary
+  displayName: Canary
+  dependsOn: [ 'Build', 'Analysis' ]
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+  variables:
+    isRelease: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v0.'))
+  jobs:
+  - template: jobs/release.yaml
+    parameters:
+      name: canary_release
+
+# Release pipeline
+- stage: Stable
+  displayName: Stable
+  dependsOn: Canary
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v0.'))
+  jobs:
+    - template: jobs/release.yaml
+      parameters:
+        name: stable_release
+        extensionTag: ''

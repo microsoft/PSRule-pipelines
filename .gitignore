@@ -2,3 +2,4 @@
 .vs/
 out/
 reports/
+node_modules/
