@@ -13,7 +13,6 @@ trigger:
   branches:
     include:
     - 'master'
-    - 'bewhite/dev'
   tags:
     include:
     - 'v0.*'
@@ -44,17 +43,6 @@ stages:
     # Install TFS CLI
     - task: TfxInstaller@2
       displayName: 'Install tfx-cli'
-
-    # # Determine current published version
-    # - task: QueryAzureDevOpsExtensionVersion@2
-    #   displayName: 'Query published version'
-    #   inputs:
-    #     connectTo: 'VsTeam'
-    #     connectedServiceName: 'Visual Studio Marketplace (bewhite)'
-    #     publisherId: 'bewhite'
-    #     extensionId: 'ps-rule$(BUILD_TAG)'
-    #     versionAction: 'Patch'
-    #   condition: and(succeeded(), not(startsWith(variables['Build.SourceBranch'], 'refs/tags/v0.')))
 
     # Build extension
     - powershell: Invoke-Build -Configuration $(buildConfiguration) -Build $(Build.BuildNumber)
@@ -112,6 +100,8 @@ stages:
   - template: jobs/release.yaml
     parameters:
       name: canary_release
+      extensionTag: '-canary'
+      extensionName: 'PSRule (Canary)'
 
 # Release pipeline
 - stage: Stable
@@ -123,3 +113,4 @@ stages:
       parameters:
         name: stable_release
         extensionTag: ''
+        extensionName: 'PSRule'

@@ -16,7 +16,6 @@ resources:
       enabled: true
       branches:
         include:
-        - bewhite/dev
         - master
 
 trigger: none
