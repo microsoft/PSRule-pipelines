@@ -98,12 +98,13 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 
 ## License
 
-This project is [licensed under the MIT License](LICENSE).
+This project is [licensed under the MIT License][license].
 
 [issues]: https://github.com/BernieWhite/PSRule-pipelines/issues
 [ci-badge]: https://dev.azure.com/bewhite/PSRule-pipelines/_apis/build/status/PSRule-pipelines-CI?branchName=master
 [extension]: https://marketplace.visualstudio.com/items?itemName=bewhite.ps-rule
-[ps-rule-assert]: https://github.com/BernieWhite/PSRule-pipelines/blob/bewhite/dev/docs/tasks.md#ps-rule-assert
-[ps-rule-install]: https://github.com/BernieWhite/PSRule-pipelines/blob/bewhite/dev/docs/tasks.md#ps-rule-install
-[contribution guide]: https://github.com/BernieWhite/PSRule-pipelines/blob/bewhite/dev/CONTRIBUTING.md
-[change log]: https://github.com/BernieWhite/PSRule-pipelines/blob/bewhite/dev/CHANGELOG.md
+[ps-rule-assert]: https://github.com/BernieWhite/PSRule-pipelines/blob/master/docs/tasks.md#ps-rule-assert
+[ps-rule-install]: https://github.com/BernieWhite/PSRule-pipelines/blob/master/docs/tasks.md#ps-rule-install
+[contribution guide]: https://github.com/BernieWhite/PSRule-pipelines/blob/master/CONTRIBUTING.md
+[change log]: https://github.com/BernieWhite/PSRule-pipelines/blob/master/CHANGELOG.md
+[license]: https://github.com/BernieWhite/PSRule-pipelines/blob/master/LICENSE

@@ -129,7 +129,7 @@ function UpdateTaskVersion {
         [String]$Path
     )
     process {
-        $buildNumber = $Env:BUILD_BUILDNUMBER.Split('-', [System.StringSplitOptions]::RemoveEmptyEntries)[1].Replace('B', '');
+        $buildNumber = [int]::Parse($Env:BUILD_BUILDNUMBER.Split('-', [System.StringSplitOptions]::RemoveEmptyEntries)[1].Replace('B', ''));
         Get-ChildItem -Path $Path -Filter task.json -Recurse | ForEach-Object {
             $filePath = $_.FullName;
             $taskContent = Get-Content -Raw -Path $filePath | ConvertFrom-Json;
