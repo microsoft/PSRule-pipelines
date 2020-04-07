@@ -6,8 +6,9 @@ parameters:
   vmImage: 'ubuntu-18.04'
   publisherId: 'bewhite'
   extensionId: 'ps-rule'
-  extensionTag: '-canary'
- 
+  extensionTag: ''
+  extensionName: 'PSRule'
+
 jobs:
 - job:
   displayName: Release
@@ -55,9 +56,8 @@ jobs:
       publisherId: ${{ parameters.publisherId }}
       extensionId: ${{ parameters.extensionId }}
       extensionTag: ${{ parameters.extensionTag }}
+      extensionName: ${{ parameters.extensionName }}
       extensionVersion: $(EXTENSION_VERSION)
-      updateTasksVersion: true
-      updateTasksVersionType: patch
 
   # Check extension
   - task: IsAzureDevOpsExtensionValid@2

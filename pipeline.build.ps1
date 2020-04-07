@@ -122,6 +122,23 @@ function GetPipelineTasks {
     }
 }
 
+function UpdateTaskVersion {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $True)]
+        [String]$Path
+    )
+    process {
+        $buildNumber = [int]::Parse($Env:BUILD_BUILDNUMBER.Split('-', [System.StringSplitOptions]::RemoveEmptyEntries)[1].Replace('B', ''));
+        Get-ChildItem -Path $Path -Filter task.json -Recurse | ForEach-Object {
+            $filePath = $_.FullName;
+            $taskContent = Get-Content -Raw -Path $filePath | ConvertFrom-Json;
+            $taskContent.version.patch = $buildNumber;
+            $taskContent | ConvertTo-Json -Depth 100 | Set-Content -Path $filePath -Force;
+        }
+    }
+}
+
 # Synopsis: Install NuGet provider
 task NuGet {
     if ($Null -eq (Get-PackageProvider -Name NuGet -ErrorAction SilentlyContinue)) {
@@ -253,6 +270,8 @@ task VersionExtension {
             @{ version = $version } | ConvertTo-Json | Set-Content -Path $versionInfo;
         }
     }
+
+    UpdateTaskVersion -Path out/dist/;
 }
 
 # Synopsis: This task reads version info if set and configures a build variable

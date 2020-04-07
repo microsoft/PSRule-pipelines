@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
     "id": "ps-rule",
-    "name": "PSRule (Canary)",
+    "name": "PSRule",
     "version": "0.0.1",
     "publisher": "bewhite",
     "targets": [
