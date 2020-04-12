@@ -1,0 +1,26 @@
+
+info:
+  name: PSRule-pipelines
+  description: An Azure DevOps extension for using PSRule within Azure Pipelines.
+  url: https://github.com/BernieWhite/PSRule-pipelines
+
+repository:
+  type: git
+  url: https://github.com/BernieWhite/PSRule-pipelines.git
+
+license: MIT
+
+bugs:
+  url: https://github.com/BernieWhite/PSRule-pipelines/issues
+
+modules:
+  PSRule: ^0.16.0
+  VstsTaskSdk: ^0.11.0
+  PowerShellGet: ^2.2.3
+
+tasks:
+  clear:
+    steps:
+      - gitPrune:
+          name: origin
+          removeGone: true

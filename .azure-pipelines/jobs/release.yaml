@@ -58,6 +58,7 @@ jobs:
       extensionTag: ${{ parameters.extensionTag }}
       extensionName: ${{ parameters.extensionName }}
       extensionVersion: $(EXTENSION_VERSION)
+      updateTasksVersion: false
 
   # Check extension
   - task: IsAzureDevOpsExtensionValid@2

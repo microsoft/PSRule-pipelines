@@ -188,8 +188,8 @@ task VstsTaskSdk NuGet, {
         $Null = New-Item -Path out/ps_modules -ItemType Directory -Force;
     }
     Save-Module -Name VstsTaskSdk -Path out/ps_modules -RequiredVersion 0.11.0;
-    Copy-Item -Path out/ps_modules/VstsTaskSdk/0.11.0/* -Destination out/dist/ps-rule-assert/ps_modules/VstsTaskSdk/  -Recurse -Force;
-    Copy-Item -Path out/ps_modules/VstsTaskSdk/0.11.0/* -Destination out/dist/ps-rule-install/ps_modules/VstsTaskSdk/  -Recurse -Force;
+    Copy-Item -Path out/ps_modules/VstsTaskSdk/0.11.0/* -Destination out/dist/ps-rule-assert/ps_modules/VstsTaskSdk/ -Recurse -Force;
+    Copy-Item -Path out/ps_modules/VstsTaskSdk/0.11.0/* -Destination out/dist/ps-rule-install/ps_modules/VstsTaskSdk/ -Recurse -Force;
     Remove-Item  -Path out/ps_modules/VstsTaskSdk -Force -Recurse;
 }
 
