@@ -6,11 +6,11 @@
 
 [CmdletBinding()]
 param (
-    # The modules to use
+    # The name of the module to install
     [Parameter(Mandatory = $False)]
-    [String]$Modules = (Get-VstsInput -Name 'modules'),
+    [String]$Module = (Get-VstsInput -Name 'module'),
 
-    # Determine if PSRule modules are updated to the latest versions
+    # Determine if the PSRule module is updated to the latest version
     [Parameter(Mandatory = $False)]
     [System.Boolean]$Latest = (Get-VstsInput -Name 'latest' -AsBool),
 
@@ -40,10 +40,7 @@ function WriteDebug {
     }
 }
 
-$moduleNames = @()
-if (![String]::IsNullOrEmpty($Modules)) {
-    $moduleNames = $Modules.Split(',', [System.StringSplitOptions]::RemoveEmptyEntries);
-}
+$moduleNames = @($Module)
 if ('PSRule' -notin $moduleNames) {
     $moduleNames += 'PSRule';
 }

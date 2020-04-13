@@ -36,7 +36,7 @@ stages:
     - task: ps-rule-install@0
       displayName: Test install task
       inputs:
-        modules: PSRule.Rules.Azure
+        module: PSRule.Rules.Azure
 
     - task: ps-rule-assert@0
       displayName: Test assert task

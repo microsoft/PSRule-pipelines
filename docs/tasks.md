@@ -11,7 +11,7 @@ Modules will be installed to the current user scope.
 steps:
 - task: ps-rule-install@0
   inputs:
-    modules: PSRule.Rules.Azure  # The name of a rule module to install.
+    module: PSRule.Rules.Azure   # The name of a rule module to install.
     latest: false                # Optional. Determine if the installed module is updated to the latest version.
     prerelease: false            # Optional. Determine if a pre-release module version is installed.
     path: ''                     # Optional. The current working path for the task to execute from.
@@ -19,7 +19,7 @@ steps:
 
 Inputs:
 
-- **modules**: The name of a rule module to install.
+- **module**: The name of a rule module to install.
 The module will be installed from the PowerShell Gallery.
 For example: _PSRule.Rules.Azure_
 - **latest**: Determine if the installed module is updated to the latest version.

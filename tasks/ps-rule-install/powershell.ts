@@ -15,7 +15,7 @@ async function run() {
 
         // Get inputs
         let input_path: string = task.getPathInput('path', /*required*/ true, /*check*/ true);
-        let input_modules: string = task.getInput('modules', /*required*/ false);
+        let input_module: string = task.getInput('module', /*required*/ false);
         let input_latest: boolean = task.getBoolInput('latest', /*required*/ true);
         let input_prerelease: boolean = task.getBoolInput('prerelease', /*required*/ true);
 
@@ -29,8 +29,8 @@ async function run() {
 
         // Prepare parameters
         contents.push(`$scriptParams = @{ };`);
-        if (input_modules !== undefined) {
-            contents.push(`$scriptParams['Modules'] = '${input_modules}'`);
+        if (input_module !== undefined) {
+            contents.push(`$scriptParams['Module'] = '${input_module}'`);
         }
         if (input_latest) {
             contents.push(`$scriptParams['Latest'] = $True;`);
