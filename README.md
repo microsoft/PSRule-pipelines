@@ -16,7 +16,7 @@ The PSRule extension includes the following tasks for Azure Pipelines:
 Name                | Friendly name   | Description | Reference
 ----                | -------------   | ----------- | ---------
 `ps-rule-assert`    | PSRule analysis | Run analysis with PSRule. | [reference][ps-rule-assert]
-`ps-rule-install`   | Install PSRule module | Install PowerShell modules containing rules. | [reference][ps-rule-install]
+`ps-rule-install`   | Install a PSRule module | Install PowerShell modules containing rules. | [reference][ps-rule-install]
 
 To add these tasks, use the name for YAML pipelines or friendly name of classic pipelines.
 
@@ -38,16 +38,17 @@ steps:
 
 ### Using rules modules from PowerShell Gallery
 
-To use rules modules, install them before using the `ps-rule-assert` task.
-To install modules automatically from the PowerShell Gallery, use the `ps-rule-install` task.
+To use PSRule modules, install them before using the `ps-rule-assert` task.
+To install modules from the PowerShell Gallery, use the `ps-rule-install` task.
 
 Using YAML pipelines:
 
 ```yaml
 steps:
+# Install the PSRule.Rules.Azure module
 - task: ps-rule-install@0
   inputs:
-    modules: PSRule.Rules.Azure
+    module: PSRule.Rules.Azure
 ```
 
 ### Using rules from Azure Artifacts
