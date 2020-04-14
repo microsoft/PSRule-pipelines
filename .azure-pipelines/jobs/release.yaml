@@ -10,8 +10,8 @@ parameters:
   extensionName: 'PSRule'
 
 jobs:
-- job:
-  displayName: Release
+- job: ${{ parameters.name }}
+  displayName: ${{ parameters.displayName }}
   pool:
     vmImage: ${{ parameters.vmImage }}
   steps:
