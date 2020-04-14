@@ -109,8 +109,27 @@ stages:
   dependsOn: Canary
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v0.'))
   jobs:
-    - template: jobs/release.yaml
-      parameters:
-        name: stable_release
-        extensionTag: ''
-        extensionName: 'PSRule'
+  - template: jobs/release.yaml
+    parameters:
+      name: stable_release
+      extensionTag: ''
+      extensionName: 'PSRule'
+
+  - job: GitHub
+    dependsOn: stable_release
+    pool:
+      name: 'ubuntu-18.04'
+    steps:
+    # Update GitHub release
+    - task: GitHubRelease@1
+      displayName: 'GitHub release'
+      inputs:
+        gitHubConnection: 'AzureDevOps-PSRule-pipelines'
+        repositoryName: '$(Build.Repository.Name)'
+        action: edit
+        tag: '$(Build.SourceBranchName)'
+        releaseNotesSource: inline
+        releaseNotesInline: 'See [change log](https://github.com/BernieWhite/PSRule-pipelines/blob/master/CHANGELOG.md)'
+        assetUploadMode: replace
+        addChangeLog: false
+        isPreRelease: false
