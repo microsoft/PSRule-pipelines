@@ -16,15 +16,11 @@ async function run() {
         // Get inputs
         let input_path: string = task.getPathInput('path', /*required*/ true, /*check*/ true);
         let input_inputType: string = task.getInput('inputType', /*required*/ true);
-        let input_inputPath: string;
+        let input_inputPath: string = task.getInput('inputPath', /*required*/ true);
         let input_source: string = task.getPathInput('source', /*required*/ false, /*check*/ false);
         let input_modules: string = task.getInput('modules', /*required*/ false);
         let input_outputFormat: string = task.getPathInput('outputFormat', /*required*/ false, /*check*/ false) || 'None';
         let input_outputPath: string = task.getPathInput('outputPath', /*required*/ false, /*check*/ false);
-
-        if (input_inputType.toUpperCase() === 'INPUTPATH') {
-            input_inputPath = task.getInput('inputPath', /*required*/ true);
-        }
 
         // Write bootstrap commands to a temporary script file
         let contents: string[] = [];
@@ -35,10 +31,7 @@ async function run() {
         contents.push(`Import-Module $sdkPath -ArgumentList @{ NonInteractive = 'true' }`);
 
         // Prepare parameters
-        contents.push(`$scriptParams = @{ Path = '${input_path}'; InputType = '${input_inputType}' };`);
-        if (input_inputPath !== undefined) {
-            contents.push(`$scriptParams['InputPath'] = '${input_inputPath}'`);
-        }
+        contents.push(`$scriptParams = @{ Path = '${input_path}'; InputType = '${input_inputType}' }; InputPath = '${input_inputPath}' };`);
         if (input_source !== undefined) {
             contents.push(`$scriptParams['Source'] = '${input_source}'`);
         }

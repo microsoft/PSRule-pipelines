@@ -46,6 +46,9 @@ if ($Null -eq $Path) {
 if ([String]::IsNullOrEmpty($Path)) {
     $Path = $PWD;
 }
+if ($Null -eq $InputPath) {
+    $InputPath = $Path;
+}
 if ([String]::IsNullOrEmpty($Source)) {
     $Source = Join-Path -Path $Path -ChildPath '.ps-rule/';
 }
@@ -146,8 +149,8 @@ try {
     if ($InputType -eq 'repository') {
         $items = New-Object -TypeName System.Collections.ArrayList;
         WriteDebug 'Running ''Assert-PSRule'' with repository as input.';
-        $Null = $items.Add((Get-Item -Path $Path));
-        $Null = $items.AddRange((Get-ChildItem -Path $Path -File -Recurse));
+        $Null = $items.Add((Get-Item -Path $InputPath));
+        $Null = $items.AddRange((Get-ChildItem -Path $InputPath -File -Recurse));
         Write-Host '';
         Write-Host '---';
         $items.ToArray() | Assert-PSRule @invokeParams;
