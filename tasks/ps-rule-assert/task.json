@@ -22,7 +22,7 @@
         "Patch": 1
     },
     "preview": true,
-    "releaseNotes": "",
+    "releaseNotes": "[See change log](https://github.com/BernieWhite/PSRule-pipelines/blob/master/CHANGELOG.md)",
     "groups": [
         {
             "name": "advanced",
@@ -39,7 +39,7 @@
             "groupName": "advanced",
             "defaultValue": "",
             "required": false,
-            "helpMarkDown": "Working directory where PSRule is run from."
+            "helpMarkDown": "The working directory PSRule is run from."
         },
         {
             "name": "inputType",
@@ -57,10 +57,9 @@
             "name": "inputPath",
             "type": "filePath",
             "label": "Input file(s)",
-            "defaultValue": "*.json",
-            "required": false,
-            "helpMarkDown": "One or more input files containing objects for PSRule to validate. This binds to the `-InputPath` parameter. File type is detected based on file extension.",
-            "visibleRule": "inputType = inputPath"
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "The path PSRule will look for files to validate."
         },
         {
             "name": "source",
@@ -68,7 +67,7 @@
             "label": "Source path",
             "defaultValue": ".ps-rule/",
             "required": false,
-            "helpMarkDown": "Path to the rule source location."
+            "helpMarkDown": "An path containing rules to use for analysis."
         },
         {
             "name": "modules",
@@ -103,7 +102,7 @@
             "visibleRule": "outputFormat != None"
         }
     ],
-    "instanceNameFormat": "PSRule analysis",
+    "instanceNameFormat": "Run PSRule analysis",
     "execution": {
         "PowerShell3": {
             "target": "powershell.ps1",

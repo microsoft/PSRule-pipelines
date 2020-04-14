@@ -16,90 +16,67 @@ The PSRule extension includes the following tasks for Azure Pipelines:
 Name                | Friendly name   | Description | Reference
 ----                | -------------   | ----------- | ---------
 `ps-rule-assert`    | PSRule analysis | Run analysis with PSRule. | [reference][ps-rule-assert]
-`ps-rule-install`   | Install a PSRule module | Install PowerShell modules containing rules. | [reference][ps-rule-install]
+`ps-rule-install`   | Install PSRule module | Install a PowerShell module containing rules. | [reference][ps-rule-install]
 
 To add these tasks, use the name for YAML pipelines or friendly name of classic pipelines.
 
-### Pre-installing the PSRule module
+### Installing PSRule extension
 
-A point in time release of PSRule is distributed with this extension.
-To use pre-release versions or a newer version of PSRule use PowerShell to pre-install using:
+To use PSRule within Azure DevOps Services, install the [extension] from the [Visual Studio Marketplace][extension].
+For detailed instructions see [Install extensions][extension-install].
 
-```powershell
-Install-Module -Name PSRule -Scope CurrentUser -Force;
-```
+If you don't have permissions to install extensions within your Azure DevOps organization,
+you can request it to be installed by an admin instead.
 
-Using YAML pipelines:
+### Using within YAML pipelines
 
-```yaml
-steps:
-- powershell: Install-Module -Name PSRule -Scope CurrentUser -Force;
-```
+To use these tasks within YAML pipelines:
 
-### Using rules modules from PowerShell Gallery
+- Install rule modules with the `ps-rule-install` task (optional).
+- Run analysis one or more times with the `ps-rule-assert` task.
+- Publish analysis results with the [Publish Test Results](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=yaml) builtin task.
 
-To use PSRule modules, install them before using the `ps-rule-assert` task.
-To install modules from the PowerShell Gallery, use the `ps-rule-install` task.
-
-Using YAML pipelines:
+For example:
 
 ```yaml
 steps:
-# Install the PSRule.Rules.Azure module
+
+# Install PSRule.Rules.Azure from the PowerShell Gallery
 - task: ps-rule-install@0
   inputs:
-    module: PSRule.Rules.Azure
-```
+    module: PSRule.Rules.Azure   # Install PSRule.Rules.Azure from the PowerShell Gallery.
+    latest: false                # Only install the module if not already installed.
+    prerelease: false            # Install stable versions only.
 
-### Using rules from Azure Artifacts
-
-More to come.
-
-### Assert repository structure
-
-Using YAML pipelines:
-
-```yaml
-steps:
+# Run analysis from JSON files using the `PSRule.Rules.Azure` module and custom rules from `.ps-rule/`.
 - task: ps-rule-assert@0
   inputs:
-    source: '.ps-rule/'
-    inputType: repository
-```
-
-### Assert an input path
-
-Using YAML pipelines:
-
-```yaml
-steps:
-- task: ps-rule-assert@0
-  inputs:
-    source: '.ps-rule/'
     inputType: inputPath
-    inputPath: 'out/'
-```
+    inputPath: 'out/*.json'                  # Read objects from JSON files in 'out/'.
+    modules: 'PSRule.Rules.Azure'            # Analyze objects using the rules within the PSRule.Rules.Azure PowerShell module.
+    source: '.ps-rule/'                      # Additionally, analyze object using custom rules from '.ps-rule/'.
+    outputType: NUnit3                       # Save results to an NUnit report
+    outputPath: reports/ps-rule-results.xml  # Write NUnit report to 'reports/ps-rule-results.xml'.
 
-```yaml
-steps:
-- task: ps-rule-assert@0
+# Publish NUnit report as test results
+- task: PublishTestResults@2
+  displayName: 'Publish PSRule results'
   inputs:
-    source: '.ps-rule/'
-    inputType: repository
-    outputType: NUnit3
-    outputPath: reports/ps-rule-loopback.xml
+    testRunTitle: 'PSRule'                          # The title to use for the test run.
+    testRunner: NUnit                               # Import report using the NUnit format.
+    testResultsFiles: 'reports/ps-rule-results.xml' # The previously saved NUnit report.
 ```
 
 ## Changes and versioning
 
 Extensions and tasks in this repository will use the [semantic versioning](http://semver.org/) model to declare breaking changes from v1.0.0.
 Prior to v1.0.0, breaking changes may be introduced in minor (0.x.0) version increments.
-For a list of module changes please see the [change log](CHANGELOG.md).
+For a list of module changes please see the [change log].
 
 ## Contributing
 
 This project welcomes contributions and suggestions.
-If you are ready to contribute, please visit the [contribution guide](CONTRIBUTING.md).
+If you are ready to contribute, please visit the [contribution guide].
 
 ## Code of Conduct
 
@@ -113,10 +90,14 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 
 ## License
 
-This project is [licensed under the MIT License](LICENSE).
+This project is [licensed under the MIT License][license].
 
 [issues]: https://github.com/BernieWhite/PSRule-pipelines/issues
 [ci-badge]: https://dev.azure.com/bewhite/PSRule-pipelines/_apis/build/status/PSRule-pipelines-CI?branchName=master
 [extension]: https://marketplace.visualstudio.com/items?itemName=bewhite.ps-rule
+[extension-install]: https://docs.microsoft.com/en-us/azure/devops/marketplace/install-extension?view=azure-devops&tabs=browser
 [ps-rule-assert]: docs/tasks.md#ps-rule-assert
 [ps-rule-install]: docs/tasks.md#ps-rule-install
+[contribution guide]: https://github.com/BernieWhite/PSRule-pipelines/blob/master/CONTRIBUTING.md
+[change log]: https://github.com/BernieWhite/PSRule-pipelines/blob/master/CHANGELOG.md
+[license]: https://github.com/BernieWhite/PSRule-pipelines/blob/master/LICENSE

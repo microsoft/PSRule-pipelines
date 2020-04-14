@@ -14,8 +14,7 @@ async function run() {
         task.setResourcePath(path.join(__dirname, 'task.json'));
 
         // Get inputs
-        let input_path: string = task.getPathInput('path', /*required*/ true, /*check*/ true);
-        let input_module: string = task.getInput('module', /*required*/ false);
+        let input_module: string = task.getInput('module', /*required*/ true);
         let input_latest: boolean = task.getBoolInput('latest', /*required*/ true);
         let input_prerelease: boolean = task.getBoolInput('prerelease', /*required*/ true);
 
@@ -63,7 +62,6 @@ async function run() {
             .arg('-Command')
             .arg(`. '${filePath.replace("'", "''")}'`);
         const options = <runner.IExecOptions>{
-            cwd: input_path,
             failOnStdErr: false,
             errStream: process.stdout,
             outStream: process.stdout,
