@@ -31,7 +31,7 @@ async function run() {
         contents.push(`Import-Module $sdkPath -ArgumentList @{ NonInteractive = 'true' }`);
 
         // Prepare parameters
-        contents.push(`$scriptParams = @{ Path = '${input_path}'; InputType = '${input_inputType}' }; InputPath = '${input_inputPath}' };`);
+        contents.push(`$scriptParams = @{ Path = '${input_path}'; InputType = '${input_inputType}'; InputPath = '${input_inputPath}' };`);
         if (input_source !== undefined) {
             contents.push(`$scriptParams['Source'] = '${input_source}'`);
         }
