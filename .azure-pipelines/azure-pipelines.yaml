@@ -2,7 +2,7 @@
 # CI pipeline for PSRule-pipelines
 
 variables:
-  version: '0.0.0'
+  version: '0.1.0'
   buildConfiguration: 'Release'
   publish: 'true'
   vmImage: 'ubuntu-18.04'
@@ -56,7 +56,6 @@ stages:
         rootFolder: out/dist
         outputPath: out/extension
         extensionVisibility: private
-        # updateTasksVersion: true
 
     # Generate artifacts
     - publish: out/extension
@@ -115,6 +114,7 @@ stages:
       name: stable_release
       extensionTag: ''
       extensionName: 'PSRule'
+      extensionVisibility: 'public'
 
   - job: GitHub
     dependsOn: stable_release

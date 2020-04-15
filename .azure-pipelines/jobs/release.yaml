@@ -8,6 +8,7 @@ parameters:
   extensionId: 'ps-rule'
   extensionTag: ''
   extensionName: 'PSRule'
+  extensionVisibility: 'private'
 
 jobs:
 - job: ${{ parameters.name }}
@@ -59,6 +60,7 @@ jobs:
       extensionName: ${{ parameters.extensionName }}
       extensionVersion: $(EXTENSION_VERSION)
       updateTasksVersion: false
+      extensionVisibility: ${{ parameters.extensionVisibility }}
 
   # Check extension
   - task: IsAzureDevOpsExtensionValid@2
