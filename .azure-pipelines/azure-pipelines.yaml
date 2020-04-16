@@ -2,7 +2,7 @@
 # CI pipeline for PSRule-pipelines
 
 variables:
-  version: '0.1.0'
+  version: '0.2.0'
   buildConfiguration: 'Release'
   publish: 'true'
   vmImage: 'ubuntu-18.04'
