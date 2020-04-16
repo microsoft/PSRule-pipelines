@@ -116,17 +116,6 @@ function GetPathInfo {
     }
 }
 
-function GetPipelineTasks {
-    [CmdletBinding()]
-    param (
-        [Parameter(Mandatory = $True)]
-        [String]$Path
-    )
-    process {
-        
-    }
-}
-
 function UpdateTaskVersion {
     [CmdletBinding()]
     param (
@@ -332,4 +321,4 @@ task . Test
 # Synopsis: Build the project
 task Build Clean, Rules, PackageRestore, BuildExtension, VersionExtension
 
-task Test Rules
+task Test Build, TestModule
