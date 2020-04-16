@@ -37,6 +37,8 @@ if ($version -like '*-*') {
 }
 
 if ($Env:QUERYAZUREDEVOPSEXTENSIONVERSION_EXTENSION_VERSION) {
+    Write-Verbose -Message "[Pipeline] -- Using QUERYAZUREDEVOPSEXTENSIONVERSION_EXTENSION_VERSION: $Env:QUERYAZUREDEVOPSEXTENSIONVERSION_EXTENSION_VERSION";
+    Write-Verbose -Message "[Pipeline] -- Using EXTENSION_VERSION: $Env:EXTENSION_VERSION";
     [String[]]$extensionParts = $Env:QUERYAZUREDEVOPSEXTENSIONVERSION_EXTENSION_VERSION.Split('.', [System.StringSplitOptions]::RemoveEmptyEntries);
     [String[]]$versionParts = $version.Split('.', [System.StringSplitOptions]::RemoveEmptyEntries);
 
