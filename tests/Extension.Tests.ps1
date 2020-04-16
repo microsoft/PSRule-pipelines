@@ -1,5 +1,8 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 #
-# Unit tests extension
+# Extension unit tests
 #
 
 [CmdletBinding()]

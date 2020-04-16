@@ -1,3 +1,5 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
 
 [CmdletBinding()]
 param (
@@ -96,14 +98,16 @@ function GetPathInfo {
     }
     process {
         $Null = $items.Add((Get-Item -Path $Path));
-        $files = @(Get-ChildItem -Path $Path -File -Recurse -Include *.ps1,*.psm1,*.psd1,*.cs | Where-Object {
+        $files = @(Get-ChildItem -Path $Path -File -Recurse -Include *.ps1,*.ts,*.psm1,*.psd1,*.cs | Where-Object {
             !($_.FullName -like "*.Designer.cs") -and
             !($_.FullName -like "*/bin/*") -and
             !($_.FullName -like "*/obj/*") -and
             !($_.FullName -like "*\obj\*") -and
             !($_.FullName -like "*\bin\*") -and
             !($_.FullName -like "*\out\*") -and
-            !($_.FullName -like "*/out/*")
+            !($_.FullName -like "*/out/*") -and
+            !($_.FullName -like "*\node_modules\*") -and
+            !($_.FullName -like "*/node_modules/*")
         });
         $Null = $items.AddRange($files);
     }
@@ -281,6 +285,18 @@ task GetVersionInfo {
     Write-Host "`#`#vso[task.setvariable variable=EXTENSION_VERSION;]$version";
 }
 
+# Synopsis: Run validation
+task Rules PSRule, {
+    $assertParams = @{
+        Path = './.ps-rule/'
+        Style = $AssertStyle
+        OutputFormat = 'NUnit3'
+        ErrorAction = 'Stop'
+    }
+    Get-RepoRuleData -Path $PWD |
+        Assert-PSRule @assertParams -OutputPath reports/ps-rule-file.xml;
+}
+
 task TestModule Pester, PSScriptAnalyzer, {
     # Run Pester tests
     $pesterParams = @{ Path = $PWD; OutputFile = 'reports/pester-unit.xml'; OutputFormat = 'NUnitXml'; PesterOption = @{ IncludeVSCodeMarker = $True }; PassThru = $True; };
@@ -305,7 +321,6 @@ task TestModule Pester, PSScriptAnalyzer, {
     }
 }
 
-
 # Synopsis: Restore NPM packages
 task PackageRestore {
     exec { & npm install --no-save }
@@ -315,6 +330,6 @@ task PackageRestore {
 task . Test
 
 # Synopsis: Build the project
-task Build Clean, PackageRestore, BuildExtension, VersionExtension
+task Build Clean, Rules, PackageRestore, BuildExtension, VersionExtension
 
-task Test Build, TestModule
+task Test Rules

@@ -3,7 +3,7 @@ parameters:
   name: ''
   displayName: 'Release'
   buildConfiguration: 'Release'
-  vmImage: 'ubuntu-18.04'
+  imageName: 'ubuntu-18.04'
   publisherId: 'bewhite'
   extensionId: 'ps-rule'
   extensionTag: ''
@@ -14,7 +14,7 @@ jobs:
 - job: ${{ parameters.name }}
   displayName: ${{ parameters.displayName }}
   pool:
-    vmImage: ${{ parameters.vmImage }}
+    vmImage: ${{ parameters.imageName }}
   steps:
 
   # Install pipeline dependencies

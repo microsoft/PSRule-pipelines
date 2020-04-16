@@ -5,14 +5,14 @@
     "author": {
         "name": "Microsoft Corporation"
     },
-    "license": "https://github.com/BernieWhite/PSRule-pipelines/blob/master/LICENSE",
-    "homepage": "https://github.com/BernieWhite/PSRule-pipelines",
+    "license": "https://github.com/Microsoft/PSRule-pipelines/blob/master/LICENSE",
+    "homepage": "https://github.com/Microsoft/PSRule-pipelines",
     "repository": {
         "type": "git",
-        "url": "https://github.com/BernieWhite/PSRule-pipelines.git"
+        "url": "https://github.com/Microsoft/PSRule-pipelines.git"
     },
     "bugs": {
-        "url": "https://github.com/BernieWhite/PSRule-pipelines/issues"
+        "url": "https://github.com/Microsoft/PSRule-pipelines/issues"
     },
     "dependencies": {
         "@types/mocha": "2.2.48",

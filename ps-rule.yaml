@@ -1,0 +1,5 @@
+# PSRule options for QA
+
+output:
+  culture:
+  - en-US
