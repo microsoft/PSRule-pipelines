@@ -44,10 +44,10 @@ jobs:
       versionAction: 'Patch'
 
   # Get extension version
-  - powershell: Invoke-Build GetVersionInfo
+  - powershell: Invoke-Build GetVersionInfo -Build $(Build.BuildNumber)
     displayName: 'Get extension version'
-    env:
-      QUERYAZUREDEVOPSEXTENSIONVERSION_EXTENSION_VERSION: $(Extension.Version)
+    # env:
+      # QUERYAZUREDEVOPSEXTENSIONVERSION_EXTENSION_VERSION: $(Extension.Version)
 
   # Publish extension
   - task: PublishAzureDevOpsExtension@2
