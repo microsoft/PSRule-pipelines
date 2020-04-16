@@ -1,8 +1,11 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 #
-# PSRule for Azure Pipelines
+# ps-rule-assert
 #
 
-# See details at: https://github.com/BernieWhite/PSRule-pipelines
+# See details at: https://github.com/Microsoft/PSRule-pipelines
 
 [CmdletBinding()]
 param (

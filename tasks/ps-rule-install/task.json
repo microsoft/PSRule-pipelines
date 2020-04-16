@@ -4,8 +4,8 @@
     "name": "ps-rule-install",
     "friendlyName": "Install PSRule module",
     "description": "Install a PowerShell module containing rules.",
-    "helpUrl": "https://github.com/BernieWhite/PSRule-pipelines/blob/master/docs/tasks.md#ps-rule-install",
-    "helpMarkDown": "[Learn more about this task](https://github.com/BernieWhite/PSRule-pipelines/blob/master/docs/tasks.md#ps-rule-install)",
+    "helpUrl": "https://github.com/Microsoft/PSRule-pipelines/blob/master/docs/tasks.md#ps-rule-install",
+    "helpMarkDown": "[Learn more about this task](https://github.com/Microsoft/PSRule-pipelines/blob/master/docs/tasks.md#ps-rule-install)",
     "category": "Utility",
     "visibility": [
         "Build",
@@ -22,7 +22,7 @@
         "Patch": 1
     },
     "preview": true,
-    "releaseNotes": "[See change log](https://github.com/BernieWhite/PSRule-pipelines/blob/master/CHANGELOG.md)",
+    "releaseNotes": "[See change log](https://github.com/Microsoft/PSRule-pipelines/blob/master/CHANGELOG.md)",
     "groups": [
         {
             "name": "advanced",

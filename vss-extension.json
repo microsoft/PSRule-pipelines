@@ -31,18 +31,18 @@
     },
     "links": {
         "home": {
-            "uri": "https://github.com/BernieWhite/PSRule-pipelines"
+            "uri": "https://github.com/Microsoft/PSRule-pipelines"
         },
         "repository": {
-            "uri": "https://github.com/BernieWhite/PSRule-pipelines"
+            "uri": "https://github.com/Microsoft/PSRule-pipelines"
         },
         "issues": {
-            "uri": "https://github.com/BernieWhite/PSRule-pipelines/issues"
+            "uri": "https://github.com/Microsoft/PSRule-pipelines/issues"
         }
     },
     "repository": {
         "type": "git",
-        "uri": "https://github.com/BernieWhite/PSRule-pipelines"
+        "uri": "https://github.com/Microsoft/PSRule-pipelines"
     },
     "files": [
         {
