@@ -107,6 +107,6 @@ steps:
     inputType: repository                    # Analyze repository structure.
     inputPath: $(BUILD_SOURCESDIRECTORY)     # Read repository structure from the default source path.
     modules: 'PSRule.Rules.Azure'            # Analyze objects using the rules within the PSRule.Rules.Azure PowerShell module.
-    outputType: NUnit3                       # Save results to an NUnit report
+    outputFormat: NUnit3                     # Save results to an NUnit report.
     outputPath: reports/ps-rule-results.xml  # Write NUnit report to 'reports/ps-rule-results.xml'.
 ```

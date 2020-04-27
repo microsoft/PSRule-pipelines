@@ -43,5 +43,5 @@ stages:
       inputs:
         source: '.ps-rule/'
         inputType: repository
-        outputType: NUnit3
+        outputFormat: NUnit3
         outputPath: reports/ps-rule-loopback.xml
