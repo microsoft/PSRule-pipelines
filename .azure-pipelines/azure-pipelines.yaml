@@ -7,7 +7,7 @@ variables:
   publish: 'true'
   imageName: 'ubuntu-18.04'
 
-# Use build number format, i.e. 0.1.0-B1811001
+# Use build number format, i.e. 0.1.0-B2004001
 name: $(version)-B$(date:yyMM)$(rev:rrr)
 
 trigger:

@@ -55,7 +55,7 @@ steps:
     inputPath: 'out/*.json'                  # Read objects from JSON files in 'out/'.
     modules: 'PSRule.Rules.Azure'            # Analyze objects using the rules within the PSRule.Rules.Azure PowerShell module.
     source: '.ps-rule/'                      # Additionally, analyze object using custom rules from '.ps-rule/'.
-    outputType: NUnit3                       # Save results to an NUnit report
+    outputFormat: NUnit3                     # Save results to an NUnit report.
     outputPath: reports/ps-rule-results.xml  # Write NUnit report to 'reports/ps-rule-results.xml'.
 
 # Publish NUnit report as test results
