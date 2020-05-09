@@ -1,10 +1,8 @@
 # PSRule
 
-An extension for using PSRule within Azure Pipelines.
+An Azure DevOps extension for using PSRule within Azure Pipelines.
 
 ![ci-badge]
-
-This Azure DevOps extensions adds support for PSRule.
 
 ## Disclaimer
 
