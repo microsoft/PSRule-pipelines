@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- General improvements:
+  - Updated to PSRule v0.18.1. [#28](https://github.com/microsoft/PSRule-pipelines/issues/28)
+
 ## v0.3.0
 
 What's changed since v0.2.0:
