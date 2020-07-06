@@ -93,11 +93,11 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 This project is [licensed under the MIT License][license].
 
 [issues]: https://github.com/Microsoft/PSRule-pipelines/issues
-[ci-badge]: https://dev.azure.com/bewhite/PSRule-pipelines/_apis/build/status/PSRule-pipelines-CI?branchName=master
+[ci-badge]: https://dev.azure.com/bewhite/PSRule-pipelines/_apis/build/status/PSRule-pipelines-CI?branchName=main
 [extension]: https://marketplace.visualstudio.com/items?itemName=bewhite.ps-rule
 [extension-install]: https://docs.microsoft.com/en-us/azure/devops/marketplace/install-extension?view=azure-devops&tabs=browser
-[ps-rule-assert]: https://github.com/Microsoft/PSRule-pipelines/blob/master/docs/tasks.md#ps-rule-assert
-[ps-rule-install]: https://github.com/Microsoft/PSRule-pipelines/blob/master/docs/tasks.md#ps-rule-install
-[contribution guide]: https://github.com/Microsoft/PSRule-pipelines/blob/master/CONTRIBUTING.md
-[change log]: https://github.com/Microsoft/PSRule-pipelines/blob/master/CHANGELOG.md
-[license]: https://github.com/Microsoft/PSRule-pipelines/blob/master/LICENSE
+[ps-rule-assert]: https://github.com/Microsoft/PSRule-pipelines/blob/main/docs/tasks.md#ps-rule-assert
+[ps-rule-install]: https://github.com/Microsoft/PSRule-pipelines/blob/main/docs/tasks.md#ps-rule-install
+[contribution guide]: https://github.com/Microsoft/PSRule-pipelines/blob/main/CONTRIBUTING.md
+[change log]: https://github.com/Microsoft/PSRule-pipelines/blob/main/CHANGELOG.md
+[license]: https://github.com/Microsoft/PSRule-pipelines/blob/main/LICENSE
