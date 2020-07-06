@@ -4,8 +4,8 @@
     "name": "ps-rule-assert",
     "friendlyName": "PSRule analysis",
     "description": "Run analysis with PSRule.",
-    "helpUrl": "https://github.com/Microsoft/PSRule-pipelines/blob/master/docs/tasks.md#ps-rule-assert",
-    "helpMarkDown": "[Learn more about this task](https://github.com/Microsoft/PSRule-pipelines/blob/master/docs/tasks.md#ps-rule-assert)",
+    "helpUrl": "https://github.com/Microsoft/PSRule-pipelines/blob/main/docs/tasks.md#ps-rule-assert",
+    "helpMarkDown": "[Learn more about this task](https://github.com/Microsoft/PSRule-pipelines/blob/main/docs/tasks.md#ps-rule-assert)",
     "category": "Utility",
     "visibility": [
         "Build",
@@ -22,7 +22,7 @@
         "Patch": 1
     },
     "preview": true,
-    "releaseNotes": "[See change log](https://github.com/Microsoft/PSRule-pipelines/blob/master/CHANGELOG.md)",
+    "releaseNotes": "[See change log](https://github.com/Microsoft/PSRule-pipelines/blob/main/CHANGELOG.md)",
     "groups": [
         {
             "name": "advanced",

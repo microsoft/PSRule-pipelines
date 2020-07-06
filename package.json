@@ -5,7 +5,7 @@
     "author": {
         "name": "Microsoft Corporation"
     },
-    "license": "https://github.com/Microsoft/PSRule-pipelines/blob/master/LICENSE",
+    "license": "https://github.com/Microsoft/PSRule-pipelines/blob/main/LICENSE",
     "homepage": "https://github.com/Microsoft/PSRule-pipelines",
     "repository": {
         "type": "git",

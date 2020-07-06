@@ -16,7 +16,7 @@ resources:
       enabled: true
       branches:
         include:
-        - master
+        - main
 
 trigger: none
 pr: none
