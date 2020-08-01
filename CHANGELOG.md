@@ -4,6 +4,8 @@
 
 ## v0.4.0
 
+What's changed since v0.3.0:
+
 - General improvements:
   - Updated to PSRule v0.19.0. [#31](https://github.com/microsoft/PSRule-pipelines/issues/31)
 
