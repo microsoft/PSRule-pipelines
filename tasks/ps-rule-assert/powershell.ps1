@@ -112,7 +112,7 @@ foreach ($m in $moduleNames) {
     }
     # Check
     if ($Null -eq (Get-InstalledModule -Name $m)) {
-        Write-Host "  - Failed to install";
+        Write-Host '  - Failed to install';
     }
     else {
         Write-Host "  - Using version: $((Get-InstalledModule -Name $m).Version)";
@@ -150,13 +150,10 @@ try {
 
     # Repository
     if ($InputType -eq 'repository') {
-        $items = New-Object -TypeName System.Collections.ArrayList;
         WriteDebug 'Running ''Assert-PSRule'' with repository as input.';
-        $Null = $items.Add((Get-Item -Path $InputPath));
-        $Null = $items.AddRange((Get-ChildItem -Path $InputPath -File -Recurse));
         Write-Host '';
         Write-Host '---';
-        $items.ToArray() | Assert-PSRule @invokeParams;
+        Assert-PSRule @invokeParams -InputPath $InputPath -Format File;
     }
     # Repository
     elseif ($InputType -eq 'inputPath') {
