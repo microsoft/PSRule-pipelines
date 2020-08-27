@@ -43,7 +43,7 @@ param (
 if ($Env:SYSTEM_DEBUG -eq 'true') {
     $VerbosePreference = 'Continue';
 }
-if ($Null -eq $Path) {
+if ([String]::IsNullOrEmpty($Path)) {
     $Path = $Env:BUILD_SOURCESDIRECTORY;
 }
 if ([String]::IsNullOrEmpty($Path)) {
@@ -120,6 +120,7 @@ foreach ($m in $moduleNames) {
 }
 
 Write-Host '';
+Write-Host "[info] Using PWD: $PWD";
 Write-Host "[info] Using Path: $Path";
 Write-Host "[info] Using Source: $Source";
 Write-Host "[info] Using InputType: $InputType";
@@ -131,7 +132,6 @@ try {
     Push-Location -Path $Path;
     $invokeParams = @{
         Path = $Source
-        Option = (New-PSRuleOption -TargetName 'FullName')
         Style = 'AzurePipelines'
         ErrorAction = 'Stop'
     }
