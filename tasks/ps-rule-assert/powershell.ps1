@@ -132,7 +132,6 @@ try {
     Push-Location -Path $Path;
     $invokeParams = @{
         Path = $Source
-        Option = (New-PSRuleOption -TargetName 'FullName')
         Style = 'AzurePipelines'
         ErrorAction = 'Stop'
     }
