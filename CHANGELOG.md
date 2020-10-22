@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## v0.6.0
+
+What's changed since v0.5.0:
+
 - Engineering:
   - Updated to PSRule v0.21.0. [#72](https://github.com/microsoft/PSRule-pipelines/issues/72)
     - See the [change log](https://github.com/microsoft/PSRule/blob/main/CHANGELOG.md#v0210)
