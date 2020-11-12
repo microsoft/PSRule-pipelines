@@ -42,8 +42,10 @@ stages:
       displayName: 'Install dependencies'
 
     # Install TFS CLI
-    - task: TfxInstaller@2
+    - task: TfxInstaller@3
       displayName: 'Install tfx-cli'
+      inputs:
+        version: 'v0.7.x'
 
     # Build extension
     - powershell: Invoke-Build -Configuration $(buildConfiguration) -Build $(Build.BuildNumber)

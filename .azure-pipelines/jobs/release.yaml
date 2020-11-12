@@ -22,8 +22,10 @@ jobs:
     displayName: 'Install dependencies'
 
   # Install TFS CLI
-  - task: TfxInstaller@2
+  - task: TfxInstaller@3
     displayName: 'Install tfx-cli'
+    inputs:
+      version: 'v0.7.x'
 
   # Download extension
   - task: DownloadPipelineArtifact@1
@@ -33,7 +35,7 @@ jobs:
       downloadPath: $(Build.SourcesDirectory)/out/extension
 
   # Determine current published version
-  - task: QueryAzureDevOpsExtensionVersion@2
+  - task: QueryAzureDevOpsExtensionVersion@3
     displayName: 'Query published version'
     inputs:
       connectTo: 'VsTeam'
@@ -48,7 +50,7 @@ jobs:
     displayName: 'Get extension version'
 
   # Publish extension
-  - task: PublishAzureDevOpsExtension@2
+  - task: PublishAzureDevOpsExtension@3
     displayName: 'Publish extension to marketplace'
     inputs:
       connectedServiceName: 'Visual Studio Marketplace (bewhite)'
@@ -63,7 +65,7 @@ jobs:
       extensionVisibility: ${{ parameters.extensionVisibility }}
 
   # Check extension
-  - task: IsAzureDevOpsExtensionValid@2
+  - task: IsAzureDevOpsExtensionValid@3
     displayName: 'Check extension'
     inputs:
       connectedServiceName: 'Visual Studio Marketplace (bewhite)'
