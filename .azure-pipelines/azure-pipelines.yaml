@@ -63,7 +63,7 @@ stages:
       condition: succeededOrFailed()
 
     # Package extension
-    - task: PackageAzureDevOpsExtension@2
+    - task: PackageAzureDevOpsExtension@3
       displayName: 'Package extension'
       inputs:
         rootFolder: out/dist
