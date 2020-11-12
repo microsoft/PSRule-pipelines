@@ -42,8 +42,10 @@ stages:
       displayName: 'Install dependencies'
 
     # Install TFS CLI
-    - task: TfxInstaller@2
+    - task: TfxInstaller@3
       displayName: 'Install tfx-cli'
+      inputs:
+        version: 'v0.7.x'
 
     # Build extension
     - powershell: Invoke-Build -Configuration $(buildConfiguration) -Build $(Build.BuildNumber)
@@ -63,7 +65,7 @@ stages:
       condition: succeededOrFailed()
 
     # Package extension
-    - task: PackageAzureDevOpsExtension@2
+    - task: PackageAzureDevOpsExtension@3
       displayName: 'Package extension'
       inputs:
         rootFolder: out/dist
