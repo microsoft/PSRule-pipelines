@@ -52,7 +52,7 @@ async function run() {
         const tempDirectory = task.getVariable('agent.tempDirectory');
         task.checkPath(tempDirectory, `${tempDirectory} (agent.tempDirectory)`);
         const filePath = path.join(tempDirectory, uuidV4() + '.ps1');
-        fs.writeFile(filePath, '\ufeff' + contents.join(os.EOL), { encoding: 'utf8' });
+        fs.writeFileSync(filePath, '\ufeff' + contents.join(os.EOL), { encoding: 'utf8' });
 
         // Run the script.
         const powershell = task.tool(task.which('pwsh') || task.which('powershell') || task.which('pwsh', true))
