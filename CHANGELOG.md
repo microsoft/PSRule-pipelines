@@ -6,12 +6,18 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 ## Unreleased
 
+What's changed since v0.7.0:
+
+- Engineering:
+  - Bump PSRule dependency to v1.0.1. [#106](https://github.com/microsoft/PSRule-pipelines/issues/106)
+    - See the [change log](https://github.com/microsoft/PSRule/blob/main/docs/CHANGELOG-v1.md#v101)
+
 ## v0.7.0
 
 What's changed since v0.6.0:
 
 - Engineering:
-  - Updated to PSRule v1.0.0. [#82](https://github.com/microsoft/PSRule-pipelines/issues/82)
+  - Bump PSRule dependency to v1.0.0. [#82](https://github.com/microsoft/PSRule-pipelines/issues/82)
     - See the [change log](https://github.com/microsoft/PSRule/blob/main/docs/CHANGELOG-v1.md#v100)
 
 ## v0.6.0
@@ -19,7 +25,7 @@ What's changed since v0.6.0:
 What's changed since v0.5.0:
 
 - Engineering:
-  - Updated to PSRule v0.21.0. [#72](https://github.com/microsoft/PSRule-pipelines/issues/72)
+  - Bump PSRule dependency to v0.21.0. [#72](https://github.com/microsoft/PSRule-pipelines/issues/72)
     - See the [change log](https://github.com/microsoft/PSRule/blob/main/docs/CHANGELOG-v0.md#v0210)
 
 ## v0.5.0
@@ -32,7 +38,7 @@ What's changed since v0.4.0:
     - Path specs included in `.gitignore` are also automatically excluded.
     - See [upgrade notes][upgrade-v0.5.0] for details on breaking change.
 - Engineering:
-  - Updated to PSRule v0.20.0. [#54](https://github.com/microsoft/PSRule-pipelines/issues/54)
+  - Bump PSRule dependency to v0.20.0. [#54](https://github.com/microsoft/PSRule-pipelines/issues/54)
     - See the [change log](https://github.com/microsoft/PSRule/blob/main/docs/CHANGELOG-v0.md#v0200)
 
 See [upgrade notes][upgrade-v0.5.0] for helpful information when upgrading from previous versions.
@@ -44,7 +50,7 @@ See [upgrade notes][upgrade-v0.5.0] for helpful information when upgrading from 
 What's changed since v0.3.0:
 
 - Engineering:
-  - Updated to PSRule v0.19.0. [#31](https://github.com/microsoft/PSRule-pipelines/issues/31)
+  - Bump PSRule dependency to v0.19.0. [#31](https://github.com/microsoft/PSRule-pipelines/issues/31)
     - See the [change log](https://github.com/microsoft/PSRule/blob/main/docs/CHANGELOG-v0.md#v0190)
 
 ## v0.3.0
@@ -52,7 +58,7 @@ What's changed since v0.3.0:
 What's changed since v0.2.0:
 
 - Engineering:
-  - Updated to PSRule v0.18.0. [#24](https://github.com/microsoft/PSRule-pipelines/issues/24)
+  - Bump PSRule dependency to v0.18.0. [#24](https://github.com/microsoft/PSRule-pipelines/issues/24)
     - See the [change log](https://github.com/microsoft/PSRule/blob/main/docs/CHANGELOG-v0.md#v0180)
 
 ## v0.2.0
@@ -60,7 +66,7 @@ What's changed since v0.2.0:
 What's changed since v0.1.0:
 
 - Engineering:
-  - Updated to PSRule v0.17.0. [#19](https://github.com/microsoft/PSRule-pipelines/issues/19)
+  - Bump PSRule dependency to v0.17.0. [#19](https://github.com/microsoft/PSRule-pipelines/issues/19)
     - See the [change log](https://github.com/microsoft/PSRule/blob/main/docs/CHANGELOG-v0.md#v0170)
 - Bug fixes:
   - Fixed examples in documentation referencing outputType instead of outputFormat. [#17](https://github.com/microsoft/PSRule-pipelines/issues/17)
