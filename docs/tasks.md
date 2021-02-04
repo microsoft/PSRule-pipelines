@@ -48,14 +48,14 @@ Syntax:
 steps:
 - task: ps-rule-assert@0
   inputs:
-    inputType: repository, inputPath              # Required. Determines the type of input to use for PSRule.
-    inputPath: string                             # Required. The path PSRule will look for files to validate.
-    modules: string                               # Optional. A comma separated list of modules to use for analysis.
-    baseline: string                              # Optional. The name of a PSRule baseline to use.
-    source: string                                # Optional. An path containing rules to use for analysis.
-    outputFormat: None, Yaml, Json, NUnit3, Csv   # Optional. The format to use when writing results to disk.
-    outputPath: string                            # Optional. The file path to write results to.
-    path: string                                  # Optional. The working directory PSRule is run from.
+    inputType: repository, inputPath                        # Required. Determines the type of input to use for PSRule.
+    inputPath: string                                       # Required. The path PSRule will look for files to validate.
+    modules: string                                         # Optional. A comma separated list of modules to use for analysis.
+    baseline: string                                        # Optional. The name of a PSRule baseline to use.
+    source: string                                          # Optional. An path containing rules to use for analysis.
+    outputFormat: None, Yaml, Json, Markdown, NUnit3, Csv   # Optional. The format to use when writing results to disk.
+    outputPath: string                                      # Optional. The file path to write results to.
+    path: string                                            # Optional. The working directory PSRule is run from.
 ```
 
 - **inputType**: Determines the type of input to use for PSRule.
