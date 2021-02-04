@@ -8,6 +8,10 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 What's changed since v0.7.0:
 
+- General improvements:
+  - Added support for using baselines. [#46](https://github.com/microsoft/PSRule-pipelines/issues/46)
+    - Specify a named baseline by using `baseline: '<baseline_name>'`.
+    - Baselines can be included from individual files or modules using `source:` and `modules:`.
 - Engineering:
   - Bump PSRule dependency to v1.0.1. [#106](https://github.com/microsoft/PSRule-pipelines/issues/106)
     - See the [change log](https://github.com/microsoft/PSRule/blob/main/docs/CHANGELOG-v1.md#v101)
