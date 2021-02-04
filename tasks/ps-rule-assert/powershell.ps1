@@ -36,7 +36,7 @@ param (
 
     # The output format
     [Parameter(Mandatory = $False)]
-    [ValidateSet('None', 'Yaml', 'Json', 'NUnit3', 'Csv')]
+    [ValidateSet('None', 'Yaml', 'Json', 'Markdown', 'NUnit3', 'Csv')]
     [String]$OutputFormat = (Get-VstsInput -Name 'outputFormat'),
 
     # The path to store formatted output

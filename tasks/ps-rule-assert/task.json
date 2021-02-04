@@ -93,6 +93,7 @@
                 "None": "None",
                 "Yaml": "Yaml",
                 "Json": "Json",
+                "Markdown": "Markdown",
                 "NUnit3": "NUnit3",
                 "Csv": "Csv"
             },
