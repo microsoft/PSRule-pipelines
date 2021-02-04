@@ -1,5 +1,10 @@
 # PSRule options for QA
 
+input:
+  pathIgnore:
+  - '.vscode/'
+  - '*.md'
+
 output:
   culture:
   - en-US
