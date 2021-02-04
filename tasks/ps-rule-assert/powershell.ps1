@@ -30,6 +30,10 @@ param (
     [Parameter(Mandatory = $False)]
     [String]$Modules = (Get-VstsInput -Name 'modules'),
 
+    # The name of a baseline to use
+    [Parameter(Mandatory = $False)]
+    [String]$Baseline = (Get-VstsInput -Name 'baseline'),
+
     # The output format
     [Parameter(Mandatory = $False)]
     [ValidateSet('None', 'Yaml', 'Json', 'NUnit3', 'Csv')]
@@ -37,7 +41,7 @@ param (
 
     # The path to store formatted output
     [Parameter(Mandatory = $False)]
-    [String]$OutputPath = (Get-VstsInput -Name 'outputPath') 
+    [String]$OutputPath = (Get-VstsInput -Name 'outputPath')
 )
 
 if ($Env:SYSTEM_DEBUG -eq 'true') {
@@ -123,6 +127,7 @@ Write-Host '';
 Write-Host "[info] Using PWD: $PWD";
 Write-Host "[info] Using Path: $Path";
 Write-Host "[info] Using Source: $Source";
+Write-Host "[info] Using Baseline: $Baseline";
 Write-Host "[info] Using InputType: $InputType";
 Write-Host "[info] Using InputPath: $InputPath";
 Write-Host "[info] Using OutputFormat: $OutputFormat";
@@ -137,6 +142,10 @@ try {
     }
     WriteDebug "Preparing command-line:";
     WriteDebug ([String]::Concat('-Path ''', $Source, ''''));
+    if (![String]::IsNullOrEmpty($Baseline)) {
+        $invokeParams['Baseline'] = $Baseline;
+        WriteDebug ([String]::Concat('-Baseline ''', $Baseline, ''''));
+    }
     if (![String]::IsNullOrEmpty($Modules)) {
         $moduleNames = $Modules.Split(',', [System.StringSplitOptions]::RemoveEmptyEntries);
         $invokeParams['Module'] = $moduleNames;

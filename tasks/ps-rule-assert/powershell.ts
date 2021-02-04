@@ -19,6 +19,7 @@ async function run() {
         let input_inputPath: string = task.getInput('inputPath', /*required*/ true);
         let input_source: string = task.getPathInput('source', /*required*/ false, /*check*/ false);
         let input_modules: string = task.getInput('modules', /*required*/ false);
+        let input_baseline: string = task.getInput('baseline', /*required*/ false);
         let input_outputFormat: string = task.getPathInput('outputFormat', /*required*/ false, /*check*/ false) || 'None';
         let input_outputPath: string = task.getPathInput('outputPath', /*required*/ false, /*check*/ false);
 
@@ -37,6 +38,9 @@ async function run() {
         }
         if (input_modules !== undefined) {
             contents.push(`$scriptParams['Modules'] = '${input_modules}'`);
+        }
+        if (input_baseline !== undefined) {
+            contents.push(`$scriptParams['Baseline'] = '${input_baseline}'`);
         }
         if (input_outputFormat !== undefined) {
             contents.push(`$scriptParams['OutputFormat'] = '${input_outputFormat}'`);

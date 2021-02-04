@@ -78,6 +78,14 @@
             "helpMarkDown": "A comma separated list of modules to use for analysis."
         },
         {
+            "name": "baseline",
+            "type": "string",
+            "label": "Baseline",
+            "required": false,
+            "defaultValue": "",
+            "helpMarkDown": "The name of a PSRule baseline to use."
+        },
+        {
             "name": "outputFormat",
             "type": "pickList",
             "label": "Output format",

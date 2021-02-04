@@ -34,7 +34,7 @@ To use these tasks within YAML pipelines:
 
 - Install rule modules with the `ps-rule-install` task (optional).
 - Run analysis one or more times with the `ps-rule-assert` task.
-- Publish analysis results with the [Publish Test Results](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=yaml) builtin task.
+- Publish analysis results with the [Publish Test Results](https://docs.microsoft.com/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=yaml) builtin task.
 
 For example:
 

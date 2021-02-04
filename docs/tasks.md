@@ -7,7 +7,7 @@ The following pipeline tasks are included in this extension.
 Use this task to install rule modules and their dependencies.
 Modules will be installed to the current user scope.
 
-### Syntax
+Syntax:
 
 ```yaml
 steps:
@@ -42,7 +42,7 @@ steps:
 Perform analysis and assert PSRule conditions.
 Analysis can be perform from input files or the repository structure.
 
-### Syntax
+Syntax:
 
 ```yaml
 steps:
@@ -51,6 +51,7 @@ steps:
     inputType: repository, inputPath              # Required. Determines the type of input to use for PSRule.
     inputPath: string                             # Required. The path PSRule will look for files to validate.
     modules: string                               # Optional. A comma separated list of modules to use for analysis.
+    baseline: string                              # Optional. The name of a PSRule baseline to use.
     source: string                                # Optional. An path containing rules to use for analysis.
     outputFormat: None, Yaml, Json, NUnit3, Csv   # Optional. The format to use when writing results to disk.
     outputPath: string                            # Optional. The file path to write results to.
@@ -69,6 +70,10 @@ Install PSRule modules using the `ps-rule-install` task.
 If the modules have not been installed,
 the latest stable version will be installed from the PowerShell Gallery automatically.
 For example: _PSRule.Rules.Azure,PSRule.Rules.Kubernetes_
+- **baseline**: The name of a PSRule baseline to use.
+Baselines can be used from modules or specified in a separate file.
+To use a baseline included in a module use `modules:` with `baseline:`.
+To use a baseline specified in a separate file use `source:` with `baseline:`.
 - **source**: An path containing rules to use for analysis.
 Use this option to include rules not installed as a PowerShell module.
 This binds to the [-Path](https://microsoft.github.io/PSRule/commands/PSRule/en-US/Assert-PSRule.html#-path) parameter.
@@ -109,4 +114,19 @@ steps:
     modules: 'PSRule.Rules.Azure'            # Analyze objects using the rules within the PSRule.Rules.Azure PowerShell module.
     outputFormat: NUnit3                     # Save results to an NUnit report.
     outputPath: reports/ps-rule-results.xml  # Write NUnit report to 'reports/ps-rule-results.xml'.
+```
+
+### Example: Run analysis using an included baseline
+
+Run analysis of files within `out/` and all subdirectories using the named baseline `Azure.GA_2020_12`.
+
+```yaml
+steps:
+- task: ps-rule-assert@0
+  inputs:
+    inputType: inputPath
+    inputPath: 'out/'              # Read objects from files in 'out/'.
+    modules: 'PSRule.Rules.Azure'  # Analyze objects using the rules within the PSRule.Rules.Azure PowerShell module.
+    baseline: 'Azure.GA_2020_12'   # Use the 'Azure.GA_2020_12' baseline included within PSRule.Rules.Azure.
+    source: '.ps-rule/'            # Additionally, analyze object using custom rules from '.ps-rule/'.
 ```
