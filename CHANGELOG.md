@@ -6,6 +6,12 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 ## Unreleased
 
+What's changed since v0.8.0:
+
+- Engineering:
+  - Bump PSRule dependency to v1.1.0. [#128](https://github.com/microsoft/PSRule-pipelines/issues/128)
+    - See the [change log](https://github.com/microsoft/PSRule/blob/main/docs/CHANGELOG-v1.md#v110)
+
 ## v0.8.0
 
 What's changed since v0.7.0:
