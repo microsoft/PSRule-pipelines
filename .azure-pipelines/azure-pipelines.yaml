@@ -2,12 +2,12 @@
 # CI pipeline for PSRule-pipelines
 
 variables:
-  version: '0.9.0'
+  version: '1.0.0'
   buildConfiguration: 'Release'
   publish: 'true'
   imageName: 'ubuntu-18.04'
 
-# Use build number format, i.e. 0.9.0-B2010001
+# Use build number format, i.e. 1.0.0-B2010001
 name: $(version)-B$(date:yyMM)$(rev:rrr)
 
 trigger:
@@ -16,7 +16,7 @@ trigger:
     - 'main'
   tags:
     include:
-    - 'v0.*'
+    - 'v1.*'
 
 pr:
   branches:
@@ -110,7 +110,7 @@ stages:
   dependsOn: [ 'Build', 'Analysis' ]
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
   variables:
-    isRelease: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v0.'))
+    isRelease: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v1.'))
   jobs:
   - template: jobs/release.yaml
     parameters:
@@ -122,7 +122,7 @@ stages:
 - stage: Stable
   displayName: Stable
   dependsOn: Canary
-  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v0.'))
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v1.'))
   jobs:
   - template: jobs/release.yaml
     parameters:
