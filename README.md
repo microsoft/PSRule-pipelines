@@ -4,10 +4,15 @@ An Azure DevOps extension for using PSRule within Azure Pipelines.
 
 ![ci-badge] ![extension-version]
 
-## Disclaimer
+## Support
 
-If you have any problems please check our GitHub [issues] page.
-If you do not see your problem captured, please file a new issue and follow the provided template.
+This project uses GitHub Issues to track bugs and feature requests.
+Please search the existing issues before filing new issues to avoid duplicates.
+
+- For new issues, file your bug or feature request as a new [issue].
+- For help, discussion, and support questions about using this project, join or start a [discussion].
+
+Support for this project/ product is limited to the resources listed above.
 
 ## Getting started
 
@@ -92,7 +97,8 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 
 This project is [licensed under the MIT License][license].
 
-[issues]: https://github.com/Microsoft/PSRule-pipelines/issues
+[issue]: https://github.com/microsoft/PSRule-pipelines/issues
+[discussion]: https://github.com/microsoft/PSRule-pipelines/discussions
 [ci-badge]: https://dev.azure.com/bewhite/PSRule-pipelines/_apis/build/status/PSRule-pipelines-CI?branchName=main
 [extension]: https://marketplace.visualstudio.com/items?itemName=bewhite.ps-rule
 [extension-install]: https://docs.microsoft.com/en-us/azure/devops/marketplace/install-extension?view=azure-devops&tabs=browser
