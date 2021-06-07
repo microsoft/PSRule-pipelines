@@ -6,7 +6,7 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 ## Unreleased
 
-## v0.10.0
+## v1.0.0
 
 What's changed since v0.9.0:
 
