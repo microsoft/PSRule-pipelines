@@ -6,6 +6,13 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 ## Unreleased
 
+What's changed since v1.0.0:
+
+- Engineering:
+  - Bump PSRule dependency to v1.5.0. [#184](https://github.com/microsoft/PSRule-pipelines/issues/184)
+    - See the [change log](https://github.com/microsoft/PSRule/blob/main/docs/CHANGELOG-v1.md#v150).
+  - Bump azure-pipelines-task-lib to 3.1.4. [#174](https://github.com/microsoft/PSRule-pipelines/pull/174)
+
 ## v1.0.0
 
 What's changed since v0.9.0:
