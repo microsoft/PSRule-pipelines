@@ -69,8 +69,7 @@ steps:
 
 ## Changes and versioning
 
-Extensions and tasks in this repository will use the [semantic versioning](http://semver.org/) model to declare breaking changes from v1.0.0.
-Prior to v1.0.0, breaking changes may be introduced in minor (0.x.0) version increments.
+Extensions and tasks in this repository uses [semantic versioning](http://semver.org/) to declare breaking changes.
 For a list of module changes please see the [change log].
 
 ## Contributing
