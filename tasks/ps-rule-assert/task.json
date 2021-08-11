@@ -125,6 +125,8 @@
         }
     },
     "messages": {
-        "AssertFailed": "One or more assertions failed."
+        "AssertFailed": "One or more assertions failed.",
+        "DependencyFailed": "An error occurred installing a dependency module.",
+        "ImportFailed": "An error occurred importing module 'PSRule'."
     }
 }
