@@ -6,6 +6,13 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 ## Unreleased
 
+## v1.1.1
+
+What's changed since v1.1.0:
+
+- Engineering:
+  - Bump azure-pipelines-task-lib to 3.1.7. [#206](https://github.com/microsoft/PSRule-pipelines/pull/206)
+
 ## v1.1.0
 
 What's changed since v1.0.0:
