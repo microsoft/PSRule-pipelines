@@ -86,6 +86,14 @@
             "helpMarkDown": "The name of a PSRule baseline to use."
         },
         {
+            "name": "conventions",
+            "type": "string",
+            "label": "Conventions",
+            "required": false,
+            "defaultValue": "",
+            "helpMarkDown": "A comma separated list of conventions to use."
+        },
+        {
             "name": "outputFormat",
             "type": "pickList",
             "label": "Output format",

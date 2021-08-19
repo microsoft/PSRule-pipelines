@@ -6,6 +6,11 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 ## Unreleased
 
+- General improvements:
+  - Added support for conventions. [#211](https://github.com/microsoft/PSRule-pipelines/issues/211)
+    - Specify one or more conventions by using `conventions: '<convention1>,<convention2>'`.
+    - Conventions can be included from individual files or modules using `source:` and `modules:`.
+
 ## v1.1.1
 
 What's changed since v1.1.0:

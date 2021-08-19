@@ -52,6 +52,7 @@ steps:
     inputPath: string                                       # Required. The path PSRule will look for files to validate.
     modules: string                                         # Optional. A comma separated list of modules to use for analysis.
     baseline: string                                        # Optional. The name of a PSRule baseline to use.
+    conventions: string                                     # Optional. A comma separated list of conventions to use.
     source: string                                          # Optional. An path containing rules to use for analysis.
     outputFormat: None, Yaml, Json, Markdown, NUnit3, Csv   # Optional. The format to use when writing results to disk.
     outputPath: string                                      # Optional. The file path to write results to.
@@ -74,6 +75,9 @@ For example: _PSRule.Rules.Azure,PSRule.Rules.Kubernetes_
 Baselines can be used from modules or specified in a separate file.
 To use a baseline included in a module use `modules:` with `baseline:`.
 To use a baseline specified in a separate file use `source:` with `baseline:`.
+- **conventions**: A comma separated list of conventions to use.
+Conventions can be used from modules or specified in a separate file.
+For example: _Monitor.LogAnalytics.Import_
 - **source**: An path containing rules to use for analysis.
 Use this option to include rules not installed as a PowerShell module.
 This binds to the [-Path](https://microsoft.github.io/PSRule/commands/PSRule/en-US/Assert-PSRule.html#-path) parameter.
@@ -118,7 +122,7 @@ steps:
 
 ### Example: Run analysis using an included baseline
 
-Run analysis of files within `out/` and all subdirectories using the named baseline `Azure.GA_2020_12`.
+Run analysis of files within `out/` and all subdirectories using the named baseline `Azure.GA_2021_06`.
 
 ```yaml
 steps:
@@ -127,6 +131,6 @@ steps:
     inputType: inputPath
     inputPath: 'out/'              # Read objects from files in 'out/'.
     modules: 'PSRule.Rules.Azure'  # Analyze objects using the rules within the PSRule.Rules.Azure PowerShell module.
-    baseline: 'Azure.GA_2020_12'   # Use the 'Azure.GA_2020_12' baseline included within PSRule.Rules.Azure.
+    baseline: 'Azure.GA_2021_06'   # Use the 'Azure.GA_2021_06' baseline included within PSRule.Rules.Azure.
     source: '.ps-rule/'            # Additionally, analyze object using custom rules from '.ps-rule/'.
 ```

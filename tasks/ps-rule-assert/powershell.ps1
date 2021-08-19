@@ -34,6 +34,10 @@ param (
     [Parameter(Mandatory = $False)]
     [String]$Baseline = (Get-VstsInput -Name 'baseline'),
 
+    # The conventions to use
+    [Parameter(Mandatory = $False)]
+    [String]$Conventions = (Get-VstsInput -Name 'conventions'),
+
     # The output format
     [Parameter(Mandatory = $False)]
     [ValidateSet('None', 'Yaml', 'Json', 'Markdown', 'NUnit3', 'Csv')]
@@ -62,6 +66,14 @@ if ([String]::IsNullOrEmpty($Source)) {
 if (!(Test-Path -Path $Source)) {
     Write-Host "[info] Source '$Source' does not exist.";
     Write-Host '';
+}
+if (![String]::IsNullOrEmpty($Conventions)) {
+    $Conventions = @($Contentions.Split(',', [System.StringSplitOptions]::RemoveEmptyEntries) | ForEach-Object {
+        $_.Trim();
+    });
+}
+else {
+    $Conventions = @();
 }
 
 function WriteDebug {
@@ -147,6 +159,7 @@ Write-Host "[info] Using PWD: $PWD";
 Write-Host "[info] Using Path: $Path";
 Write-Host "[info] Using Source: $Source";
 Write-Host "[info] Using Baseline: $Baseline";
+Write-Host "[info] Using Conventions: $Conventions";
 Write-Host "[info] Using InputType: $InputType";
 Write-Host "[info] Using InputPath: $InputPath";
 Write-Host "[info] Using OutputFormat: $OutputFormat";
@@ -164,6 +177,10 @@ try {
     if (![String]::IsNullOrEmpty($Baseline)) {
         $invokeParams['Baseline'] = $Baseline;
         WriteDebug ([String]::Concat('-Baseline ''', $Baseline, ''''));
+    }
+    if ($Conventions.Length -gt 0) {
+        $invokeParams['Convention'] = $Conventions;
+        WriteDebug ([String]::Concat('-Convention ', [String]::Join(', ', $Conventions)));
     }
     if (![String]::IsNullOrEmpty($Modules)) {
         $moduleNames = $Modules.Split(',', [System.StringSplitOptions]::RemoveEmptyEntries);
