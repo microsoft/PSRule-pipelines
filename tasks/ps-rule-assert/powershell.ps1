@@ -63,17 +63,20 @@ if ($Null -eq $InputPath) {
 if ([String]::IsNullOrEmpty($Source)) {
     $Source = Join-Path -Path $Path -ChildPath '.ps-rule/';
 }
-if (!(Test-Path -Path $Source)) {
-    Write-Host "[info] Source '$Source' does not exist.";
-    Write-Host '';
-}
+
+# Set conventions
 if (![String]::IsNullOrEmpty($Conventions)) {
-    $Conventions = @($Contentions.Split(',', [System.StringSplitOptions]::RemoveEmptyEntries) | ForEach-Object {
+    $Conventions = @($Conventions.Split(',', [System.StringSplitOptions]::RemoveEmptyEntries) | ForEach-Object {
         $_.Trim();
     });
 }
 else {
     $Conventions = @();
+}
+
+if (!(Test-Path -Path $Source)) {
+    Write-Host "[info] Source '$Source' does not exist.";
+    Write-Host '';
 }
 
 function WriteDebug {
