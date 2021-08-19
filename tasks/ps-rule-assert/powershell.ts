@@ -43,7 +43,7 @@ async function run() {
         if (input_baseline !== undefined) {
             contents.push(`$scriptParams['Baseline'] = '${input_baseline}'`);
         }
-        if (input_modules !== undefined) {
+        if (input_conventions !== undefined) {
             contents.push(`$scriptParams['Conventions'] = '${input_conventions}'`);
         }
         if (input_outputFormat !== undefined) {
