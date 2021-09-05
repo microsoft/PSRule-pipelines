@@ -6,10 +6,14 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 ## Unreleased
 
+What's changed since v1.1.1:
+
 - General improvements:
   - Added support for conventions. [#211](https://github.com/microsoft/PSRule-pipelines/issues/211)
     - Specify one or more conventions by using `conventions: '<convention1>,<convention2>'`.
     - Conventions can be included from individual files or modules using `source:` and `modules:`.
+- Engineering:
+  - Bump azure-pipelines-task-lib to 3.1.9. [#221](https://github.com/microsoft/PSRule-pipelines/pull/221)
 
 ## v1.1.1
 
