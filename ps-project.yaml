@@ -14,7 +14,7 @@ bugs:
   url: https://github.com/Microsoft/PSRule-pipelines/issues
 
 modules:
-  PSRule: ^1.6.0
+  PSRule: ^1.7.0
   VstsTaskSdk: ^0.11.0
   PowerShellGet: ^2.2.3
 
