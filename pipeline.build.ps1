@@ -169,10 +169,10 @@ task PSRule NuGet, {
     if (!(Test-Path -Path out/dist/ps_modules)) {
         $Null = New-Item -Path out/dist/ps_modules -ItemType Directory -Force;
     }
-    if ($Null -eq (Get-InstalledModule -Name PSRule -MinimumVersion 1.7.0 -ErrorAction SilentlyContinue)) {
-        Install-Module -Name PSRule -Scope CurrentUser -MinimumVersion 1.7.0 -Force;
+    if ($Null -eq (Get-InstalledModule -Name PSRule -MinimumVersion 1.7.2 -ErrorAction SilentlyContinue)) {
+        Install-Module -Name PSRule -Scope CurrentUser -MinimumVersion 1.7.2 -Force;
     }
-    Save-Module -Name PSRule -Path out/dist/ps_modules -MinimumVersion 1.7.0;
+    Save-Module -Name PSRule -Path out/dist/ps_modules -MinimumVersion 1.7.2;
     Import-Module -Name PSRule -Verbose:$False;
 }
 
