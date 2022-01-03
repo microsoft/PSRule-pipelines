@@ -2,12 +2,42 @@
 
 This document contains notes to help upgrade from previous versions of the PSRule extension.
 
-## Upgrade to v0.4.0 from v0.5.0
+## Upgrade to v1.5.0
+
+Follow these notes to upgrade from previous versions to v1.5.0.
+
+### Node 10 exension handler
+
+Prior to v1.5.0, the Node 6 extension handler was used.
+From _March 31st 2022_ the Node 6 extension handler will be removed from Azure DevOps.
+Pipelines using the Node 6 extension handler will not work after this date.
+
+To upgrade to the latest version update task versions to use v1 or higher.
+To do this use the `@1` suffix on the task name.
+
+- `ps-rule-install@1` instead of `ps-rule-install@0`.
+- `ps-rule-assert@1` instead of `ps-rule-assert@0`.
+
+For example:
+
+```yaml
+# Install PSRule.Rules.Azure from the PowerShell Gallery
+- task: ps-rule-install@1
+  inputs:
+    module: PSRule.Rules.Azure    # Install PSRule.Rules.Azure from the PowerShell Gallery.
+
+# Run analysis
+- task: ps-rule-assert@1
+  inputs:
+    modules: 'PSRule.Rules.Azure' # Analyze objects using the rules within the PSRule.Rules.Azure PowerShell module.
+```
+
+## Upgrade to v0.5.0
 
 Follow these notes to upgrade from extension version _v0.4.0_ to _v0.5.0_.
 For a list of upstream changes to the PSRule engine see [change log](https://github.com/microsoft/PSRule/blob/main/docs/CHANGELOG-v0.md#v0200).
 
-## Repository analysis
+### Repository analysis
 
 Previously in _v0.4.0_ or prior using `inputType: repository` on the `ps-rule-assert` task would:
 

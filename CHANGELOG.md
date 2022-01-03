@@ -1,10 +1,28 @@
 # Change log
 
-See [upgrade notes][upgrade-notes] for helpful information when upgrading from previous versions.
+See [upgrade notes][1] for helpful information when upgrading from previous versions.
 
-[upgrade-notes]: docs/upgrade-notes.md
+**Important notes**:
+
+- Node 6 extension handler will be removed from Azure DevOps _March 31st 2022_.
+  To ensure your pipelines continue to work, please upgrade to the latest versions of the tasks.
+  See [upgrade notes][1] for more information.
+
+  [1]: docs/upgrade-notes.md
 
 ## Unreleased
+
+What's changed since v1.4.0:
+
+- Engineering:
+  - Update extension icon to the latest version. [#279](https://github.com/microsoft/PSRule-pipelines/issues/279)
+  - Update node execution handler to Node 10. [#265](https://github.com/microsoft/PSRule-pipelines/issues/265)
+    - Added `ps-rule-assert@1` task that uses Node 10 extension handler.
+    - Added `ps-rule-install@1` task that uses Node 10 extension handler.
+    - Please upgrade your pipelines to the latest task versions to avoid issues.
+    - Added warning to older task versions to ensure they are upgraded.
+  - Bump PSRule dependency to v1.11.0. [#278](https://github.com/microsoft/PSRule-pipelines/issues/278)
+    - See the [change log](https://github.com/microsoft/PSRule/blob/main/docs/CHANGELOG-v1.md#v1110).
 
 ## v1.4.0
 

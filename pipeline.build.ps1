@@ -51,6 +51,9 @@ if ($Env:QUERYAZUREDEVOPSEXTENSIONVERSION_EXTENSION_VERSION) {
 Write-Host -Object "[Pipeline] -- Using version: $version" -ForegroundColor Green;
 Write-Host -Object "[Pipeline] -- Using versionSuffix: $versionSuffix" -ForegroundColor Green;
 
+# A list of tasks included in the extension
+$tasks = @((Get-ChildItem -Path tasks/ -Directory).Name)
+
 # Copy the extension files to the destination path
 function CopyExtensionFiles {
     [CmdletBinding()]
@@ -169,10 +172,10 @@ task PSRule NuGet, {
     if (!(Test-Path -Path out/dist/ps_modules)) {
         $Null = New-Item -Path out/dist/ps_modules -ItemType Directory -Force;
     }
-    if ($Null -eq (Get-InstalledModule -Name PSRule -MinimumVersion 1.9.0 -ErrorAction SilentlyContinue)) {
-        Install-Module -Name PSRule -Scope CurrentUser -MinimumVersion 1.9.0 -Force;
+    if ($Null -eq (Get-InstalledModule -Name PSRule -RequiredVersion 1.11.0 -ErrorAction SilentlyContinue)) {
+        Install-Module -Name PSRule -Scope CurrentUser -RequiredVersion 1.11.0 -Force;
     }
-    Save-Module -Name PSRule -Path out/dist/ps_modules -MinimumVersion 1.9.0;
+    Save-Module -Name PSRule -Path out/dist/ps_modules -RequiredVersion 1.11.0;
     Import-Module -Name PSRule -Verbose:$False;
 }
 
@@ -182,8 +185,11 @@ task VstsTaskSdk NuGet, {
         $Null = New-Item -Path out/ps_modules -ItemType Directory -Force;
     }
     Save-Module -Name VstsTaskSdk -Path out/ps_modules -RequiredVersion 0.11.0;
-    Copy-Item -Path out/ps_modules/VstsTaskSdk/0.11.0/* -Destination out/dist/ps-rule-assert/ps_modules/VstsTaskSdk/ -Recurse -Force;
-    Copy-Item -Path out/ps_modules/VstsTaskSdk/0.11.0/* -Destination out/dist/ps-rule-install/ps_modules/VstsTaskSdk/ -Recurse -Force;
+
+    foreach ($task in $tasks) {
+        Copy-Item -Path out/ps_modules/VstsTaskSdk/0.11.0/* -Destination "out/dist/$task/ps_modules/VstsTaskSdk/" -Recurse -Force;
+    }
+
     Remove-Item  -Path out/ps_modules/VstsTaskSdk -Force -Recurse;
 }
 
@@ -200,13 +206,12 @@ task Clean {
 }
 
 task CopyExtension {
-    CopyExtensionFiles -Path tasks/ps-rule-assert -DestinationPath out/dist/ps-rule-assert/;
-    Copy-Item -Path package.json -Destination out/dist/ps-rule-assert/;
-    Copy-Item -Path images/icon128.png -Destination out/dist/ps-rule-assert/icon.png -Force;
 
-    CopyExtensionFiles -Path tasks/ps-rule-install -DestinationPath out/dist/ps-rule-install/;
-    Copy-Item -Path package.json -Destination out/dist/ps-rule-install/;
-    Copy-Item -Path images/icon128.png -Destination out/dist/ps-rule-install/icon.png -Force;
+    foreach ($task in $tasks) {
+        CopyExtensionFiles -Path "tasks/$task" -DestinationPath "out/dist/$task/";
+        Copy-Item -Path package.json -Destination "out/dist/$task/";
+        Copy-Item -Path images/icon128.png -Destination "out/dist/$task/icon.png" -Force;
+    }
 
     # Copy manifests
     Copy-Item -Path vss-extension.json -Destination out/dist/;
@@ -227,20 +232,14 @@ task BuildExtension CopyExtension, PSRule, PowerShellGet, VstsTaskSdk, {
     Write-Host '> Building extension' -ForegroundColor Green;
     exec { & npm run compile }
 
-    try {
-        Push-Location out/dist/ps-rule-assert/;
-        exec { & npm install --only=prod }
-    }
-    finally {
-        Pop-Location;
-    }
-
-    try {
-        Push-Location out/dist/ps-rule-install/;
-        exec { & npm install --only=prod }
-    }
-    finally {
-        Pop-Location;
+    foreach ($task in $tasks) {
+        try {
+            Push-Location "out/dist/$task/";
+            exec { & npm install --only=prod }
+        }
+        finally {
+            Pop-Location;
+        }
     }
 }
 
