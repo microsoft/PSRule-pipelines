@@ -46,81 +46,55 @@
     },
     "files": [
         {
-            "path": "ps-rule-assert-v0"
+            "path": "ps-rule-assert"
         },
         {
-            "path": "ps-rule-assert-v1"
-        },
-        {
-            "path": "ps-rule-install-v0"
-        },
-        {
-            "path": "ps-rule-install-v1"
+            "path": "ps-rule-install"
         },
         {
             "path": "ps_modules/PSRule",
-            "packagePath": "/ps-rule-assert-v0/ps_modules/PSRule"
+            "packagePath": "/ps-rule-assert/ps-rule-assertV0/ps_modules/PSRule"
         },
         {
             "path": "ps_modules/PowerShellGet",
-            "packagePath": "/ps-rule-install-v0/ps_modules/PowerShellGet"
+            "packagePath": "/ps-rule-install/ps-rule-installV0/ps_modules/PowerShellGet"
         },
         {
             "path": "ps_modules/PackageManagement",
-            "packagePath": "/ps-rule-install-v0/ps_modules/PackageManagement"
+            "packagePath": "/ps-rule-install/ps-rule-installV0/ps_modules/PackageManagement"
         },
         {
             "path": "ps_modules/PSRule",
-            "packagePath": "/ps-rule-assert-v1/ps_modules/PSRule"
+            "packagePath": "/ps-rule-assert/ps-rule-assertV1/ps_modules/PSRule"
         },
         {
             "path": "ps_modules/PowerShellGet",
-            "packagePath": "/ps-rule-install-v1/ps_modules/PowerShellGet"
+            "packagePath": "/ps-rule-install/ps-rule-installV1/ps_modules/PowerShellGet"
         },
         {
             "path": "ps_modules/PackageManagement",
-            "packagePath": "/ps-rule-install-v1/ps_modules/PackageManagement"
+            "packagePath": "/ps-rule-install/ps-rule-installV1/ps_modules/PackageManagement"
         }
     ],
     "contributions": [
         {
-            "id": "assert-v0",
+            "id": "assert",
             "type": "ms.vss-distributed-task.task",
             "targets": [
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "ps-rule-assert-v0"
+                "name": "ps-rule-assert1"
             }
         },
         {
-            "id": "assert-v1",
+            "id": "install",
             "type": "ms.vss-distributed-task.task",
             "targets": [
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "ps-rule-assert-v1"
-            }
-        },
-        {
-            "id": "install-v0",
-            "type": "ms.vss-distributed-task.task",
-            "targets": [
-                "ms.vss-distributed-task.tasks"
-            ],
-            "properties": {
-                "name": "ps-rule-install-v0"
-            }
-        },
-        {
-            "id": "install-v1",
-            "type": "ms.vss-distributed-task.task",
-            "targets": [
-                "ms.vss-distributed-task.tasks"
-            ],
-            "properties": {
-                "name": "ps-rule-install-v1"
+                "name": "ps-rule-install"
             }
         }
     ],
