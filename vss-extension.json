@@ -84,7 +84,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "ps-rule-assert1"
+                "name": "ps-rule-assert"
             }
         },
         {
