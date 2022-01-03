@@ -66,7 +66,7 @@ function CopyExtensionFiles {
     )
     process {
         $sourcePath = Resolve-Path -Path $Path;
-        Get-ChildItem -Path $sourcePath -File -Include *.ps1,*.json,*.png -Recurse | Where-Object {
+        Get-ChildItem -Path $sourcePath -File -Include *.ps1,*.json,*.png,*.ts -Recurse | Where-Object {
             ($_.FullName -notmatch '(\\|\/)(node_modules)')
         } | ForEach-Object {
             $filePath = $_.FullName.Replace($sourcePath, $DestinationPath);
@@ -187,7 +187,8 @@ task VstsTaskSdk NuGet, {
     Save-Module -Name VstsTaskSdk -Path out/ps_modules -RequiredVersion 0.11.0;
 
     foreach ($task in $tasks) {
-        Copy-Item -Path out/ps_modules/VstsTaskSdk/0.11.0/* -Destination "out/dist/$task/ps_modules/VstsTaskSdk/" -Recurse -Force;
+        $taskRoot = $task.Split('V')[0];
+        Copy-Item -Path out/ps_modules/VstsTaskSdk/0.11.0/* -Destination "out/dist/$taskRoot/$task/ps_modules/VstsTaskSdk/" -Recurse -Force;
     }
 
     Remove-Item  -Path out/ps_modules/VstsTaskSdk -Force -Recurse;
@@ -208,9 +209,10 @@ task Clean {
 task CopyExtension {
 
     foreach ($task in $tasks) {
-        CopyExtensionFiles -Path "tasks/$task" -DestinationPath "out/dist/$task/";
-        Copy-Item -Path package.json -Destination "out/dist/$task/";
-        Copy-Item -Path images/icon128.png -Destination "out/dist/$task/icon.png" -Force;
+        $taskRoot = $task.Split('V')[0];
+        CopyExtensionFiles -Path "tasks/$task" -DestinationPath "out/dist/$taskRoot/$task/";
+        Copy-Item -Path package.json -Destination "out/dist/$taskRoot/$task/";
+        Copy-Item -Path images/icon128.png -Destination "out/dist/$taskRoot/$task/icon.png" -Force;
     }
 
     # Copy manifests
@@ -230,12 +232,15 @@ task CopyExtension {
 
 task BuildExtension CopyExtension, PSRule, PowerShellGet, VstsTaskSdk, {
     Write-Host '> Building extension' -ForegroundColor Green;
-    exec { & npm run compile }
 
     foreach ($task in $tasks) {
+        $taskRoot = $task.Split('V')[0];
         try {
-            Push-Location "out/dist/$task/";
+            Push-Location "out/dist/$taskRoot/$task/"
             exec { & npm install --only=prod }
+            exec { & npm run compile }
+
+            Remove-Item -Path *.ts -Force;
         }
         finally {
             Pop-Location;

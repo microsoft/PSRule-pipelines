@@ -2,9 +2,7 @@
     "compilerOptions": {
         "target": "ES6",
         "module": "commonjs",
-        "skipLibCheck": true,
-        "rootDir": "tasks",
-        "outDir": "out/dist",
+        "skipLibCheck": true
     },
     "exclude": [
         "node_modules"
