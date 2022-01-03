@@ -33,12 +33,12 @@ stages:
     displayName: 'Extension'
     steps:
 
-    - task: ps-rule-install@0
+    - task: ps-rule-install@1
       displayName: Test install task
       inputs:
         module: PSRule.Rules.Azure
 
-    - task: ps-rule-assert@0
+    - task: ps-rule-assert@1
       displayName: Test assert task
       inputs:
         source: '.ps-rule/'
