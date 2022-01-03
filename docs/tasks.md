@@ -11,7 +11,7 @@ Syntax:
 
 ```yaml
 steps:
-- task: ps-rule-install@0
+- task: ps-rule-install@1
   inputs:
     module: string        # Required. The name of a rule module to install.
     latest: boolean       # Optional. Determine if the installed module is updated to the latest version.
@@ -30,7 +30,7 @@ Install the latest stable version of `PSRule.Rules.Azure` from the PowerShell Ga
 
 ```yaml
 steps:
-- task: ps-rule-install@0
+- task: ps-rule-install@1
   inputs:
     module: PSRule.Rules.Azure   # Install PSRule.Rules.Azure from the PowerShell Gallery.
     latest: false                # Only install the module if not already installed.
@@ -46,7 +46,7 @@ Syntax:
 
 ```yaml
 steps:
-- task: ps-rule-assert@0
+- task: ps-rule-assert@1
   inputs:
     inputType: repository, inputPath                        # Required. Determines the type of input to use for PSRule.
     inputPath: string                                       # Required. The path PSRule will look for files to validate.
@@ -96,7 +96,7 @@ Run analysis from JSON files using the `PSRule.Rules.Azure` module and custom ru
 
 ```yaml
 steps:
-- task: ps-rule-assert@0
+- task: ps-rule-assert@1
   inputs:
     inputType: inputPath
     inputPath: 'out/*.json'        # Read objects from JSON files in 'out/'.
@@ -111,7 +111,7 @@ Results are outputted to a NUnit format that can be published using the publish 
 
 ```yaml
 steps:
-- task: ps-rule-assert@0
+- task: ps-rule-assert@1
   inputs:
     inputType: repository                    # Analyze repository structure.
     inputPath: $(BUILD_SOURCESDIRECTORY)     # Read repository structure from the default source path.
@@ -126,7 +126,7 @@ Run analysis of files within `out/` and all subdirectories using the named basel
 
 ```yaml
 steps:
-- task: ps-rule-assert@0
+- task: ps-rule-assert@1
   inputs:
     inputType: inputPath
     inputPath: 'out/'              # Read objects from files in 'out/'.
