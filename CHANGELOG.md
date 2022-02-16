@@ -14,6 +14,10 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 
 What's changed since v1.5.0:
 
+- New features:
+  - Added support for outputting analysis results as SARIF. [#315](https://github.com/microsoft/PSRule-pipelines/issues/315)
+    - To use the SARIF output format set the `outputFormat` parameter to `Sarif`.
+    - Currently a pre-release version of PSRule must be used.
 - Engineering:
   - Preparing for PSRule v2 support. [#312](https://github.com/microsoft/PSRule-pipelines/issues/312)
     - Added `ps-rule-assert@2` task for PSRule v2.
