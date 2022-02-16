@@ -12,6 +12,13 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 
 ## Unreleased
 
+What's changed since v1.5.0:
+
+- Engineering:
+  - Preparing for PSRule v2 support. [#312](https://github.com/microsoft/PSRule-pipelines/issues/312)
+    - Added `ps-rule-assert@2` task for PSRule v2.
+    - Added `ps-rule-install@2` task for PSRule v2.
+
 ## v1.5.0
 
 What's changed since v1.4.0:

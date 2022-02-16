@@ -74,6 +74,18 @@
         {
             "path": "ps_modules/PackageManagement",
             "packagePath": "/ps-rule-install/ps-rule-installV1/ps_modules/PackageManagement"
+        },
+        {
+            "path": "ps_modules/PSRule",
+            "packagePath": "/ps-rule-assert/ps-rule-assertV2/ps_modules/PSRule"
+        },
+        {
+            "path": "ps_modules/PowerShellGet",
+            "packagePath": "/ps-rule-install/ps-rule-installV2/ps_modules/PowerShellGet"
+        },
+        {
+            "path": "ps_modules/PackageManagement",
+            "packagePath": "/ps-rule-install/ps-rule-installV2/ps_modules/PackageManagement"
         }
     ],
     "contributions": [

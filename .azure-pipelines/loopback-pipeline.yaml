@@ -41,7 +41,5 @@ stages:
     - task: ps-rule-assert@1
       displayName: Test assert task
       inputs:
-        source: '.ps-rule/'
-        inputType: repository
         outputFormat: NUnit3
         outputPath: reports/ps-rule-loopback.xml
