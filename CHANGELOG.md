@@ -12,6 +12,11 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 
 ## Unreleased
 
+What's changed since v1.5.0:
+
+- General improvements:
+  - Expose more rule error output in CI. [#308](https://github.com/microsoft/PSRule-pipelines/issues/308)
+
 ## v1.5.0
 
 What's changed since v1.4.0:
