@@ -211,11 +211,6 @@ try {
         Assert-PSRule @invokeParams -InputPath $InputPath;
     }
 }
-catch [PSRule.Pipeline.RuleException] {
-    Write-Host "`#`#vso[task.logissue type=error]$($_.Exception.Message)";
-    Write-Host "`#`#vso[task.complete result=Failed;]FAILED";
-    $Host.SetShouldExit(1);
-}
 catch {
     Write-Host "`#`#vso[task.logissue type=error]$(Get-VstsLocString -Key 'AssertFailed')";
     Write-Host "`#`#vso[task.complete result=Failed;]FAILED";
