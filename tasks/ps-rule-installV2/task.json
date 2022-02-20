@@ -1,0 +1,77 @@
+{
+    "$schema": "https://raw.githubusercontent.com/microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+    "id": "0848dd65-bc06-4882-ae15-e2609d7fab0d",
+    "name": "ps-rule-install",
+    "friendlyName": "Install PSRule module",
+    "description": "Install a PowerShell module containing rules.",
+    "helpUrl": "https://github.com/Microsoft/PSRule-pipelines/blob/main/docs/tasks.md#ps-rule-install",
+    "helpMarkDown": "[Learn more about this task](https://github.com/Microsoft/PSRule-pipelines/blob/main/docs/tasks.md#ps-rule-install)",
+    "category": "Utility",
+    "visibility": [
+        "Build",
+        "Release"
+    ],
+    "runsOn": [
+        "Agent",
+        "DeploymentGroup"
+    ],
+    "author": "Bernie White",
+    "version": {
+        "Major": 2,
+        "Minor": 0,
+        "Patch": 0
+    },
+    "preview": true,
+    "releaseNotes": "[See change log](https://github.com/Microsoft/PSRule-pipelines/blob/main/CHANGELOG.md)",
+    "groups": [
+        {
+            "name": "advanced",
+            "displayName": "Advanced",
+            "isExpanded": false
+        }
+    ],
+    "minimumAgentVersion": "2.115.0",
+    "inputs": [
+        {
+            "name": "module",
+            "type": "string",
+            "label": "Module",
+            "required": true,
+            "helpMarkDown": "The name of a PSRule module to install from the PowerShell Gallery."
+        },
+        {
+            "name": "latest",
+            "type": "boolean",
+            "label": "Install latest",
+            "defaultValue": false,
+            "required": true,
+            "helpMarkDown": "Determines if the module is automatically updated to the latest version.",
+            "groupName": "advanced"
+        },
+        {
+            "name": "prerelease",
+            "type": "boolean",
+            "label": "Allow pre-releases",
+            "defaultValue": false,
+            "required": true,
+            "helpMarkDown": "Determines if pre-release module versions are installed.",
+            "groupName": "advanced"
+        }
+    ],
+    "instanceNameFormat": "Install $(module)",
+    "execution": {
+        "PowerShell3": {
+            "target": "powershell.ps1",
+            "platforms": [
+                "windows"
+            ]
+        },
+        "Node10": {
+            "target": "powershell.js",
+            "argumentFormat": ""
+        }
+    },
+    "messages": {
+        "JS_ExitCode": "Extension error:"
+    }
+}
