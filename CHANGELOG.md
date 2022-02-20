@@ -14,6 +14,8 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 
 What's changed since v1.5.0:
 
+- General improvements:
+  - Expose more rule error output in CI. [#308](https://github.com/microsoft/PSRule-pipelines/issues/308)
 - New features:
   - Added support for outputting analysis results as SARIF. [#315](https://github.com/microsoft/PSRule-pipelines/issues/315)
     - To use the SARIF output format set the `outputFormat` parameter to `Sarif`.
