@@ -60,7 +60,7 @@ async function run() {
             .arg('-NoProfile')
             .arg('-NonInteractive')
             .arg('-Command')
-            .arg(`. '${filePath.replace("'", "''")}'`);
+            .arg(`. '${filePath.replace(/'/g, "''")}'`);
         const options = <runner.IExecOptions>{
             failOnStdErr: false,
             errStream: process.stdout,
