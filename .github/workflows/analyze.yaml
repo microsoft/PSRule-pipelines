@@ -16,7 +16,7 @@ on:
   pull_request:
     branches: [ main, 'release/*' ]
   schedule:
-  - cron: '215 20 * * 0' # At 08:15 PM, on Sunday each week
+  - cron: '15 20 * * 0' # At 08:15 PM, on Sunday each week
   workflow_dispatch:
 
 jobs:
