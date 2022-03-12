@@ -1,5 +1,12 @@
 # PSRule options for QA
 
+requires:
+  PSRule.Rules.MSFT.OSS: '@pre >=1.0.1'
+
+include:
+  module:
+  - PSRule.Rules.MSFT.OSS
+
 input:
   pathIgnore:
   - '.vscode/'

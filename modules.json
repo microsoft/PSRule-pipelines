@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "PSRule": {
+      "version": "1.11.1"
+    },
+    "VstsTaskSdk": {
+      "version": "0.11.0"
+    },
+    "PowerShellGet": {
+      "version": "2.2.3"
+    }
+  },
+  "devDependencies": {
+    "Pester": {
+      "version": "5.3.1"
+    },
+    "PSScriptAnalyzer": {
+      "version": "1.20.0"
+    }
+  }
+}
