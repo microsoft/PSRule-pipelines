@@ -17,6 +17,7 @@ async function run() {
         let input_module: string = task.getInput('module', /*required*/ true);
         let input_latest: boolean = task.getBoolInput('latest', /*required*/ true);
         let input_prerelease: boolean = task.getBoolInput('prerelease', /*required*/ true);
+        let input_repository: string = task.getInput('repository', /*required*/ false);
 
         // Write bootstrap commands to a temporary script file
         let contents: string[] = [];
@@ -42,6 +43,9 @@ async function run() {
         }
         else {
             contents.push(`$scriptParams['PreRelease'] = $False;`);
+        }
+        if (input_repository !== undefined) {
+            contents.push(`$scriptParams['Repository'] = '${input_repository}'`);
         }
 
         // Add PowerShell entry point

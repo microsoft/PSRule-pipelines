@@ -56,6 +56,14 @@
             "required": true,
             "helpMarkDown": "Determines if pre-release module versions are installed.",
             "groupName": "advanced"
+        },
+        {
+            "name": "repository",
+            "type": "string",
+            "label": "Repository",
+            "required": false,
+            "defaultValue": "PSGallery",
+            "helpMarkDown": "The name of the PowerShell repository where PSRule modules are installed from."
         }
     ],
     "instanceNameFormat": "Install $(module)",

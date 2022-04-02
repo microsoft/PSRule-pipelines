@@ -19,6 +19,7 @@
         "**/.azure-pipelines/**/*.yaml": "azure-pipelines"
     },
     "cSpell.words": [
-        "cmdlets"
+        "cmdlets",
+        "Sarif"
     ]
 }

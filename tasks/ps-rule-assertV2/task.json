@@ -118,6 +118,30 @@
             "required": true,
             "helpMarkDown": "The file path to write results to.",
             "visibleRule": "outputFormat != None"
+        },
+        {
+            "name": "prerelease",
+            "type": "boolean",
+            "label": "PreRelease",
+            "required": false,
+            "defaultValue": false,
+            "helpMarkDown": "Determine if a pre-release module version is installed."
+        },
+        {
+            "name": "repository",
+            "type": "string",
+            "label": "Repository",
+            "required": false,
+            "defaultValue": "PSGallery",
+            "helpMarkDown": "The name of the PowerShell repository where PSRule modules are installed from."
+        },
+        {
+            "name": "version",
+            "type": "string",
+            "label": "Version",
+            "required": false,
+            "defaultValue": "",
+            "helpMarkDown": "The specific version of PSRule to use."
         }
     ],
     "instanceNameFormat": "Run PSRule analysis",

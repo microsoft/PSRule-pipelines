@@ -6,7 +6,7 @@
         {
             "label": "test",
             "type": "shell",
-            "command": "Invoke-Build Rules -AssertStyle Client",
+            "command": "Invoke-Build Test",
             "group": {
                 "kind": "test",
                 "isDefault": true

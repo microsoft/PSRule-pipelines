@@ -30,7 +30,7 @@ param (
     [Parameter(Mandatory = $False)]
     [String]$Modules = (Get-VstsInput -Name 'modules'),
 
-    # The name of a baseline to use
+    # A baseline to use
     [Parameter(Mandatory = $False)]
     [String]$Baseline = (Get-VstsInput -Name 'baseline'),
 
@@ -45,23 +45,58 @@ param (
 
     # The path to store formatted output
     [Parameter(Mandatory = $False)]
-    [String]$OutputPath = (Get-VstsInput -Name 'outputPath')
+    [String]$OutputPath = (Get-VstsInput -Name 'outputPath'),
+
+    # Determine if a pre-release module version is installed.
+    [Parameter(Mandatory = $False)]
+    [System.Boolean]$PreRelease = (Get-VstsInput -Name 'prerelease' -AsBool),
+
+    # The name of the PowerShell repository where PSRule modules are installed from.
+    [String]$Repository = (Get-VstsInput -Name 'repository'),
+
+    # The specific version of PSRule to use.
+    [Parameter(Mandatory = $False)]
+    [String]$Version = (Get-VstsInput -Name 'version')
 )
 
+$workspacePath = $Env:BUILD_SOURCESDIRECTORY;
+$ProgressPreference = [System.Management.Automation.ActionPreference]::SilentlyContinue;
 if ($Env:SYSTEM_DEBUG -eq 'true') {
-    $VerbosePreference = 'Continue';
+    $VerbosePreference = [System.Management.Automation.ActionPreference]::Continue;
 }
+
+# Check inputType
+if ([String]::IsNullOrEmpty($InputType) -or $InputType -notin 'repository', 'inputPath') {
+    $InputType = 'repository';
+}
+
+# Set workspace
+if ([String]::IsNullOrEmpty($workspacePath)) {
+    $workspacePath = $PWD;
+}
+
+# Set Path
 if ([String]::IsNullOrEmpty($Path)) {
-    $Path = $Env:BUILD_SOURCESDIRECTORY;
+    $Path = $workspacePath;
 }
-if ([String]::IsNullOrEmpty($Path)) {
-    $Path = $PWD;
+else {
+    $Path = Join-Path -Path $workspacePath -ChildPath $Path;
 }
-if ($Null -eq $InputPath) {
+
+# Set InputPath
+if ([String]::IsNullOrEmpty($InputPath)) {
     $InputPath = $Path;
 }
+else {
+    $InputPath = Join-Path -Path $Path -ChildPath $InputPath;
+}
+
+# Set Source
 if ([String]::IsNullOrEmpty($Source)) {
     $Source = Join-Path -Path $Path -ChildPath '.ps-rule/';
+}
+else {
+    $Source = Join-Path -Path $Path -ChildPath $Source;
 }
 
 # Set conventions
@@ -72,6 +107,11 @@ if (![String]::IsNullOrEmpty($Conventions)) {
 }
 else {
     $Conventions = @();
+}
+
+# Set repository
+if ([String]::IsNullOrEmpty($Repository)) {
+    $Repository = 'PSGallery'
 }
 
 if (!(Test-Path -Path $Source)) {
@@ -89,6 +129,15 @@ function WriteDebug {
         if ($Env:SYSTEM_DEBUG -eq 'true') {
             Write-Host "[debug] $Message";
         }
+    }
+}
+
+function HostExit {
+    [CmdletBinding()]
+    param ()
+    process {
+        Write-Host "`#`#vso[task.complete result=Failed;]FAILED";
+        $Host.SetShouldExit(1);
     }
 }
 
@@ -110,6 +159,34 @@ else {
     }
 }
 
+#
+# Check and install modules
+#
+$dependencyFile = Join-Path -Path $PSScriptRoot -ChildPath 'modules.json';
+$latestVersion = (Get-Content -Path $dependencyFile -Raw | ConvertFrom-Json -AsHashtable -Depth 5).dependencies.PSRule.version;
+$checkParams = @{
+    RequiredVersion = $latestVersion
+}
+if (![String]::IsNullOrEmpty($Version)) {
+    $checkParams['RequiredVersion'] = $Version;
+    if ($PreRelease -eq $True) {
+        $checkParams['AllowPrerelease'] = $True;
+    }
+}
+
+# Look for existing versions of PSRule
+Write-Host "[info] Using repository: $Repository";
+$installed = @(Get-InstalledModule -Name PSRule @checkParams -ErrorAction Ignore)
+if ($installed.Length -eq 0) {
+    Write-Host "[info] Installing PSRule: $($checkParams.RequiredVersion)";
+    $Null = Install-Module -Repository $Repository -Name PSRule @checkParams -Scope CurrentUser -Force;
+}
+foreach ($m in $installed) {
+    Write-Host "[info] Using existing module $($m.Name): $($m.Version)";
+}
+
+# Look for existing modules
+Write-Host '';
 $moduleNames = @()
 if (![String]::IsNullOrEmpty($Modules)) {
     $moduleNames = $Modules.Split(',', [System.StringSplitOptions]::RemoveEmptyEntries);
@@ -117,6 +194,9 @@ if (![String]::IsNullOrEmpty($Modules)) {
 $moduleParams = @{
     Scope = 'CurrentUser'
     Force = $True
+}
+if ($PreRelease -eq 'true') {
+    $moduleParams['AllowPrerelease'] = $True;
 }
 
 # Install each module if not already installed
@@ -126,7 +206,7 @@ foreach ($m in $moduleNames) {
     try {
         if ($Null -eq (Get-InstalledModule -Name $m -ErrorAction Ignore)) {
             Write-Host '  - Installing module';
-            $Null = Install-Module -Name $m @moduleParams -AllowClobber -ErrorAction Stop;
+            $Null = Install-Module -Repository $Repository -Name $m @moduleParams -AllowClobber -ErrorAction Stop;
         }
         else {
             Write-Host '  - Already installed';
@@ -140,24 +220,29 @@ foreach ($m in $moduleNames) {
         }
     }
     catch {
-        Write-Host "`#`#vso[task.logissue type=error]$(Get-VstsLocString -Key 'DependencyFailed')";
+        Write-Host "`#`#vso[task.logissue type=error]$(Get-VstsLocString -Key 'DependencyFailed') $($_.Exception.Message)";
         Write-Host "`#`#vso[task.complete result=Failed;]FAILED";
         $Host.SetShouldExit(1);
     }
 }
 
 try {
-    $Null = Import-Module PSRule -ErrorAction Stop;
-    $version = (Get-InstalledModule PSRule).Version;
+    $checkParams = @{ RequiredVersion = $checkParams.RequiredVersion.Split('-')[0] }
+    $Null = Import-Module PSRule @checkParams -ErrorAction Stop;
+    $version = (Get-Module PSRule).Version;
 }
 catch {
-    Write-Host "`#`#vso[task.logissue type=error]$(Get-VstsLocString -Key 'ImportFailed')";
+    Write-Host "`#`#vso[task.logissue type=error]$(Get-VstsLocString -Key 'ImportFailed') $($_.Exception.Message)";
     Write-Host "`#`#vso[task.complete result=Failed;]FAILED";
     $Host.SetShouldExit(1);
 }
 
+#
+# Run assert pipeline
+#
 Write-Host '';
 Write-Host "[info] Using Version: $version";
+Write-Host "[info] Using Workspace: $workspacePath"
 Write-Host "[info] Using PWD: $PWD";
 Write-Host "[info] Using Path: $Path";
 Write-Host "[info] Using Source: $Source";
@@ -213,13 +298,11 @@ try {
 }
 catch [PSRule.Pipeline.RuleException] {
     Write-Host "`#`#vso[task.logissue type=error]$($_.Exception.Message)";
-    Write-Host "`#`#vso[task.complete result=Failed;]FAILED";
-    $Host.SetShouldExit(1);
+    HostExit
 }
 catch {
     Write-Host "`#`#vso[task.logissue type=error]$(Get-VstsLocString -Key 'AssertFailed')";
-    Write-Host "`#`#vso[task.complete result=Failed;]FAILED";
-    $Host.SetShouldExit(1);
+    HostExit
 }
 finally {
     Pop-Location;
