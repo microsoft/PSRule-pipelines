@@ -268,7 +268,7 @@ task PackageRestore {
 }
 
 # Synopsis: Build and clean.
-task . Test, Rules
+task . Build, Rules
 
 # Synopsis: Build the project
 task Build Clean, PackageRestore, BuildExtension, VersionExtension
