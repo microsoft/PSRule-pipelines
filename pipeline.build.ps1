@@ -212,6 +212,8 @@ task Rules Dependencies, {
     $assertParams = @{
         OutputFormat = 'NUnit3'
         ErrorAction = 'Stop'
+        Format = 'File'
+        InputPath = '.'
     }
     Assert-PSRule @assertParams -OutputPath reports/ps-rule-file.xml;
 }
