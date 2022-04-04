@@ -19,13 +19,21 @@ param (
 
     # Determine if pre-release modules are installed
     [Parameter(Mandatory = $False)]
-    [System.Boolean]$PreRelease = (Get-VstsInput -Name 'prerelease' -AsBool)
+    [System.Boolean]$PreRelease = (Get-VstsInput -Name 'prerelease' -AsBool),
+
+    # The name of the PowerShell repository where PSRule modules are installed from.
+    [String]$Repository = (Get-VstsInput -Name 'repository')
 )
 
 if ($Env:SYSTEM_DEBUG -eq 'true') {
     $VerbosePreference = 'Continue';
 }
 $ProgressPreference = 'SilentlyContinue';
+
+# Set repository
+if ([String]::IsNullOrEmpty($Repository)) {
+    $Repository = 'PSGallery'
+}
 
 Write-Host '';
 Write-Host "[info] Using PreRelease: $PreRelease";
@@ -80,7 +88,7 @@ foreach ($m in $moduleNames) {
     Write-Host "[info] Checking module: $m";
     if ($Null -eq (Get-InstalledModule -Name $m -ErrorAction Ignore)) {
         Write-Host "[info] Installing module: $m";
-        $Null = Install-Module -Name $m @moduleParams -AllowClobber;
+        $Null = Install-Module -Name $m @moduleParams -Repository $Repository -AllowClobber;
     }
     elseif ($Latest) {
         Write-Host "[info] Updating module: $m";

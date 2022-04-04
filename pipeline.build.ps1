@@ -7,10 +7,7 @@ param (
     [String]$Build = '0.0.1',
 
     [Parameter(Mandatory = $False)]
-    [String]$Configuration = 'Debug',
-
-    [Parameter(Mandatory = $False)]
-    [String]$AssertStyle = 'AzurePipelines'
+    [String]$Configuration = 'Debug'
 )
 
 Write-Host -Object "[Pipeline] -- PWD: $PWD" -ForegroundColor Green;
@@ -79,54 +76,20 @@ function CopyExtensionFiles {
     }
 }
 
-function Get-RepoRuleData {
-    [CmdletBinding()]
-    param (
-        [Parameter(Position = 0, Mandatory = $False)]
-        [String]$Path = $PWD
-    )
-    process {
-        GetPathInfo -Path $Path -Verbose:$VerbosePreference;
-    }
-}
-
-function GetPathInfo {
-    [CmdletBinding()]
-    param (
-        [Parameter(Mandatory = $True)]
-        [String]$Path
-    )
-    begin {
-        $items = New-Object -TypeName System.Collections.ArrayList;
-    }
-    process {
-        $Null = $items.Add((Get-Item -Path $Path));
-        $files = @(Get-ChildItem -Path $Path -File -Recurse -Include *.ps1,*.ts,*.psm1,*.psd1,*.cs | Where-Object {
-            !($_.FullName -like "*.Designer.cs") -and
-            !($_.FullName -like "*/bin/*") -and
-            !($_.FullName -like "*/obj/*") -and
-            !($_.FullName -like "*\obj\*") -and
-            !($_.FullName -like "*\bin\*") -and
-            !($_.FullName -like "*\out\*") -and
-            !($_.FullName -like "*/out/*") -and
-            !($_.FullName -like "*\node_modules\*") -and
-            !($_.FullName -like "*/node_modules/*")
-        });
-        $Null = $items.AddRange($files);
-    }
-    end {
-        $items;
-    }
-}
-
 function UpdateTaskVersion {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $True)]
-        [String]$Path
+        [String]$Path,
+
+        [Parameter(Mandatory = $False)]
+        [String]$Build = $Env:BUILD_BUILDNUMBER
     )
     process {
-        $buildNumber = [int]::Parse($Env:BUILD_BUILDNUMBER.Split('-', [System.StringSplitOptions]::RemoveEmptyEntries)[1].Replace('B', ''));
+        if ([String]::IsNullOrEmpty($Build)) {
+            $Build = '0.0.1-B000000000';
+        }
+        $buildNumber = [int]::Parse($Build.Split('-', [System.StringSplitOptions]::RemoveEmptyEntries)[1].Replace('B', ''));
         Get-ChildItem -Path $Path -Filter task.json -Recurse | ForEach-Object {
             $filePath = $_.FullName;
             $taskContent = Get-Content -Raw -Path $filePath | ConvertFrom-Json;
@@ -143,62 +106,26 @@ task NuGet {
     }
 }
 
-# Synopsis: Install Pester module
-task Pester NuGet, {
-    if ($Null -eq (Get-InstalledModule -Name Pester -RequiredVersion 4.10.1 -ErrorAction SilentlyContinue)) {
-        Install-Module -Name Pester -RequiredVersion 4.10.1 -Scope CurrentUser -Force -SkipPublisherCheck;
-    }
-    Import-Module -Name Pester -RequiredVersion 4.10.1 -Verbose:$False;
+task Dependencies NuGet, {
+    Import-Module $PWD/scripts/dependencies.psm1;
+    Install-Dependencies -Path $PWD/modules.json;
 }
 
-# Synopsis: Install PSScriptAnalyzer module
-task PSScriptAnalyzer NuGet, {
-    if ($Null -eq (Get-InstalledModule -Name PSScriptAnalyzer -MinimumVersion 1.18.3 -ErrorAction SilentlyContinue)) {
-        Install-Module -Name PSScriptAnalyzer -MinimumVersion 1.18.3 -Scope CurrentUser -Force;
-    }
-    Import-Module -Name PSScriptAnalyzer -Verbose:$False;
+task SaveDependencies NuGet, PSRule, {
+    Import-Module $PWD/scripts/dependencies.psm1;
+    Save-Dependencies -Path $PWD/modules.json -OutputPath out/dist/ps_modules;
 }
 
-# Synopsis: Install PlatyPS module
-task platyPS {
-    if ($Null -eq (Get-InstalledModule -Name PlatyPS -MinimumVersion 0.14.0 -ErrorAction SilentlyContinue)) {
-        Install-Module -Name PlatyPS -Scope CurrentUser -MinimumVersion 0.14.0 -Force;
-    }
-    Import-Module -Name PlatyPS -Verbose:$False;
-}
-
-# Synopsis: Install PSRule modules
+# Synopsis: Install PSRule older version of PSRule for V1
 task PSRule NuGet, {
     if (!(Test-Path -Path out/dist/ps_modules)) {
         $Null = New-Item -Path out/dist/ps_modules -ItemType Directory -Force;
     }
-    if ($Null -eq (Get-InstalledModule -Name PSRule -RequiredVersion 1.11.0 -ErrorAction SilentlyContinue)) {
-        Install-Module -Name PSRule -Scope CurrentUser -RequiredVersion 1.11.0 -Force;
+    if ($Null -eq (Get-InstalledModule -Name PSRule -RequiredVersion 1.11.1 -ErrorAction SilentlyContinue)) {
+        Install-Module -Name PSRule -Repository PSGallery -Scope CurrentUser -RequiredVersion 1.11.1 -Force;
     }
-    Save-Module -Name PSRule -Path out/dist/ps_modules -RequiredVersion 1.11.0;
+    Save-Module -Name PSRule -Repository PSGallery -Path out/dist/ps_modules -RequiredVersion 1.11.1;
     Import-Module -Name PSRule -Verbose:$False;
-}
-
-# Synopsis: Install VstsTaskSdk module
-task VstsTaskSdk NuGet, {
-    if (!(Test-Path -Path out/ps_modules)) {
-        $Null = New-Item -Path out/ps_modules -ItemType Directory -Force;
-    }
-    Save-Module -Name VstsTaskSdk -Path out/ps_modules -RequiredVersion 0.11.0;
-
-    foreach ($task in $tasks) {
-        $taskRoot = $task.Split('V')[0];
-        Copy-Item -Path out/ps_modules/VstsTaskSdk/0.11.0/* -Destination "out/dist/$taskRoot/$task/ps_modules/VstsTaskSdk/" -Recurse -Force;
-    }
-
-    Remove-Item  -Path out/ps_modules/VstsTaskSdk -Force -Recurse;
-}
-
-task PowerShellGet NuGet, {
-    if (!(Test-Path -Path out/dist/ps_modules)) {
-        $Null = New-Item -Path out/dist/ps_modules -ItemType Directory -Force;
-    }
-    Save-Module -Name PowerShellGet -Path out/dist/ps_modules -MinimumVersion 2.2.3;
 }
 
 # Synopsis: Remove temp files.
@@ -217,6 +144,8 @@ task CopyExtension {
 
     # Copy manifests
     Copy-Item -Path vss-extension.json -Destination out/dist/;
+    Copy-Item -Path modules.json -Destination out/dist/;
+
 
     # Copy icon
     if (!(Test-Path -Path out/dist/images)) {
@@ -230,7 +159,7 @@ task CopyExtension {
     Copy-Item -Path LICENSE -Destination out/dist/;
 }
 
-task BuildExtension CopyExtension, PSRule, PowerShellGet, VstsTaskSdk, {
+task BuildExtension CopyExtension, SaveDependencies, {
     Write-Host '> Building extension' -ForegroundColor Green;
 
     foreach ($task in $tasks) {
@@ -279,31 +208,52 @@ task GetVersionInfo {
 }
 
 # Synopsis: Run validation
-task Rules PSRule, {
+task Rules Dependencies, {
     $assertParams = @{
-        Path = './.ps-rule/'
-        Style = $AssertStyle
         OutputFormat = 'NUnit3'
         ErrorAction = 'Stop'
+        Format = 'File'
+        InputPath = '.'
     }
-    Get-RepoRuleData -Path $PWD |
-        Assert-PSRule @assertParams -OutputPath reports/ps-rule-file.xml;
+    Assert-PSRule @assertParams -OutputPath reports/ps-rule-file.xml;
 }
 
-task TestModule Pester, PSScriptAnalyzer, {
+task TestModule Dependencies, {
     # Run Pester tests
-    $pesterParams = @{ Path = $PWD; OutputFile = 'reports/pester-unit.xml'; OutputFormat = 'NUnitXml'; PesterOption = @{ IncludeVSCodeMarker = $True }; PassThru = $True; };
+    $pesterOptions = @{
+        Run        = @{
+            Path     = (Join-Path -Path $PWD -ChildPath tests/);
+            PassThru = $True;
+        };
+        TestResult = @{
+            Enabled      = $True;
+            OutputFormat = 'NUnitXml';
+            OutputPath   = 'reports/pester-unit.xml';
+        };
+    };
 
     if ($CodeCoverage) {
-        $pesterParams.Add('CodeCoverage', (Join-Path -Path $PWD -ChildPath 'tasks/**/*.ps1'));
-        $pesterParams.Add('CodeCoverageOutputFile', (Join-Path -Path $PWD -ChildPath reports/pester-coverage.xml));
+        $codeCoverageOptions = @{
+            Enabled    = $True;
+            OutputPath = (Join-Path -Path $PWD -ChildPath 'reports/pester-coverage.xml');
+            Path       = (Join-Path -Path $PWD -ChildPath 'tasks/**/*.ps1');
+        };
+
+        $pesterOptions.Add('CodeCoverage', $codeCoverageOptions);
     }
 
     if (!(Test-Path -Path reports)) {
         $Null = New-Item -Path reports -ItemType Directory -Force;
     }
 
-    $results = Invoke-Pester @pesterParams;
+    if ($Null -ne $TestGroup) {
+        $pesterOptions.Add('Filter', @{ Tag = $TestGroup });
+    }
+
+    # https://pester.dev/docs/commands/New-PesterConfiguration
+    $pesterConfiguration = New-PesterConfiguration -Hashtable $pesterOptions;
+
+    $results = Invoke-Pester -Configuration $pesterConfiguration;
 
     # Throw an error if pester tests failed
     if ($Null -eq $results) {
@@ -320,9 +270,9 @@ task PackageRestore {
 }
 
 # Synopsis: Build and clean.
-task . Test
+task . Build, Rules
 
 # Synopsis: Build the project
-task Build Clean, Rules, PackageRestore, BuildExtension, VersionExtension
+task Build Clean, PackageRestore, BuildExtension, VersionExtension
 
 task Test Build, TestModule

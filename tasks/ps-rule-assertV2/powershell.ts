@@ -23,6 +23,9 @@ async function run() {
         let input_conventions: string = task.getInput('conventions', /*required*/ false);
         let input_outputFormat: string = task.getPathInput('outputFormat', /*required*/ false, /*check*/ false) || 'None';
         let input_outputPath: string = task.getPathInput('outputPath', /*required*/ false, /*check*/ false);
+        let input_prerelease: boolean = task.getBoolInput('prerelease', /*required*/ false);
+        let input_repository: string = task.getInput('repository', /*required*/ false);
+        let input_version: string = task.getInput('version', /*required*/ false);
 
         // Write bootstrap commands to a temporary script file
         let contents: string[] = [];
@@ -51,6 +54,18 @@ async function run() {
         }
         if (input_outputPath !== undefined) {
             contents.push(`$scriptParams['OutputPath'] = '${input_outputPath}'`);
+        }
+        if (input_prerelease !== undefined && input_prerelease) {
+            contents.push(`$scriptParams['PreRelease'] = $True;`);
+        }
+        else {
+            contents.push(`$scriptParams['PreRelease'] = $False;`);
+        }
+        if (input_repository !== undefined) {
+            contents.push(`$scriptParams['Repository'] = '${input_repository}'`);
+        }
+        if (input_version !== undefined) {
+            contents.push(`$scriptParams['Version'] = '${input_version}'`);
         }
 
         // Add PowerShell entry point
