@@ -25,7 +25,7 @@ async function run() {
         // Import SDK
         contents.push(`$rootPath = '${__dirname}';`);
         contents.push(`$sdkPath = Join-Path -Path $rootPath -ChildPath 'ps_modules/VstsTaskSdk';`);
-        contents.push(`Import-Module $sdkPath -ArgumentList @{ NonInteractive = 'true' }`);
+        contents.push(`Import-Module $sdkPath -ArgumentList @{ NonInteractive = 'true' } -ErrorAction Stop`);
 
         // Prepare parameters
         contents.push(`$scriptParams = @{ };`);

@@ -29,6 +29,8 @@ What's changed since v1.5.0:
     - Configure repository to install modules from the named repository.
 - General improvements:
   - Expose more rule error output in CI. [#308](https://github.com/microsoft/PSRule-pipelines/issues/308)
+- Bug fixes:
+  - Fixed failure loading VstsTaskSdk. [#361](https://github.com/microsoft/PSRule-pipelines/issues/361)
 
 ## v1.5.0
 
