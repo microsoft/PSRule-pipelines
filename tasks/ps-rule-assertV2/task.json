@@ -37,7 +37,7 @@
             "type": "filePath",
             "label": "Working directory",
             "groupName": "advanced",
-            "defaultValue": "",
+            "defaultValue": ".",
             "required": false,
             "helpMarkDown": "The working directory PSRule is run from."
         },
@@ -57,7 +57,7 @@
             "name": "inputPath",
             "type": "filePath",
             "label": "Input file(s)",
-            "defaultValue": "",
+            "defaultValue": ".",
             "required": false,
             "helpMarkDown": "The path PSRule will look for files to validate."
         },
