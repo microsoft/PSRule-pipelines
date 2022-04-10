@@ -84,16 +84,10 @@ if ([String]::IsNullOrEmpty($Path)) {
 if ([String]::IsNullOrEmpty($InputPath)) {
     $InputPath = $Path;
 }
-else {
-    $InputPath = Join-Path -Path $Path -ChildPath $InputPath;
-}
 
 # Set Source
 if ([String]::IsNullOrEmpty($Source)) {
     $Source = Join-Path -Path $Path -ChildPath '.ps-rule/';
-}
-else {
-    $Source = Join-Path -Path $Path -ChildPath $Source;
 }
 
 # Set conventions
