@@ -79,9 +79,6 @@ if ([String]::IsNullOrEmpty($workspacePath)) {
 if ([String]::IsNullOrEmpty($Path)) {
     $Path = $workspacePath;
 }
-else {
-    $Path = Join-Path -Path $workspacePath -ChildPath $Path;
-}
 
 # Set InputPath
 if ([String]::IsNullOrEmpty($InputPath)) {

@@ -31,6 +31,7 @@ What's changed since v1.5.0:
   - Expose more rule error output in CI. [#308](https://github.com/microsoft/PSRule-pipelines/issues/308)
 - Bug fixes:
   - Fixed failure loading VstsTaskSdk. [#361](https://github.com/microsoft/PSRule-pipelines/issues/361)
+  - Fixed handling of unset path. [#363](https://github.com/microsoft/PSRule-pipelines/issues/363)
 
 ## v1.5.0
 
