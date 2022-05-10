@@ -15,23 +15,32 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 What's changed since v1.5.0:
 
 - New features:
-  - Added support for PSRule v2. [#312](https://github.com/microsoft/PSRule-pipelines/issues/312)
+  - Added support for PSRule v2 by @BernieWhite.
+    [#312](https://github.com/microsoft/PSRule-pipelines/issues/312)
     - Added `ps-rule-assert@2` task for PSRule v2.
     - Added `ps-rule-install@2` task for PSRule v2.
-  - Added support for outputting analysis results as SARIF. [#315](https://github.com/microsoft/PSRule-pipelines/issues/315)
+  - Added support for outputting analysis results as SARIF by @BernieWhite.
+    [#315](https://github.com/microsoft/PSRule-pipelines/issues/315)
     - To use the SARIF output format set the `outputFormat` parameter to `Sarif`.
     - Currently a pre-release version of PSRule must be used.
-  - Added the ability to use a specific version of PSRule. [#314](https://github.com/microsoft/PSRule-pipelines/issues/314)
+  - Added the ability to use a specific version of PSRule by @BernieWhite.
+    [#314](https://github.com/microsoft/PSRule-pipelines/issues/314)
     - To install a specific version set the version parameter.
     - By default, the latest stable version of PSRule is used.
-  - Added the ability to use an alternative PowerShell repository. [#353](https://github.com/microsoft/PSRule-pipelines/issues/353)
+  - Added the ability to use an alternative PowerShell repository by @BernieWhite.
+    [#353](https://github.com/microsoft/PSRule-pipelines/issues/353)
     - Register and authenticate to the repository in PowerShell if required.
     - Configure repository to install modules from the named repository.
 - General improvements:
-  - Expose more rule error output in CI. [#308](https://github.com/microsoft/PSRule-pipelines/issues/308)
+  - Expose more rule error output in CI by @ArmaanMcleod.
+    [#308](https://github.com/microsoft/PSRule-pipelines/issues/308)
 - Bug fixes:
-  - Fixed failure loading VstsTaskSdk. [#361](https://github.com/microsoft/PSRule-pipelines/issues/361)
-  - Fixed handling of unset path. [#363](https://github.com/microsoft/PSRule-pipelines/issues/363)
+  - Fixed failure loading VstsTaskSdk by @BernieWhite.
+    [#361](https://github.com/microsoft/PSRule-pipelines/issues/361)
+  - Fixed handling of unset path by @BernieWhite.
+    [#363](https://github.com/microsoft/PSRule-pipelines/issues/363)
+  - Fixed dependency conflict with older module versions by @BernieWhite.
+    [#396](https://github.com/microsoft/PSRule-pipelines/issues/396)
 
 ## v1.5.0
 
