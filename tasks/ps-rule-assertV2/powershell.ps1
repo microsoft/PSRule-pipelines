@@ -218,7 +218,7 @@ foreach ($m in $moduleNames) {
 }
 
 try {
-    $checkParams = @{ RequiredVersion = $checkParams.RequiredVersion.Split('-')[0] }
+    $checkParams = @{ MinimumVersion = $checkParams.RequiredVersion.Split('-')[0] }
     $Null = Import-Module PSRule @checkParams -ErrorAction Stop;
     $version = (Get-Module PSRule).Version;
 }
