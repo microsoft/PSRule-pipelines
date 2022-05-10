@@ -83,27 +83,34 @@ if ($PreRelease) {
     $moduleParams['AllowPrerelease'] = $True;
 }
 
-# Install each module if not already installed
-foreach ($m in $moduleNames) {
-    Write-Host "[info] Checking module: $m";
-    if ($Null -eq (Get-InstalledModule -Name $m -ErrorAction Ignore)) {
-        Write-Host "[info] Installing module: $m";
-        $Null = Install-Module -Name $m @moduleParams -Repository $Repository -AllowClobber;
-    }
-    elseif ($Latest) {
-        Write-Host "[info] Updating module: $m";
-        $Null = Update-Module -Name $m @moduleParams;
-    }
-    else {
-        WriteDebug "Module '$m' already installed";
-    }
-    # Check
-    if ($Null -eq (Get-InstalledModule -Name $m)) {
-        $exitResult = 1;
-        Write-Host "[error] Failed to install module: $m";
-    }
-    else {
-        Write-Host "[info] Using module: $m - v$((Get-InstalledModule -Name $m).Version)";
+try {
+    # Install each module if not already installed
+    foreach ($m in $moduleNames) {
+        Write-Host "[info] Checking module: $m";
+        if ($Null -eq (Get-InstalledModule -Name $m -ErrorAction Ignore)) {
+            Write-Host "[info] Installing module: $m";
+            $Null = Install-Module -Name $m @moduleParams -Repository $Repository -AllowClobber;
+        }
+        elseif ($Latest) {
+            Write-Host "[info] Updating module: $m";
+            $Null = Update-Module -Name $m @moduleParams;
+        }
+        else {
+            WriteDebug "Module '$m' already installed";
+        }
+        # Check
+        if ($Null -eq (Get-InstalledModule -Name $m)) {
+            $exitResult = 1;
+            Write-Host "[error] Failed to install module: $m";
+        }
+        else {
+            Write-Host "[info] Using module: $m - v$((Get-InstalledModule -Name $m).Version)";
+        }
     }
 }
-$Host.SetShouldExit($exitResult);
+catch {
+    Write-Host "`#`#vso[task.logissue type=error]$($_.Exception.Message)";
+    Write-Host "$($_.Exception.ScriptStackTrace)";
+    HostExit
+}
+Write-Host '---';

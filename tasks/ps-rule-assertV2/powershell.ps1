@@ -153,6 +153,9 @@ else {
 #
 # Check and install modules
 #
+
+Write-Host "`#`#[group]Checking PSRule";
+
 $dependencyFile = Join-Path -Path $PSScriptRoot -ChildPath 'modules.json';
 $latestVersion = (Get-Content -Path $dependencyFile -Raw | ConvertFrom-Json -AsHashtable -Depth 5).dependencies.PSRule.version;
 $checkParams = @{
@@ -176,8 +179,14 @@ foreach ($m in $installed) {
     Write-Host "[info] Using existing module $($m.Name): $($m.Version)";
 }
 
+Write-Host "`#`#[endgroup]";
+
+#
 # Look for existing modules
-Write-Host '';
+#
+
+Write-Host "`#`#[group]Checking modules";
+
 $moduleNames = @()
 if (![String]::IsNullOrEmpty($Modules)) {
     $moduleNames = $Modules.Split(',', [System.StringSplitOptions]::RemoveEmptyEntries);
@@ -218,7 +227,7 @@ foreach ($m in $moduleNames) {
 }
 
 try {
-    $checkParams = @{ RequiredVersion = $checkParams.RequiredVersion.Split('-')[0] }
+    $checkParams = @{ MinimumVersion = $checkParams.RequiredVersion.Split('-')[0] }
     $Null = Import-Module PSRule @checkParams -ErrorAction Stop;
     $version = (Get-Module PSRule).Version;
 }
@@ -228,10 +237,14 @@ catch {
     $Host.SetShouldExit(1);
 }
 
+Write-Host "`#`#[endgroup]";
+
 #
 # Run assert pipeline
 #
-Write-Host '';
+
+Write-Host "`#`#[group]Checking environment";
+
 Write-Host "[info] Using Version: $version";
 Write-Host "[info] Using Workspace: $workspacePath"
 Write-Host "[info] Using PWD: $PWD";
@@ -243,6 +256,8 @@ Write-Host "[info] Using InputType: $InputType";
 Write-Host "[info] Using InputPath: $InputPath";
 Write-Host "[info] Using OutputFormat: $OutputFormat";
 Write-Host "[info] Using OutputPath: $OutputPath";
+
+Write-Host "`#`#[endgroup]";
 
 try {
     Push-Location -Path $Path;
@@ -289,10 +304,16 @@ try {
 }
 catch [PSRule.Pipeline.RuleException] {
     Write-Host "`#`#vso[task.logissue type=error]$($_.Exception.Message)";
+    Write-Host "$($_.Exception.ScriptStackTrace)";
+    HostExit
+}
+catch [PSRule.Pipeline.FailPipelineException] {
+    Write-Host "`#`#vso[task.logissue type=error]$(Get-VstsLocString -Key 'AssertFailed')";
     HostExit
 }
 catch {
-    Write-Host "`#`#vso[task.logissue type=error]$(Get-VstsLocString -Key 'AssertFailed')";
+    Write-Host "`#`#vso[task.logissue type=error]$($_.Exception.Message)";
+    Write-Host "$($_.Exception.ScriptStackTrace)";
     HostExit
 }
 finally {
