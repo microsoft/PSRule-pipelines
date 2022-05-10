@@ -289,10 +289,16 @@ try {
 }
 catch [PSRule.Pipeline.RuleException] {
     Write-Host "`#`#vso[task.logissue type=error]$($_.Exception.Message)";
+    Write-Host "$($_.Exception.ScriptStackTrace)";
+    HostExit
+}
+catch [PSRule.Pipeline.FailPipelineException] {
+    Write-Host "`#`#vso[task.logissue type=error]$(Get-VstsLocString -Key 'AssertFailed')";
     HostExit
 }
 catch {
-    Write-Host "`#`#vso[task.logissue type=error]$(Get-VstsLocString -Key 'AssertFailed')";
+    Write-Host "`#`#vso[task.logissue type=error]$($_.Exception.Message)";
+    Write-Host "$($_.Exception.ScriptStackTrace)";
     HostExit
 }
 finally {
