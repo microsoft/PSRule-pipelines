@@ -15,10 +15,10 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 What's changed since v1.5.0:
 
 - New features:
-  - Added support for PSRule v2 by @BernieWhite.
+  - Added tasks for PSRule v2 support by @BernieWhite.
     [#312](https://github.com/microsoft/PSRule-pipelines/issues/312)
-    - Added `ps-rule-assert@2` task for PSRule v2.
-    - Added `ps-rule-install@2` task for PSRule v2.
+    - Added `ps-rule-assert@2` task.
+    - Added `ps-rule-install@2` task.
   - Added support for outputting analysis results as SARIF by @BernieWhite.
     [#315](https://github.com/microsoft/PSRule-pipelines/issues/315)
     - To use the SARIF output format set the `outputFormat` parameter to `Sarif`.
@@ -34,6 +34,9 @@ What's changed since v1.5.0:
 - General improvements:
   - Expose more rule error output in CI by @ArmaanMcleod.
     [#308](https://github.com/microsoft/PSRule-pipelines/issues/308)
+- Engineering:
+  - Flagged v0 tasks as deprecated by @BernieWhite.
+    [#399](https://github.com/microsoft/PSRule-pipelines/issues/399)
 - Bug fixes:
   - Fixed failure loading VstsTaskSdk by @BernieWhite.
     [#361](https://github.com/microsoft/PSRule-pipelines/issues/361)
