@@ -21,7 +21,6 @@
         "Minor": 0,
         "Patch": 0
     },
-    "preview": true,
     "releaseNotes": "[See change log](https://github.com/Microsoft/PSRule-pipelines/blob/main/CHANGELOG.md)",
     "groups": [
         {
