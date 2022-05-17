@@ -16,7 +16,7 @@ trigger:
     - 'main'
   tags:
     include:
-    - 'v1.*'
+    - 'v2.*'
 
 pr:
   branches:
@@ -111,7 +111,7 @@ stages:
   dependsOn: [ 'Build', 'Analysis' ]
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
   variables:
-    isRelease: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v1.'))
+    isRelease: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v2.'))
   jobs:
   - template: jobs/release.yaml
     parameters:
@@ -123,7 +123,7 @@ stages:
 - stage: Stable
   displayName: Stable
   dependsOn: Canary
-  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v1.'))
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v2.'))
   jobs:
   - template: jobs/release.yaml
     parameters:
