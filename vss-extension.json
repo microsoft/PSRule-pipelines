@@ -56,7 +56,7 @@
             "packagePath": "/ps-rule-assert/ps-rule-assertV0/ps_modules/PSRule/1.11.1"
         },
         {
-            "path": "ps_modules/VstsTaskSdk",
+            "path": "ps_modules/VstsTaskSdk/0.11.0",
             "packagePath": "/ps-rule-assert/ps-rule-assertV0/ps_modules/VstsTaskSdk"
         },
         {
@@ -68,7 +68,7 @@
             "packagePath": "/ps-rule-install/ps-rule-installV0/ps_modules/PackageManagement"
         },
         {
-            "path": "ps_modules/VstsTaskSdk",
+            "path": "ps_modules/VstsTaskSdk/0.11.0",
             "packagePath": "/ps-rule-install/ps-rule-installV0/ps_modules/VstsTaskSdk"
         },
         {
@@ -76,7 +76,7 @@
             "packagePath": "/ps-rule-assert/ps-rule-assertV1/ps_modules/PSRule/1.11.1"
         },
         {
-            "path": "ps_modules/VstsTaskSdk",
+            "path": "ps_modules/VstsTaskSdk/0.11.0",
             "packagePath": "/ps-rule-assert/ps-rule-assertV1/ps_modules/VstsTaskSdk"
         },
         {
@@ -88,7 +88,7 @@
             "packagePath": "/ps-rule-install/ps-rule-installV1/ps_modules/PackageManagement"
         },
         {
-            "path": "ps_modules/VstsTaskSdk",
+            "path": "ps_modules/VstsTaskSdk/0.11.0",
             "packagePath": "/ps-rule-install/ps-rule-installV1/ps_modules/VstsTaskSdk"
         },
         {
@@ -100,7 +100,7 @@
             "packagePath": "/ps-rule-assert/ps-rule-assertV2/ps_modules/PSRule/2.0.0"
         },
         {
-            "path": "ps_modules/VstsTaskSdk",
+            "path": "ps_modules/VstsTaskSdk/0.11.0",
             "packagePath": "/ps-rule-assert/ps-rule-assertV2/ps_modules/VstsTaskSdk"
         },
         {
@@ -112,7 +112,7 @@
             "packagePath": "/ps-rule-install/ps-rule-installV2/ps_modules/PackageManagement"
         },
         {
-            "path": "ps_modules/VstsTaskSdk",
+            "path": "ps_modules/VstsTaskSdk/0.11.0",
             "packagePath": "/ps-rule-install/ps-rule-installV2/ps_modules/VstsTaskSdk"
         }
     ],

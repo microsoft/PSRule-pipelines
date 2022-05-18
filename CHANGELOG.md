@@ -12,6 +12,13 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 
 ## Unreleased
 
+## v2.0.1
+
+What's changed since v2.0.0:
+
+- Bug fixes:
+  - Fixes file not found error when running task. [#411](https://github.com/microsoft/PSRule-pipelines/issues/411)
+
 ## v2.0.0
 
 What's changed since v1.5.0:

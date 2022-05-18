@@ -157,7 +157,7 @@ else {
 Write-Host "`#`#[group]Checking PSRule";
 
 $dependencyFile = Join-Path -Path $PSScriptRoot -ChildPath 'modules.json';
-$latestVersion = (Get-Content -Path $dependencyFile -Raw | ConvertFrom-Json -AsHashtable -Depth 5).dependencies.PSRule.version;
+$latestVersion = (Get-Content -Path $dependencyFile -Raw | ConvertFrom-Json).dependencies.PSRule.version;
 $checkParams = @{
     RequiredVersion = $latestVersion
 }
