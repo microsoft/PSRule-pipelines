@@ -89,7 +89,7 @@ try {
         Write-Host "[info] Checking module: $m";
         if ($Null -eq (Get-InstalledModule -Name $m -ErrorAction Ignore)) {
             Write-Host "[info] Installing module: $m";
-            $Null = Install-Module -Name $m @moduleParams -Repository $Repository -AllowClobber;
+            $Null = Install-Module -Name $m @moduleParams -Repository $Repository -AllowClobber -SkipPublisherCheck;
         }
         elseif ($Latest) {
             Write-Host "[info] Updating module: $m";

@@ -157,7 +157,7 @@ else {
 Write-Host "`#`#[group]Checking PSRule";
 
 $dependencyFile = Join-Path -Path $PSScriptRoot -ChildPath 'modules.json';
-$latestVersion = (Get-Content -Path $dependencyFile -Raw | ConvertFrom-Json -AsHashtable -Depth 5).dependencies.PSRule.version;
+$latestVersion = (Get-Content -Path $dependencyFile -Raw | ConvertFrom-Json).dependencies.PSRule.version;
 $checkParams = @{
     RequiredVersion = $latestVersion
 }
@@ -173,7 +173,7 @@ Write-Host "[info] Using repository: $Repository";
 $installed = @(Get-InstalledModule -Name PSRule @checkParams -ErrorAction Ignore)
 if ($installed.Length -eq 0) {
     Write-Host "[info] Installing PSRule: $($checkParams.RequiredVersion)";
-    $Null = Install-Module -Repository $Repository -Name PSRule @checkParams -Scope CurrentUser -Force;
+    $Null = Install-Module -Repository $Repository -Name PSRule @checkParams -Scope CurrentUser -Force -SkipPublisherCheck;
 }
 foreach ($m in $installed) {
     Write-Host "[info] Using existing module $($m.Name): $($m.Version)";
@@ -206,7 +206,7 @@ foreach ($m in $moduleNames) {
     try {
         if ($Null -eq (Get-InstalledModule -Name $m -ErrorAction Ignore)) {
             Write-Host '  - Installing module';
-            $Null = Install-Module -Repository $Repository -Name $m @moduleParams -AllowClobber -ErrorAction Stop;
+            $Null = Install-Module -Repository $Repository -Name $m @moduleParams -AllowClobber -SkipPublisherCheck -ErrorAction Stop;
         }
         else {
             Write-Host '  - Already installed';
