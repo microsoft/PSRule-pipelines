@@ -206,7 +206,7 @@ foreach ($m in $moduleNames) {
     try {
         if ($Null -eq (Get-InstalledModule -Name $m -ErrorAction Ignore)) {
             Write-Host '  - Installing module';
-            $Null = Install-Module -Repository $Repository -Name $m @moduleParams -AllowClobber -ErrorAction Stop;
+            $Null = Install-Module -Repository $Repository -Name $m @moduleParams -AllowClobber -SkipPublisherCheck -ErrorAction Stop;
         }
         else {
             Write-Host '  - Already installed';
