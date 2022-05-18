@@ -173,7 +173,7 @@ Write-Host "[info] Using repository: $Repository";
 $installed = @(Get-InstalledModule -Name PSRule @checkParams -ErrorAction Ignore)
 if ($installed.Length -eq 0) {
     Write-Host "[info] Installing PSRule: $($checkParams.RequiredVersion)";
-    $Null = Install-Module -Repository $Repository -Name PSRule @checkParams -Scope CurrentUser -Force;
+    $Null = Install-Module -Repository $Repository -Name PSRule @checkParams -Scope CurrentUser -Force -SkipPublisherCheck;
 }
 foreach ($m in $installed) {
     Write-Host "[info] Using existing module $($m.Name): $($m.Version)";
