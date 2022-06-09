@@ -12,12 +12,19 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 
 ## Unreleased
 
+What's changed since v2.0.1:
+
+- Engineering:
+  - Bump azure-pipelines-task-lib from v3.3.1.
+    [#418](https://github.com/microsoft/PSRule-pipelines/pull/418)
+
 ## v2.0.1
 
 What's changed since v2.0.0:
 
 - Bug fixes:
-  - Fixes file not found error when running task. [#411](https://github.com/microsoft/PSRule-pipelines/issues/411)
+  - Fixes file not found error when running task by @BernieWhite.
+    [#411](https://github.com/microsoft/PSRule-pipelines/issues/411)
 
 ## v2.0.0
 
