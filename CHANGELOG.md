@@ -18,6 +18,7 @@ What's changed since v2.0.1:
   - Bump azure-pipelines-task-lib to v3.3.1.
     [#418](https://github.com/microsoft/PSRule-pipelines/pull/418)
   - Bump PSRule to v2.1.0.
+    [#446](https://github.com/microsoft/PSRule-pipelines/pull/446)
 
 ## v2.0.1
 
