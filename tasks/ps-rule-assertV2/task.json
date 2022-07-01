@@ -93,6 +93,14 @@
             "helpMarkDown": "A comma separated list of conventions to use."
         },
         {
+            "name": "option",
+            "type": "string",
+            "label": "Option",
+            "required": false,
+            "defaultValue": "",
+            "helpMarkDown": "The path to an options file."
+        },
+        {
             "name": "outputFormat",
             "type": "pickList",
             "label": "Output format",

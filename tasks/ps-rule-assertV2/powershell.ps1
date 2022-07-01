@@ -34,9 +34,13 @@ param (
     [Parameter(Mandatory = $False)]
     [String]$Baseline = (Get-VstsInput -Name 'baseline'),
 
-    # The conventions to use
+    # A comma separated list of conventions to use.
     [Parameter(Mandatory = $False)]
     [String]$Conventions = (Get-VstsInput -Name 'conventions'),
+
+    # The path to an options file.
+    [Parameter(Mandatory = $False)]
+    [String]$Option = (Get-VstsInput -Name 'option'),
 
     # The output format
     [Parameter(Mandatory = $False)]
@@ -254,6 +258,7 @@ Write-Host "[info] Using Baseline: $Baseline";
 Write-Host "[info] Using Conventions: $Conventions";
 Write-Host "[info] Using InputType: $InputType";
 Write-Host "[info] Using InputPath: $InputPath";
+Write-Host "[info] Using Option: $Option";
 Write-Host "[info] Using OutputFormat: $OutputFormat";
 Write-Host "[info] Using OutputPath: $OutputPath";
 
@@ -275,6 +280,10 @@ try {
     if ($Conventions.Length -gt 0) {
         $invokeParams['Convention'] = $Conventions;
         WriteDebug ([String]::Concat('-Convention ', [String]::Join(', ', $Conventions)));
+    }
+    if (![String]::IsNullOrEmpty($Option)) {
+        $invokeParams['Option'] = $Option;
+        WriteDebug ([String]::Concat('-Option ', $Option));
     }
     if (![String]::IsNullOrEmpty($Modules)) {
         $moduleNames = $Modules.Split(',', [System.StringSplitOptions]::RemoveEmptyEntries);
