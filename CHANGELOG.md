@@ -12,10 +12,12 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 
 ## Unreleased
 
+## v2.1.0
+
 What's changed since v2.0.1:
 
 - New features:
-  - Added support for alternative option file.
+  - Added support for alternative option file by @BernieWhite.
     [#349](https://github.com/microsoft/PSRule-pipelines/issues/349)
     - Set the option parameter to the path to an options file.
     - By default, the ps-rule.yaml option file is used.
