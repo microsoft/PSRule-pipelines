@@ -6,7 +6,7 @@ This document contains notes to help upgrade from previous versions of the PSRul
 
 Follow these notes to upgrade from previous versions to v1.5.0.
 
-### Node 10 exension handler
+### Node 10 extension handler
 
 Prior to v1.5.0, the Node 6 extension handler was used.
 From _March 31st 2022_ the Node 6 extension handler will be removed from Azure DevOps.
