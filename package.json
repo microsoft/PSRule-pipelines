@@ -19,7 +19,7 @@
     },
     "devDependencies": {
         "@types/mocha": "^9.1.1",
-        "@types/node": "^18.0.2",
+        "@types/node": "^18.0.3",
         "@types/q": "^1.5.5",
         "@typescript-eslint/eslint-plugin": "^5.30.5",
         "@typescript-eslint/parser": "^5.30.6",
