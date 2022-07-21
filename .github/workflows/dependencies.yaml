@@ -18,7 +18,7 @@ jobs:
   dependencies:
     name: Bump dependencies
     runs-on: ubuntu-latest
-    if: github.repository == 'PSRule-pipelines'
+    if: github.repository == 'microsoft/PSRule-pipelines'
     permissions:
       contents: write
       pull-requests: write

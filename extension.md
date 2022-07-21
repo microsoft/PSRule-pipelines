@@ -2,8 +2,6 @@
 
 An Azure DevOps extension for using PSRule within Azure Pipelines.
 
-![ci-badge]
-
 ## Disclaimer
 
 If you have any problems please check our GitHub [issues] page.
@@ -34,7 +32,7 @@ To use these tasks within YAML pipelines:
 
 - Install rule modules with the `ps-rule-install` task (optional).
 - Run analysis one or more times with the `ps-rule-assert` task.
-- Publish analysis results with the [Publish Test Results](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=yaml) builtin task.
+- Publish analysis results with the [Publish Test Results](https://docs.microsoft.com/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=yaml) builtin task.
 
 For example:
 
@@ -92,7 +90,6 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 This project is [licensed under the MIT License][license].
 
 [issues]: https://github.com/Microsoft/PSRule-pipelines/issues
-[ci-badge]: https://dev.azure.com/bewhite/PSRule-pipelines/_apis/build/status/PSRule-pipelines-CI?branchName=main
 [extension]: https://marketplace.visualstudio.com/items?itemName=bewhite.ps-rule
 [extension-install]: https://docs.microsoft.com/en-us/azure/devops/marketplace/install-extension?view=azure-devops&tabs=browser
 [ps-rule-assert]: https://github.com/Microsoft/PSRule-pipelines/blob/main/docs/tasks.md#ps-rule-assert

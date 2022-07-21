@@ -10,4 +10,4 @@
 - [ ] This PR is ready to merge and is not **Work in Progress**
 - **Code changes**
   - [ ] Link to a filed issue
-  - [ ] [Change log](https://github.com/Microsoft/PSRule-pipelines/blob/main/CHANGELOG.md) has been updated with change under unreleased section
+  - [ ] [Change log](https://github.com/microsoft/PSRule-pipelines/blob/main/CHANGELOG.md) has been updated with change under unreleased section
