@@ -12,6 +12,13 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 
 ## Unreleased
 
+What's changed since v2.1.0:
+
+- Engineering:
+  - Bump PSRule to v2.2.0.
+    [#467](https://github.com/microsoft/PSRule-pipelines/pull/467)
+    - See the [change log](https://microsoft.github.io/PSRule/latest/CHANGELOG-v2/#v220)
+
 ## v2.1.0
 
 What's changed since v2.0.1:
@@ -26,6 +33,7 @@ What's changed since v2.0.1:
     [#418](https://github.com/microsoft/PSRule-pipelines/pull/418)
   - Bump PSRule to v2.1.0.
     [#446](https://github.com/microsoft/PSRule-pipelines/pull/446)
+    - See the [change log](https://microsoft.github.io/PSRule/latest/CHANGELOG-v2/#v210)
 
 ## v2.0.1
 
@@ -44,6 +52,7 @@ What's changed since v1.5.0:
     [#312](https://github.com/microsoft/PSRule-pipelines/issues/312)
     - Added `ps-rule-assert@2` task.
     - Added `ps-rule-install@2` task.
+    - See the [change log](https://microsoft.github.io/PSRule/v2/CHANGELOG-v2/#v200)
   - Added support for outputting analysis results as SARIF by @BernieWhite.
     [#315](https://github.com/microsoft/PSRule-pipelines/issues/315)
     - To use the SARIF output format set the `outputFormat` parameter to `Sarif`.
@@ -82,7 +91,7 @@ What's changed since v1.4.0:
     - Please upgrade your pipelines to the latest task versions to avoid issues.
     - Added warning to older task versions to ensure they are upgraded.
   - Bump PSRule dependency to v1.11.0. [#278](https://github.com/microsoft/PSRule-pipelines/issues/278)
-    - See the [change log](https://github.com/microsoft/PSRule/blob/main/docs/CHANGELOG-v1.md#v1110).
+    - See the [change log](https://microsoft.github.io/PSRule/latest/CHANGELOG-v1/#v1110)
 
 ## v1.4.0
 
