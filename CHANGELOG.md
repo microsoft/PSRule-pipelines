@@ -14,6 +14,9 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 
 What's changed since v2.1.0:
 
+- General improvements:
+  - Improved display of extension version in output by @BernieWhite.
+    [#386](https://github.com/microsoft/PSRule-pipelines/issues/386)
 - Engineering:
   - Bump PSRule to v2.2.0.
     [#467](https://github.com/microsoft/PSRule-pipelines/pull/467)

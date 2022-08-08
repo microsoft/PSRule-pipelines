@@ -190,10 +190,10 @@ task VersionExtension {
             $content | ConvertTo-Json -Depth 100 | Set-Content -Path $extensionPath;
 
             # Write version info
-            if (!(Test-Path -Path out/extension)) {
-                $Null = New-Item -Path out/extension -ItemType Directory -Force;
+            if (!(Test-Path -Path out/dist)) {
+                $Null = New-Item -Path out/dist -ItemType Directory -Force;
             }
-            $versionInfo = Join-Path -Path out/extension/ -ChildPath 'version.json';
+            $versionInfo = Join-Path -Path out/dist/ -ChildPath 'version.json';
             @{ version = $version } | ConvertTo-Json | Set-Content -Path $versionInfo;
         }
     }

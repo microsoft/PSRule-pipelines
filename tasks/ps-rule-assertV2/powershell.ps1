@@ -241,6 +241,11 @@ catch {
     $Host.SetShouldExit(1);
 }
 
+$extensionJson = Join-Path -Path $PSScriptRoot -ChildPath 'version.json' | ConvertFrom-Json;
+$extensionVersion = "$($extensionJson.version)"
+$taskJson = Join-Path -Path $PSScriptRoot -ChildPath 'task.json' | ConvertFrom-Json;
+$taskVersion = "$($taskJson.version.Major).$($taskJson.Version.Minor).$($taskJson.Version.Patch)"
+
 Write-Host "`#`#[endgroup]";
 
 #
@@ -249,7 +254,9 @@ Write-Host "`#`#[endgroup]";
 
 Write-Host "`#`#[group]Checking environment";
 
-Write-Host "[info] Using Version: $version";
+Write-Host "[info] Using PSRule: $version"
+Write-Host "[info] Using Extension: $extensionVersion"
+Write-Host "[info] Using Task: $taskVersion"
 Write-Host "[info] Using Workspace: $workspacePath"
 Write-Host "[info] Using PWD: $PWD";
 Write-Host "[info] Using Path: $Path";
