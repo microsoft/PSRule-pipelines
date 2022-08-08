@@ -241,10 +241,12 @@ catch {
     $Host.SetShouldExit(1);
 }
 
-$extensionJson = Join-Path -Path $PSScriptRoot -ChildPath 'version.json' | ConvertFrom-Json;
-$extensionVersion = "$($extensionJson.version)"
-$taskJson = Join-Path -Path $PSScriptRoot -ChildPath 'task.json' | ConvertFrom-Json;
-$taskVersion = "$($taskJson.version.Major).$($taskJson.Version.Minor).$($taskJson.Version.Patch)"
+$extensionFile = Join-Path -Path $PSScriptRoot -ChildPath 'version.json';
+$extensionJson = Get-Content -Path $extensionFile -Raw -ErrorAction Stop | ConvertFrom-Json;
+$extensionVersion = "$($extensionJson.version)";
+$taskFile = Join-Path -Path $PSScriptRoot -ChildPath 'task.json';
+$taskJson = Get-Content -Path $taskFile -Raw -ErrorAction Stop | ConvertFrom-Json;
+$taskVersion = "$($taskJson.version.Major).$($taskJson.Version.Minor).$($taskJson.Version.Patch)";
 
 Write-Host "`#`#[endgroup]";
 
