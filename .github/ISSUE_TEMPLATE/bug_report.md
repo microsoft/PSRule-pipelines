@@ -30,7 +30,7 @@ Capture any error messages.
 **Task in use and version:**
 
 - Task: ps-rule-assert
-- Version: **[e.g. 2.1.0]**
+- Version: **[e.g. 2.2.0]**
 
 **Additional context**
 
