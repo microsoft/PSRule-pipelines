@@ -12,6 +12,11 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 
 ## Unreleased
 
+- Engineering:
+  - Bump PSRule to v2.3.0.
+    [#485](https://github.com/microsoft/PSRule-pipelines/pull/485)
+    - See the [change log](https://microsoft.github.io/PSRule/latest/CHANGELOG-v2/#v230)
+
 ## v2.2.0
 
 What's changed since v2.1.0:
