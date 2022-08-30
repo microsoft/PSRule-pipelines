@@ -12,10 +12,16 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 
 ## Unreleased
 
+## v2.3.0
+
+What's changed since v2.2.0:
+
 - Engineering:
   - Bump PSRule to v2.3.2.
     [#498](https://github.com/microsoft/PSRule-pipelines/pull/498)
     - See the [change log](https://microsoft.github.io/PSRule/latest/CHANGELOG-v2/#v232)
+  - Bump typescript to v4.8.2.
+    [#514](https://github.com/microsoft/PSRule-pipelines/pull/514)
 
 ## v2.2.0
 
