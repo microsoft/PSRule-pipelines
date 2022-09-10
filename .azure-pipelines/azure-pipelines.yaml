@@ -2,12 +2,12 @@
 # CI pipeline for PSRule-pipelines
 
 variables:
-  version: '2.2.0'
+  version: '2.4.0'
   buildConfiguration: 'Release'
   publish: 'true'
   imageName: 'ubuntu-20.04'
 
-# Use build number format, i.e. 2.2.0-B2106001
+# Use build number format, i.e. 2.4.0-B2106001
 name: $(version)-B$(date:yyMM)$(rev:rrr)
 
 trigger:
@@ -85,7 +85,7 @@ stages:
   jobs:
   - job: Secret_Scan
     pool:
-      vmImage: 'windows-2019'
+      vmImage: 'windows-2022'
     displayName: Secret scan
 
     steps:
