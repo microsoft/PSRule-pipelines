@@ -17,6 +17,11 @@ What's changed since v2.4.2:
 - Engineering:
   - Bump typescript to v4.8.4.
     [#546](https://github.com/microsoft/PSRule-pipelines/pull/546)
+  - Bump PSRule to v2.5.0.
+    [#560](https://github.com/microsoft/PSRule-pipelines/pull/560)
+    - See the [change log](https://microsoft.github.io/PSRule/v2/CHANGELOG-v2/#v250)
+  - Bump PSScriptAnalyzer to v1.21.0.
+    [#560](https://github.com/microsoft/PSRule-pipelines/pull/560)
 
 ## v2.4.2
 
