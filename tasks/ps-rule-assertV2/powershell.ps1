@@ -42,6 +42,10 @@ param (
     [Parameter(Mandatory = $False)]
     [String]$Option = (Get-VstsInput -Name 'option'),
 
+    # Filters output to include results with the specified outcome.
+    [Parameter(Mandatory = $False)]
+    [String]$Outcome = (Get-VstsInput -Name 'outcome'),
+
     # The output format
     [Parameter(Mandatory = $False)]
     [ValidateSet('None', 'Yaml', 'Json', 'Markdown', 'NUnit3', 'Csv', 'Sarif')]
@@ -268,6 +272,7 @@ Write-Host "[info] Using Conventions: $Conventions";
 Write-Host "[info] Using InputType: $InputType";
 Write-Host "[info] Using InputPath: $InputPath";
 Write-Host "[info] Using Option: $Option";
+Write-Host "[info] Using Option: $Outcome";
 Write-Host "[info] Using OutputFormat: $OutputFormat";
 Write-Host "[info] Using OutputPath: $OutputPath";
 
@@ -293,6 +298,10 @@ try {
     if (![String]::IsNullOrEmpty($Option)) {
         $invokeParams['Option'] = $Option;
         WriteDebug ([String]::Concat('-Option ', $Option));
+    }
+    if (![String]::IsNullOrEmpty($Outcome)) {
+        $invokeParams['Outcome'] = $Outcome;
+        WriteDebug ([String]::Concat('-Outcome ', $Outcome));
     }
     if (![String]::IsNullOrEmpty($Modules)) {
         $moduleNames = $Modules.Split(',', [System.StringSplitOptions]::RemoveEmptyEntries);

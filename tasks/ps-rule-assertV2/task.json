@@ -101,6 +101,14 @@
             "helpMarkDown": "The path to an options file."
         },
         {
+            "name": "outcome",
+            "type": "string",
+            "label": "Outcome",
+            "required": false,
+            "defaultValue": "",
+            "helpMarkDown": "Filters output to include results with the specified outcome."
+        },
+        {
             "name": "outputFormat",
             "type": "pickList",
             "label": "Output format",

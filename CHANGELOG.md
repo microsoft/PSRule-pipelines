@@ -12,8 +12,13 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 
 ## Unreleased
 
+## v2.5.0
+
 What's changed since v2.4.2:
 
+- General improvements:
+  - Added outcome filtering parameter by @BernieWhite.
+    [#570](https://github.com/microsoft/PSRule-pipelines/issues/570)
 - Engineering:
   - Bump typescript to v4.8.4.
     [#546](https://github.com/microsoft/PSRule-pipelines/pull/546)
