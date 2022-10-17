@@ -60,6 +60,7 @@ steps:
     baseline: string                                        # Optional. The name of a PSRule baseline to use.
     conventions: string                                     # Optional. A comma separated list of conventions to use.
     option: string                                          # Optional. The path to an options file.
+    outcome: Fail, Pass, Error, Processed, Problem, All     # Optional. Filters output to include results with the specified outcome.
     outputFormat: None, Yaml, Json, Markdown, NUnit3, Csv   # Optional. The format to use when writing results to disk.
     outputPath: string                                      # Optional. The file path to write results to.
     path: string                                            # Optional. The working directory PSRule is run from.
@@ -94,6 +95,9 @@ steps:
 - **option**: The path to an options file.
   By default, `ps-rule.yaml` will be used if it exists.
   Configure this parameter to use a different file.
+- **outcome**: Filters output to include results with the specified outcome.
+  Supported outcomes are `Fail`, `Pass`, `Error`, `Processed`, `Problem`, `All`.
+  Defaults to `Processed`.
 - **outputFormat**: Output results can be written to disk in addition to the default output.
   Use this option to determine the format to write results.
   By default, results are not written to disk.

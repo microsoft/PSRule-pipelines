@@ -22,6 +22,7 @@ async function run() {
         let input_baseline: string = task.getInput('baseline', /*required*/ false);
         let input_conventions: string = task.getInput('conventions', /*required*/ false);
         let input_option: string = task.getInput('option', /*required*/ false);
+        let input_outcome: string = task.getInput('outcome', /*required*/ false);
         let input_outputFormat: string = task.getPathInput('outputFormat', /*required*/ false, /*check*/ false) || 'None';
         let input_outputPath: string = task.getPathInput('outputPath', /*required*/ false, /*check*/ false);
         let input_prerelease: boolean = task.getBoolInput('prerelease', /*required*/ false);
@@ -52,6 +53,9 @@ async function run() {
         }
         if (input_option !== undefined) {
             contents.push(`$scriptParams['Option'] = '${input_option}'`);
+        }
+        if (input_outcome !== undefined) {
+            contents.push(`$scriptParams['Outcome'] = '${input_outcome}'`);
         }
         if (input_outputFormat !== undefined) {
             contents.push(`$scriptParams['OutputFormat'] = '${input_outputFormat}'`);

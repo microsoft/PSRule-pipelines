@@ -86,6 +86,7 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 ## Maintainers
 
 - [Bernie White](https://github.com/BernieWhite)
+- [Sam Bell](https://github.com/ms-sambell)
 
 ## License
 
@@ -100,5 +101,4 @@ This project is [licensed under the MIT License][license].
 [ps-rule-assert]: docs/tasks.md#ps-rule-assert
 [ps-rule-install]: docs/tasks.md#ps-rule-install
 [contribution guide]: https://github.com/Microsoft/PSRule-pipelines/blob/main/CONTRIBUTING.md
-[change log]: https://github.com/Microsoft/PSRule-pipelines/blob/main/CHANGELOG.md
 [license]: https://github.com/Microsoft/PSRule-pipelines/blob/main/LICENSE
