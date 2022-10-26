@@ -19,11 +19,11 @@ if ($Env:SYSTEM_DEBUG -eq 'true') {
     $VerbosePreference = 'Continue';
 }
 
+$version = $Build;
 if ($Env:BUILD_SOURCEBRANCH -like '*/tags/*' -and $Env:BUILD_SOURCEBRANCHNAME -like 'v2.*') {
-    $Build = $Env:BUILD_SOURCEBRANCHNAME.Substring(1);
+    $version = $Env:BUILD_SOURCEBRANCHNAME.Substring(1);
 }
 
-$version = $Build;
 $versionSuffix = [String]::Empty;
 
 if ($version -like '*-*') {
@@ -181,21 +181,19 @@ task VersionExtension {
     $extensionPath = Join-Path -Path out/dist/ -ChildPath 'vss-extension.json';
     Write-Verbose -Message "[VersionExtension] -- Checking module path: $extensionPath";
 
-    if (![String]::IsNullOrEmpty($Build)) {
-        # Update module version
-        if (![String]::IsNullOrEmpty($version)) {
-            Write-Verbose -Message "[VersionExtension] -- Updating extension manifest version";
-            $content = Get-Content -Path $extensionPath -Raw | ConvertFrom-Json;
-            $content.version = $version;
-            $content | ConvertTo-Json -Depth 100 | Set-Content -Path $extensionPath;
+    # Update module version
+    if (![String]::IsNullOrEmpty($version)) {
+        Write-Verbose -Message "[VersionExtension] -- Updating extension manifest version";
+        $content = Get-Content -Path $extensionPath -Raw | ConvertFrom-Json;
+        $content.version = $version;
+        $content | ConvertTo-Json -Depth 100 | Set-Content -Path $extensionPath;
 
-            # Write version info
-            if (!(Test-Path -Path out/dist)) {
-                $Null = New-Item -Path out/dist -ItemType Directory -Force;
-            }
-            $versionInfo = Join-Path -Path out/dist/ -ChildPath 'version.json';
-            @{ version = $version } | ConvertTo-Json | Set-Content -Path $versionInfo;
+        # Write version info
+        if (!(Test-Path -Path out/dist)) {
+            $Null = New-Item -Path out/dist -ItemType Directory -Force;
         }
+        $versionInfo = Join-Path -Path out/dist/ -ChildPath 'version.json';
+        @{ version = $version } | ConvertTo-Json | Set-Content -Path $versionInfo;
     }
 
     UpdateTaskVersion -Path out/dist/;

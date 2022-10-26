@@ -2,13 +2,13 @@
 # CI pipeline for PSRule-pipelines
 
 variables:
-  version: '2.6.0'
+  version: '2.6'
   buildConfiguration: 'Release'
   publish: 'true'
   imageName: 'ubuntu-20.04'
 
 # Use build number format, i.e. 2.6.0-B2106001
-name: $(version)-B$(date:yyMM)$(rev:rrr)
+name: $(version).$(date:yyMM)$(rev:rrr)
 
 trigger:
   branches:
