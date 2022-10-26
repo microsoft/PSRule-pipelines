@@ -19,11 +19,11 @@ if ($Env:SYSTEM_DEBUG -eq 'true') {
     $VerbosePreference = 'Continue';
 }
 
+$version = $Build;
 if ($Env:BUILD_SOURCEBRANCH -like '*/tags/*' -and $Env:BUILD_SOURCEBRANCHNAME -like 'v2.*') {
-    $Build = $Env:BUILD_SOURCEBRANCHNAME.Substring(1);
+    $version = $Env:BUILD_SOURCEBRANCHNAME.Substring(1);
 }
 
-$version = $Build;
 $versionSuffix = [String]::Empty;
 
 if ($version -like '*-*') {
@@ -80,20 +80,14 @@ function UpdateTaskVersion {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $True)]
-        [String]$Path,
-
-        [Parameter(Mandatory = $False)]
-        [String]$Build = $Env:BUILD_BUILDNUMBER
+        [String]$Path
     )
     process {
-        if ([String]::IsNullOrEmpty($Build)) {
-            $Build = '0.0.1-B000000000';
-        }
-        $buildNumber = [int]::Parse($Build.Split('-', [System.StringSplitOptions]::RemoveEmptyEntries)[1].Replace('B', ''));
+        $v = $version.Split('.', [System.StringSplitOptions]::RemoveEmptyEntries);
         Get-ChildItem -Path $Path -Filter task.json -Recurse | ForEach-Object {
             $filePath = $_.FullName;
             $taskContent = Get-Content -Raw -Path $filePath | ConvertFrom-Json;
-            $taskContent.version.patch = $buildNumber;
+            $taskContent.version.patch = $v[2];
             $taskContent | ConvertTo-Json -Depth 100 | Set-Content -Path $filePath -Force;
         }
     }
@@ -181,21 +175,19 @@ task VersionExtension {
     $extensionPath = Join-Path -Path out/dist/ -ChildPath 'vss-extension.json';
     Write-Verbose -Message "[VersionExtension] -- Checking module path: $extensionPath";
 
-    if (![String]::IsNullOrEmpty($Build)) {
-        # Update module version
-        if (![String]::IsNullOrEmpty($version)) {
-            Write-Verbose -Message "[VersionExtension] -- Updating extension manifest version";
-            $content = Get-Content -Path $extensionPath -Raw | ConvertFrom-Json;
-            $content.version = $version;
-            $content | ConvertTo-Json -Depth 100 | Set-Content -Path $extensionPath;
+    # Update module version
+    if (![String]::IsNullOrEmpty($version)) {
+        Write-Verbose -Message "[VersionExtension] -- Updating extension manifest version";
+        $content = Get-Content -Path $extensionPath -Raw | ConvertFrom-Json;
+        $content.version = $version;
+        $content | ConvertTo-Json -Depth 100 | Set-Content -Path $extensionPath;
 
-            # Write version info
-            if (!(Test-Path -Path out/dist)) {
-                $Null = New-Item -Path out/dist -ItemType Directory -Force;
-            }
-            $versionInfo = Join-Path -Path out/dist/ -ChildPath 'version.json';
-            @{ version = $version } | ConvertTo-Json | Set-Content -Path $versionInfo;
+        # Write version info
+        if (!(Test-Path -Path out/dist)) {
+            $Null = New-Item -Path out/dist -ItemType Directory -Force;
         }
+        $versionInfo = Join-Path -Path out/dist/ -ChildPath 'version.json';
+        @{ version = $version } | ConvertTo-Json | Set-Content -Path $versionInfo;
     }
 
     UpdateTaskVersion -Path out/dist/;
