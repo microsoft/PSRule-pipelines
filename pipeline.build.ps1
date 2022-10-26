@@ -83,11 +83,15 @@ function UpdateTaskVersion {
         [String]$Path
     )
     process {
-        $v = $version.Split('.', [System.StringSplitOptions]::RemoveEmptyEntries);
+        $v = $Build.Split('.', [System.StringSplitOptions]::RemoveEmptyEntries);
         Get-ChildItem -Path $Path -Filter task.json -Recurse | ForEach-Object {
             $filePath = $_.FullName;
             $taskContent = Get-Content -Raw -Path $filePath | ConvertFrom-Json;
-            $taskContent.version.patch = $v[2];
+
+            if ($filePath -like '*V2*') {
+                $taskContent.version.Minor = $v[1];
+            }
+            $taskContent.version.Patch = $v[2];
             $taskContent | ConvertTo-Json -Depth 100 | Set-Content -Path $filePath -Force;
         }
     }

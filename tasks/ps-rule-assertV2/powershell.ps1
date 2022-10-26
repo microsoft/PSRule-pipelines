@@ -272,7 +272,7 @@ Write-Host "[info] Using Conventions: $Conventions";
 Write-Host "[info] Using InputType: $InputType";
 Write-Host "[info] Using InputPath: $InputPath";
 Write-Host "[info] Using Option: $Option";
-Write-Host "[info] Using Option: $Outcome";
+Write-Host "[info] Using Outcome: $Outcome";
 Write-Host "[info] Using OutputFormat: $OutputFormat";
 Write-Host "[info] Using OutputPath: $OutputPath";
 

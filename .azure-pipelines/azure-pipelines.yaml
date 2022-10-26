@@ -131,22 +131,3 @@ stages:
       extensionTag: ''
       extensionName: 'PSRule'
       extensionVisibility: 'public'
-
-  - job: GitHub
-    dependsOn: stable_release
-    pool:
-      vmImage: $(imageName)
-    steps:
-    # Update GitHub release
-    - task: GitHubRelease@1
-      displayName: 'GitHub release'
-      inputs:
-        gitHubConnection: 'AzureDevOps-PSRule-pipelines'
-        repositoryName: '$(Build.Repository.Name)'
-        action: edit
-        tag: '$(Build.SourceBranchName)'
-        releaseNotesSource: inline
-        releaseNotesInline: 'See [change log](https://github.com/microsoft/PSRule-pipelines/blob/main/CHANGELOG.md)'
-        assetUploadMode: replace
-        addChangeLog: false
-        isPreRelease: false
