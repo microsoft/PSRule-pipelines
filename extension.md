@@ -40,19 +40,14 @@ For example:
 steps:
 
 # Install PSRule.Rules.Azure from the PowerShell Gallery
-- task: ps-rule-install@0
+- task: ps-rule-install@2
   inputs:
     module: PSRule.Rules.Azure   # Install PSRule.Rules.Azure from the PowerShell Gallery.
-    latest: false                # Only install the module if not already installed.
-    prerelease: false            # Install stable versions only.
 
 # Run analysis from JSON files using the `PSRule.Rules.Azure` module and custom rules from `.ps-rule/`.
-- task: ps-rule-assert@0
+- task: ps-rule-assert@2
   inputs:
-    inputType: inputPath
-    inputPath: 'out/*.json'                  # Read objects from JSON files in 'out/'.
     modules: 'PSRule.Rules.Azure'            # Analyze objects using the rules within the PSRule.Rules.Azure PowerShell module.
-    source: '.ps-rule/'                      # Additionally, analyze object using custom rules from '.ps-rule/'.
     outputFormat: NUnit3                     # Save results to an NUnit report.
     outputPath: reports/ps-rule-results.xml  # Write NUnit report to 'reports/ps-rule-results.xml'.
 
