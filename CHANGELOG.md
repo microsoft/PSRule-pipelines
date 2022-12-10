@@ -12,6 +12,12 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 
 ## Unreleased
 
+What's changed since v2.6.0:
+
+- Engineering:
+  - Bump typescript to v4.9.4.
+    [#627](https://github.com/microsoft/PSRule-pipelines/pull/627)
+
 ## v2.6.0
 
 What's changed since v2.5.2:
