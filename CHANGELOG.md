@@ -17,6 +17,8 @@ What's changed since v2.6.0:
 - Engineering:
   - Bump typescript to v4.9.4.
     [#627](https://github.com/microsoft/PSRule-pipelines/pull/627)
+  - Bump azure-pipelines-task-lib to v4.1.0.
+    [#620](https://github.com/microsoft/PSRule-pipelines/pull/620)
 
 ## v2.6.0
 
