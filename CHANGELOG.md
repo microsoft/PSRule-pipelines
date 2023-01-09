@@ -15,6 +15,9 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 What's changed since v2.6.0:
 
 - Engineering:
+  - Bump PSRule to v2.7.0.
+    [#657](https://github.com/microsoft/PSRule-pipelines/pull/657)
+    - See the [change log](https://microsoft.github.io/PSRule/v2/CHANGELOG-v2/#v270)
   - Bump typescript to v4.9.4.
     [#627](https://github.com/microsoft/PSRule-pipelines/pull/627)
   - Bump azure-pipelines-task-lib to v4.1.0.

@@ -100,8 +100,8 @@
             "packagePath": "/ps-rule-assert/ps-rule-assertV2/version.json"
         },
         {
-            "path": "ps_modules/PSRule/2.6.0",
-            "packagePath": "/ps-rule-assert/ps-rule-assertV2/ps_modules/PSRule/2.6.0"
+            "path": "ps_modules/PSRule/2.7.0",
+            "packagePath": "/ps-rule-assert/ps-rule-assertV2/ps_modules/PSRule/2.7.0"
         },
         {
             "path": "ps_modules/VstsTaskSdk/0.11.0",
