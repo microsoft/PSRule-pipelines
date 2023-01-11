@@ -12,6 +12,8 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 
 ## Unreleased
 
+## v2.7.0
+
 What's changed since v2.6.0:
 
 - Engineering:
