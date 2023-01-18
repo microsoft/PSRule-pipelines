@@ -15,7 +15,7 @@
         "url": "https://github.com/Microsoft/PSRule-pipelines/issues"
     },
     "dependencies": {
-        "azure-pipelines-task-lib": "^4.1.0"
+        "azure-pipelines-task-lib": "^4.2.0"
     },
     "devDependencies": {
         "@types/mocha": "^10.0.1",
