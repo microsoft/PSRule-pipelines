@@ -12,6 +12,12 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 
 ## Unreleased
 
+What's changed since v2.7.0:
+
+- Engineering:
+  - Bump azure-pipelines-task-lib to v4.2.0.
+    [#660](https://github.com/microsoft/PSRule-pipelines/pull/660)
+
 ## v2.7.0
 
 What's changed since v2.6.0:
