@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "Pester": {
-      "version": "5.3.3"
+      "version": "5.4.0"
     },
     "PSScriptAnalyzer": {
       "version": "1.21.0"

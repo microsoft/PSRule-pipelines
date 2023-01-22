@@ -17,6 +17,8 @@ What's changed since v2.7.0:
 - Engineering:
   - Bump azure-pipelines-task-lib to v4.2.0.
     [#660](https://github.com/microsoft/PSRule-pipelines/pull/660)
+  - Bump Pester to v5.4.0.
+    [#666](https://github.com/microsoft/PSRule-pipelines/pull/666)
 
 ## v2.7.0
 
