@@ -21,7 +21,7 @@
         "@types/mocha": "^10.0.1",
         "@types/node": "^18.11.18",
         "@types/q": "^1.5.5",
-        "@typescript-eslint/eslint-plugin": "^5.48.2",
+        "@typescript-eslint/eslint-plugin": "^5.49.0",
         "@typescript-eslint/parser": "^5.49.0",
         "esbuild": "^0.17.4",
         "eslint": "^8.32.0",
