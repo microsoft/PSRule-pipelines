@@ -63,8 +63,9 @@ function CopyExtensionFiles {
     )
     process {
         $sourcePath = Resolve-Path -Path $Path;
-        Get-ChildItem -Path $sourcePath -File -Include *.ps1,*.json,*.png,*.ts -Recurse | Where-Object {
-            ($_.FullName -notmatch '(\\|\/)(node_modules)')
+        Get-ChildItem -Path $sourcePath -File -Include *.ps1,*.json,*.png -Recurse | Where-Object {
+            ($_.FullName -notmatch '(\\|\/)(node_modules)') -and
+            ($_.FullName -notcontains 'package.json')
         } | ForEach-Object {
             $filePath = $_.FullName.Replace($sourcePath, $DestinationPath);
             $parentPath = Split-Path -Path $filePath -Parent;
@@ -159,20 +160,7 @@ task CopyExtension {
 
 task BuildExtension CopyExtension, SaveDependencies, {
     Write-Host '> Building extension' -ForegroundColor Green;
-
-    foreach ($task in $tasks) {
-        $taskRoot = $task.Split('V')[0];
-        try {
-            Push-Location "out/dist/$taskRoot/$task/"
-            exec { & npm install --only=prod }
-            exec { & npm run compile }
-
-            Remove-Item -Path *.ts -Force;
-        }
-        finally {
-            Pop-Location;
-        }
-    }
+    exec { & npm run build }
 }
 
 task VersionExtension {
