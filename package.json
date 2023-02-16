@@ -1,36 +1,36 @@
 {
-    "name": "psrule-pipelines",
-    "displayName": "PSRule",
-    "description": "An extension for using PSRule within Azure Pipelines.",
-    "author": {
-        "name": "Microsoft Corporation"
-    },
-    "license": "SEE LICENSE IN LICENSE",
-    "homepage": "https://github.com/Microsoft/PSRule-pipelines",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Microsoft/PSRule-pipelines.git"
-    },
-    "bugs": {
-        "url": "https://github.com/Microsoft/PSRule-pipelines/issues"
-    },
-    "dependencies": {
-        "azure-pipelines-task-lib": "^4.2.0"
-    },
-    "devDependencies": {
-        "@types/mocha": "^10.0.1",
-        "@types/node": "^18.13.0",
-        "@types/q": "^1.5.5",
-        "@typescript-eslint/eslint-plugin": "^5.52.0",
-        "@typescript-eslint/parser": "^5.52.0",
-        "esbuild": "^0.17.8",
-        "eslint": "^8.34.0",
-        "typescript": "^4.9.5",
-        "tfx-cli": "^0.12.0"
-    },
-    "scripts": {
-        "compile": "tsc -p ./",
-        "package": "tfx extension create --json --no-color --root out/dist --manifest-globs vss-extension.json --output-path out/extension",
-        "build": "node build.mjs"
-    }
+  "name": "psrule-pipelines",
+  "displayName": "PSRule",
+  "description": "An extension for using PSRule within Azure Pipelines.",
+  "author": {
+    "name": "Microsoft Corporation"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "homepage": "https://github.com/microsoft/PSRule-pipelines",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/PSRule-pipelines.git"
+  },
+  "bugs": {
+    "url": "https://github.com/microsoft/PSRule-pipelines/issues"
+  },
+  "dependencies": {
+    "azure-pipelines-task-lib": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^18.13.0",
+    "@types/q": "^1.5.5",
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@typescript-eslint/parser": "^5.52.0",
+    "esbuild": "^0.17.8",
+    "eslint": "^8.34.0",
+    "typescript": "^4.9.5",
+    "tfx-cli": "^0.12.0"
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "package": "tfx extension create --json --no-color --root out/dist --manifest-js extension.config.js --output-path out/extension",
+    "build": "node build.mjs"
+  }
 }

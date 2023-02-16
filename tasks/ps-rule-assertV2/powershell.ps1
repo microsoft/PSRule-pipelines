@@ -5,7 +5,7 @@
 # ps-rule-assert
 #
 
-# See details at: https://github.com/Microsoft/PSRule-pipelines
+# See details at: https://github.com/microsoft/PSRule-pipelines
 
 [CmdletBinding()]
 param (

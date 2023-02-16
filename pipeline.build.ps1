@@ -133,18 +133,16 @@ task Clean {
 }
 
 task CopyExtension {
+    Write-Host '> Copy extension' -ForegroundColor Green;
 
     foreach ($task in $tasks) {
         $taskRoot = $task.Split('V')[0];
         CopyExtensionFiles -Path "tasks/$task" -DestinationPath "out/dist/$taskRoot/$task/";
-        Copy-Item -Path package.json -Destination "out/dist/$taskRoot/$task/";
         Copy-Item -Path images/icon128.png -Destination "out/dist/$taskRoot/$task/icon.png" -Force;
     }
 
     # Copy manifests
-    Copy-Item -Path vss-extension.json -Destination out/dist/;
     Copy-Item -Path modules.json -Destination out/dist/;
-
 
     # Copy icon
     if (!(Test-Path -Path out/dist/images)) {
@@ -161,18 +159,16 @@ task CopyExtension {
 task BuildExtension CopyExtension, SaveDependencies, {
     Write-Host '> Building extension' -ForegroundColor Green;
     exec { & npm run build }
+    exec { & npm run -S "package" -- --env version=$Build }
+    exec { & npm run -S "package" -- --env version=$Build official=true }
 }
 
 task VersionExtension {
-    $extensionPath = Join-Path -Path out/dist/ -ChildPath 'vss-extension.json';
-    Write-Verbose -Message "[VersionExtension] -- Checking module path: $extensionPath";
+    Write-Host '> Version extension' -ForegroundColor Green;
 
     # Update module version
     if (![String]::IsNullOrEmpty($version)) {
         Write-Verbose -Message "[VersionExtension] -- Updating extension manifest version";
-        $content = Get-Content -Path $extensionPath -Raw | ConvertFrom-Json;
-        $content.version = $version;
-        $content | ConvertTo-Json -Depth 100 | Set-Content -Path $extensionPath;
 
         # Write version info
         if (!(Test-Path -Path out/dist)) {
@@ -257,6 +253,6 @@ task PackageRestore {
 task . Build, Rules
 
 # Synopsis: Build the project
-task Build Clean, PackageRestore, BuildExtension, VersionExtension
+task Build Clean, PackageRestore, VersionExtension, BuildExtension
 
 task Test Build, TestModule
