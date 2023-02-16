@@ -41,5 +41,9 @@
   "cSpell.words": [
     "cmdlets",
     "Sarif"
+  ],
+  "git.branchProtection": [
+    "main",
+    "release/*"
   ]
 }
