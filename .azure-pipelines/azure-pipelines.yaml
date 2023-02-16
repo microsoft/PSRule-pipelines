@@ -64,14 +64,6 @@ stages:
         publishRunAttachments: true
       condition: succeededOrFailed()
 
-    # Package extension
-    - task: PackageAzureDevOpsExtension@3
-      displayName: 'Package extension'
-      inputs:
-        rootFolder: out/dist
-        outputPath: out/extension
-        extensionVisibility: private
-
     # Generate artifacts
     - publish: out/extension
       displayName: 'Publish extension package'
