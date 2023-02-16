@@ -3,7 +3,7 @@ parameters:
   name: ''
   displayName: 'Release'
   buildConfiguration: 'Release'
-  imageName: 'ubuntu-20.04'
+  imageName: 'ubuntu-22.04'
   publisherId: 'bewhite'
   extensionId: 'ps-rule'
   extensionTag: ''

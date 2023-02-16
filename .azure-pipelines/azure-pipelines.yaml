@@ -5,7 +5,7 @@ variables:
   version: '2.7'
   buildConfiguration: 'Release'
   publish: 'true'
-  imageName: 'ubuntu-20.04'
+  imageName: 'ubuntu-22.04'
 
 # Use build number format, i.e. 2.7.0-B2106001
 name: $(version).$(date:yyMM)$(rev:rrr)
@@ -38,7 +38,7 @@ stages:
     steps:
 
     # Install pipeline dependencies
-    - powershell: ./.azure-pipelines/pipeline-deps.ps1
+    - powershell: ./scripts/pipeline-deps.ps1
       displayName: 'Install dependencies'
 
     # Install TFS CLI
@@ -64,17 +64,9 @@ stages:
         publishRunAttachments: true
       condition: succeededOrFailed()
 
-    # Package extension
-    - task: PackageAzureDevOpsExtension@3
-      displayName: 'Package extension'
-      inputs:
-        rootFolder: out/dist
-        outputPath: out/extension
-        extensionVisibility: private
-
-    # Generate artifacts
+    # Upload official extension
     - publish: out/extension
-      displayName: 'Publish extension package'
+      displayName: Upload extension
       artifact: Extension
       condition: and(succeeded(), eq(variables['publish'], 'true'))
 

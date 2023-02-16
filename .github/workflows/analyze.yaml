@@ -5,9 +5,9 @@
 # NOTES:
 # This worflow uses PSRule, CodeQL, and DevSkim.
 # You can read more about these linting tools and configuration options here:
-#   PSRule - https://aka.ms/ps-rule and https://github.com/Microsoft/PSRule.Rules.MSFT.OSS
+#   PSRule - https://aka.ms/ps-rule and https://github.com/microsoft/PSRule.Rules.MSFT.OSS
 #   CodeQL - https://codeql.github.com/docs/codeql-overview/about-codeql/
-#   DevSkim - https://github.com/microsoft/DevSkim-Action and https://github.com/Microsoft/DevSkim
+#   DevSkim - https://github.com/microsoft/DevSkim-Action and https://github.com/microsoft/DevSkim
 
 name: Analyze
 on:
@@ -31,7 +31,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Run PSRule analysis
-      uses: Microsoft/ps-rule@v2.7.0
+      uses: microsoft/ps-rule@v2.7.0
       with:
         modules: PSRule.Rules.MSFT.OSS
 
