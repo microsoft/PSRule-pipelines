@@ -64,10 +64,16 @@ stages:
         publishRunAttachments: true
       condition: succeededOrFailed()
 
-    # Generate artifacts
-    - publish: out/extension
-      displayName: 'Publish extension package'
-      artifact: Extension
+    # Upload official extension
+    - publish: out/extension/ps-rule.*
+      displayName: Upload official extension
+      artifact: Extension-official
+      condition: and(succeeded(), eq(variables['publish'], 'true'))
+
+    # Upload non-official extension
+    - publish: out/extension/bewhite.*
+      displayName: Upload non-official extension
+      artifact: Extension-non-official
       condition: and(succeeded(), eq(variables['publish'], 'true'))
 
 # Analysis pipeline
