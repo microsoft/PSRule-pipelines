@@ -52,7 +52,7 @@ async function run() {
         contents.push(` . $rootPath\\powershell.ps1 @scriptParams`.trim());
 
         // Write the script to disk.
-        task.assertAgent('2.115.0');
+        task.assertAgent('2.144.0');
         const tempDirectory = task.getVariable('agent.tempDirectory');
         task.checkPath(tempDirectory, `${tempDirectory} (agent.tempDirectory)`);
         const filePath = path.join(tempDirectory, uuidV4() + '.ps1');

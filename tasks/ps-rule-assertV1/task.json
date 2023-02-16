@@ -29,7 +29,7 @@
       "isExpanded": false
     }
   ],
-  "minimumAgentVersion": "2.115.0",
+  "minimumAgentVersion": "2.144.0",
   "inputs": [
     {
       "name": "path",
