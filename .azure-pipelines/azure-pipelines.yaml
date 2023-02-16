@@ -5,7 +5,7 @@ variables:
   version: '2.7'
   buildConfiguration: 'Release'
   publish: 'true'
-  imageName: 'ubuntu-20.04'
+  imageName: 'ubuntu-22.04'
 
 # Use build number format, i.e. 2.7.0-B2106001
 name: $(version).$(date:yyMM)$(rev:rrr)
