@@ -31,7 +31,7 @@ jobs:
   - task: DownloadPipelineArtifact@1
     displayName: 'Download extension package'
     inputs:
-      artifactName: Extension-non-official
+      artifactName: Extension
       downloadPath: $(Build.SourcesDirectory)/out/extension
 
   # Determine current published version

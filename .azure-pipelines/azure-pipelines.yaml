@@ -65,15 +65,9 @@ stages:
       condition: succeededOrFailed()
 
     # Upload official extension
-    - publish: out/extension/ps-rule.*
-      displayName: Upload official extension
-      artifact: Extension-official
-      condition: and(succeeded(), eq(variables['publish'], 'true'))
-
-    # Upload non-official extension
-    - publish: out/extension/bewhite.*
-      displayName: Upload non-official extension
-      artifact: Extension-non-official
+    - publish: out/extension
+      displayName: Upload extension
+      artifact: Extension
       condition: and(succeeded(), eq(variables['publish'], 'true'))
 
 # Analysis pipeline
