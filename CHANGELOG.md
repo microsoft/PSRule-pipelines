@@ -7,6 +7,9 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 - Node 6 extension handler will be removed from Azure DevOps _March 31st 2022_.
   To ensure your pipelines continue to work, please upgrade to the latest versions of the tasks.
   See [upgrade notes][1] for more information.
+- Task versions `@0` and `@1` are deprecated and will be removed from _v3.0.0_.
+  To ensure your pipelines continue to work, please upgrade to the latest versions of the tasks.
+  See [upgrade notes][1] for more information.
 
   [1]: docs/upgrade-notes.md
 
@@ -14,6 +17,11 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 
 What's changed since v2.7.0:
 
+- General improvements:
+  - **Important change**: Added warning to V1 tasks and update V0 tasks by @BernieWhite.
+    [#694](https://github.com/microsoft/PSRule-pipelines/issues/694)
+    - Deprecated task versions `@0` and `@1` will be removed from _v3.0.0_.
+    - Upgrade to `@2` task versions to ensure your pipelines continue to work.
 - Engineering:
   - Bump azure-pipelines-task-lib to v4.2.0.
     [#660](https://github.com/microsoft/PSRule-pipelines/pull/660)
