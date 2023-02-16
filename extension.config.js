@@ -7,7 +7,7 @@ module.exports = (env) => {
   let [publisher, idPrefix] = (env.official == "true") ? ["ps-rule", "pipelines"] : ["bewhite", "ps-rule"];
   let version = env.version;
 
-  let [idPostfix, namePostfix] = (env.channel == "dev") ? ["-dev", " [DEV]"] : ["", ""];
+  let [idPostfix, namePostfix] = (env.channel == "stable") ? ["", ""] : ["-dev", " [DEV]"];
   if (env.channel == "canary") {
     idPostfix = "-canary";
     namePostfix = " [CANARY]";

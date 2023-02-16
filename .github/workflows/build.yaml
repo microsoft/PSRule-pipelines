@@ -41,10 +41,18 @@ jobs:
       timeout-minutes: 5
       run: Invoke-Build -Configuration Release
 
-    - name: Upload extension
+    - name: Upload official extension
       uses: actions/upload-artifact@v3
       with:
-        name: Extension
-        path: ./out/extension/*
+        name: Extension-official
+        path: ./out/extension/ps-rule.*
+        retention-days: 3
+        if-no-files-found: error
+
+    - name: Upload non-official extension
+      uses: actions/upload-artifact@v3
+      with:
+        name: Extension-non-official
+        path: ./out/extension/bewhite.*
         retention-days: 3
         if-no-files-found: error
