@@ -2,6 +2,20 @@
 
 This document contains notes to help upgrade from previous versions of the PSRule extension.
 
+## Upgrade to v2.8.0
+
+Follow these notes to upgrade from previous versions to v2.8.0.
+
+### @2 task versions
+
+From PSRule _v2.8.0_ the `@1` and `@0` task versions are deprecated and will be removed from _v3.0.0_.
+The `@2` task versions are now the default task versions.
+
+To upgrade to the latest task versions to use `@2` or higher.
+
+- `ps-rule-install@2` instead of `ps-rule-install@1`.
+- `ps-rule-assert@2` instead of `ps-rule-assert@1`.
+
 ## Upgrade to v1.5.0
 
 Follow these notes to upgrade from previous versions to v1.5.0.

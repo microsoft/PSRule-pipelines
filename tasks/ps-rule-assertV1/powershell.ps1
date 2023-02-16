@@ -48,6 +48,8 @@ param (
     [String]$OutputPath = (Get-VstsInput -Name 'outputPath')
 )
 
+Write-Host "`#`#vso[task.logissue type=warning]This version of the task is deprecated. Please upgrade to the latest version by using 'ps-rule-assert@2'. See https://aka.ms/ps-rule-pipelines/upgrade for details.";
+
 if ($Env:SYSTEM_DEBUG -eq 'true') {
     $VerbosePreference = 'Continue';
 }
