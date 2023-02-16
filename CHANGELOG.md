@@ -24,6 +24,8 @@ What's changed since v2.7.0:
     - Upgrade to `@2` task versions to ensure your pipelines continue to work.
   - Updated Node 10 tasks to require minimum agent version by @BernieWhite.
     [#692](https://github.com/microsoft/PSRule-pipelines/issues/692)
+  - Updated V2 tasks to support Node 16 by @BernieWhite.
+    [#693](https://github.com/microsoft/PSRule-pipelines/issues/693)
 - Engineering:
   - Bump azure-pipelines-task-lib to v4.2.0.
     [#660](https://github.com/microsoft/PSRule-pipelines/pull/660)

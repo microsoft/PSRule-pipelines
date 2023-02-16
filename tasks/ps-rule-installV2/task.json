@@ -76,6 +76,10 @@
     "Node10": {
       "target": "powershell.js",
       "argumentFormat": ""
+    },
+    "Node16": {
+      "target": "powershell.js",
+      "argumentFormat": ""
     }
   },
   "messages": {
