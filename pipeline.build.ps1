@@ -156,7 +156,7 @@ task CopyExtension {
     Copy-Item -Path LICENSE -Destination out/dist/;
 }
 
-task BuildExtension CopyExtension, SaveDependencies, {
+task BuildExtension CopyExtension, VersionExtension, SaveDependencies, {
     Write-Host '> Building extension' -ForegroundColor Green;
     exec { & npm run build }
     exec { & npm run -S "package" -- --env version=$Build }
@@ -253,6 +253,6 @@ task PackageRestore {
 task . Build, Rules
 
 # Synopsis: Build the project
-task Build Clean, PackageRestore, VersionExtension, BuildExtension
+task Build Clean, PackageRestore, BuildExtension
 
 task Test Build, TestModule
