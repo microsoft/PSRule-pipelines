@@ -1,12 +1,12 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import fs = require('fs');
-import path = require('path');
-import os = require('os');
-import task = require('azure-pipelines-task-lib/task');
-import runner = require('azure-pipelines-task-lib/toolrunner');
-var uuidV4 = require('uuid/v4');
+import * as fs from 'fs';
+import * as path from 'path';
+import * as os from 'os';
+import * as task from 'azure-pipelines-task-lib/task';
+import * as runner from 'azure-pipelines-task-lib/toolrunner';
+import * as uuidV4 from 'uuid/v4';
 
 async function run() {
     try {
