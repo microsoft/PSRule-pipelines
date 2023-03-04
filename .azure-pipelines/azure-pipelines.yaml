@@ -2,13 +2,12 @@
 # CI pipeline for PSRule-pipelines
 
 variables:
-  version: '2.7'
   buildConfiguration: 'Release'
   publish: 'true'
   imageName: 'ubuntu-22.04'
 
-# Use build number format, i.e. 2.7.0-B2106001
-name: $(version).$(date:yyMM)$(rev:rrr)
+# Use build number format, i.e. 2303001
+name: $(date:yyMM)$(rev:rrr)
 
 trigger:
   branches:
@@ -33,23 +32,19 @@ stages:
     pool:
       vmImage: $(imageName)
     displayName: 'Extension'
-    variables:
-      BUILD_TAG: '-canary'
     steps:
 
     # Install pipeline dependencies
     - powershell: ./scripts/pipeline-deps.ps1
       displayName: 'Install dependencies'
 
-    # # Install TFS CLI
-    # - task: TfxInstaller@3
-    #   displayName: 'Install tfx-cli'
-    #   inputs:
-    #     version: 'v0.14.x'
-
     # Install GitVersion
     - pwsh: dotnet tool install --global GitVersion.Tool
       displayName: 'Install GitVersion'
+
+    # Get extension version
+    - powershell: Invoke-Build GetVersionInfo -Rev '$(date:yyMM)$(rev:rrr)''
+      displayName: 'Get extension version'
 
     # Build extension
     - powershell: Invoke-Build -Configuration $(buildConfiguration) -Build $(Build.BuildNumber)

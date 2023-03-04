@@ -67,18 +67,6 @@ jobs:
       artifactName: Extension
       downloadPath: $(Build.SourcesDirectory)/out/extension
 
-  # Determine current published version
-  - task: QueryAzureDevOpsExtensionVersion@3
-    displayName: 'Query published version'
-    name: QUERYVERSION
-    inputs:
-      connectTo: 'VsTeam'
-      connectedServiceName: ${{ parameters.connection }}
-      publisherId: ${{ parameters.publisherId }}
-      extensionId: ${{ parameters.extensionId }}
-      extensionTag: ${{ parameters.extensionTag }}
-      versionAction: 'Patch'
-
   # Get extension version
   - powershell: Invoke-Build GetVersionInfo -Build $(Build.BuildNumber) -ExtensionTag '${{ parameters.extensionTag }}'
     displayName: 'Get extension version'
