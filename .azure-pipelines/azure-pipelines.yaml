@@ -41,11 +41,15 @@ stages:
     - powershell: ./scripts/pipeline-deps.ps1
       displayName: 'Install dependencies'
 
-    # Install TFS CLI
-    - task: TfxInstaller@3
-      displayName: 'Install tfx-cli'
-      inputs:
-        version: 'v0.12.x'
+    # # Install TFS CLI
+    # - task: TfxInstaller@3
+    #   displayName: 'Install tfx-cli'
+    #   inputs:
+    #     version: 'v0.14.x'
+
+    # Install GitVersion
+    - pwsh: dotnet tool install --global GitVersion.Tool
+      displayName: 'Install GitVersion'
 
     # Build extension
     - powershell: Invoke-Build -Configuration $(buildConfiguration) -Build $(Build.BuildNumber)
@@ -103,9 +107,21 @@ stages:
   jobs:
   - template: jobs/release.yaml
     parameters:
-      name: canary_release
-      extensionTag: '-canary'
-      extensionName: 'PSRule (Canary)'
+      name: unoffical_canary_release
+      displayName: 'Unoffical'
+      extensionId: ps-rule
+      extensionTag: -canary
+      extensionName: PSRule (Canary)
+      publisherId: bewhite
+
+  - template: jobs/release.yaml
+    parameters:
+      name: offical_canary_release
+      displayName: 'Offical'
+      extensionId: pipelines
+      extensionTag: -canary
+      extensionName: PSRule (Canary)
+      publisherId: ps-rule
 
 # Release pipeline
 - stage: Stable
@@ -115,7 +131,20 @@ stages:
   jobs:
   - template: jobs/release.yaml
     parameters:
-      name: stable_release
+      name: unoffical_stable_release
+      displayName: 'Unoffical'
+      extensionId: ps-rule
       extensionTag: ''
-      extensionName: 'PSRule'
-      extensionVisibility: 'public'
+      extensionName: PSRule
+      extensionVisibility: public
+      publisherId: bewhite
+
+  - template: jobs/release.yaml
+    parameters:
+      name: offical_stable_release
+      displayName: 'Offical'
+      extensionId: pipelines
+      extensionTag: ''
+      extensionName: PSRule
+      extensionVisibility: public
+      publisherId: ps-rule

@@ -1,14 +1,43 @@
 
 parameters:
-  name: ''
-  displayName: 'Release'
-  buildConfiguration: 'Release'
-  imageName: 'ubuntu-22.04'
-  publisherId: 'bewhite'
-  extensionId: 'ps-rule'
-  extensionTag: ''
-  extensionName: 'PSRule'
-  extensionVisibility: 'private'
+
+- name: name
+  type: string
+
+- name: displayName
+  type: string
+
+- name: imageName
+  type: string
+  default: 'ubuntu-22.04'
+
+- name: buildConfiguration
+  type: string
+  default: 'Release'
+
+- name: publisherId
+  type: string
+  default: 'bewhite'
+
+- name: extensionId
+  type: string
+  default: 'ps-rule'
+
+- name: extensionTag
+  type: string
+  default: ''
+
+- name: extensionName
+  type: string
+  default: 'PSRule'
+
+- name: extensionVisibility
+  type: string
+  default: 'private'
+
+- name: connection
+  type: string
+  default: 'Visual Studio Marketplace (bewhite)'
 
 jobs:
 - job: ${{ parameters.name }}
@@ -21,11 +50,15 @@ jobs:
   - powershell: ./scripts/pipeline-deps.ps1
     displayName: 'Install dependencies'
 
+  # Install GitVersion
+  - pwsh: dotnet tool install --global GitVersion.Tool
+    displayName: 'Install GitVersion'
+
   # Install TFS CLI
   - task: TfxInstaller@3
     displayName: 'Install tfx-cli'
     inputs:
-      version: 'v0.12.x'
+      version: 'v0.14.x'
 
   # Download extension
   - task: DownloadPipelineArtifact@1
@@ -37,23 +70,24 @@ jobs:
   # Determine current published version
   - task: QueryAzureDevOpsExtensionVersion@3
     displayName: 'Query published version'
+    name: QUERYVERSION
     inputs:
       connectTo: 'VsTeam'
-      connectedServiceName: 'Visual Studio Marketplace (bewhite)'
+      connectedServiceName: ${{ parameters.connection }}
       publisherId: ${{ parameters.publisherId }}
       extensionId: ${{ parameters.extensionId }}
       extensionTag: ${{ parameters.extensionTag }}
       versionAction: 'Patch'
 
   # Get extension version
-  - powershell: Invoke-Build GetVersionInfo -Build $(Build.BuildNumber)
+  - powershell: Invoke-Build GetVersionInfo -Build $(Build.BuildNumber) -ExtensionTag '${{ parameters.extensionTag }}'
     displayName: 'Get extension version'
 
   # Publish extension
   - task: PublishAzureDevOpsExtension@3
     displayName: 'Publish extension to marketplace'
     inputs:
-      connectedServiceName: 'Visual Studio Marketplace (bewhite)'
+      connectedServiceName: ${{ parameters.connection }}
       fileType: vsix
       vsixFile: $(Build.SourcesDirectory)/out/extension/bewhite.ps-rule-*.vsix
       publisherId: ${{ parameters.publisherId }}
@@ -68,7 +102,7 @@ jobs:
   - task: IsAzureDevOpsExtensionValid@3
     displayName: 'Check extension'
     inputs:
-      connectedServiceName: 'Visual Studio Marketplace (bewhite)'
+      connectedServiceName: ${{ parameters.connection }}
       publisherId: ${{ parameters.publisherId }}
       extensionId: ${{ parameters.extensionId }}
       extensionTag: ${{ parameters.extensionTag }}
