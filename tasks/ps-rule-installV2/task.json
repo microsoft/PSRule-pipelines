@@ -18,7 +18,7 @@
   "author": "Bernie White",
   "version": {
     "Major": 2,
-    "Minor": 0,
+    "Minor": 100,
     "Patch": 0
   },
   "releaseNotes": "[See change log](https://github.com/Microsoft/PSRule-pipelines/blob/main/CHANGELOG.md)",
