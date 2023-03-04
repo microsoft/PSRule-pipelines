@@ -43,7 +43,7 @@ stages:
       displayName: 'Install GitVersion'
 
     # Get extension version
-    - powershell: Invoke-Build GetVersionInfo -Rev '$(date:yyMM)$(rev:rrr)'
+    - powershell: Invoke-Build GetVersionInfo -Rev '$(Build.BuildNumber)'
       displayName: 'Get extension version'
 
     # Build extension
