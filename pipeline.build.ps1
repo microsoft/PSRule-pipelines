@@ -7,6 +7,9 @@ param (
     [String]$Build = '0.0.1',
 
     [Parameter(Mandatory = $False)]
+    [String]$ExtensionTag = '',
+
+    [Parameter(Mandatory = $False)]
     [String]$Configuration = 'Debug'
 )
 
@@ -35,14 +38,14 @@ if ($version -like '*-*') {
     }
 }
 
-if ($Env:QUERYAZUREDEVOPSEXTENSIONVERSION_EXTENSION_VERSION) {
-    Write-Verbose -Message "[Pipeline] -- Using EXTENSION_VERSION: $Env:QUERYAZUREDEVOPSEXTENSIONVERSION_EXTENSION_VERSION";
-    [String[]]$extensionParts = $Env:QUERYAZUREDEVOPSEXTENSIONVERSION_EXTENSION_VERSION.Split('.', [System.StringSplitOptions]::RemoveEmptyEntries);
-    [String[]]$versionParts = $version.Split('.', [System.StringSplitOptions]::RemoveEmptyEntries);
+if ($Env:QUERYVERSION_EXTENSION_VERSION) {
+    Write-Verbose -Message "[Pipeline] -- Using EXTENSION_VERSION: $Env:QUERYVERSION_EXTENSION_VERSION";
+    # [String[]]$extensionParts = $Env:QUERYVERSION_EXTENSION_VERSION.Split('.', [System.StringSplitOptions]::RemoveEmptyEntries);
+    # [String[]]$versionParts = $version.Split('.', [System.StringSplitOptions]::RemoveEmptyEntries);
 
-    if ([System.Version]::Parse($Env:QUERYAZUREDEVOPSEXTENSIONVERSION_EXTENSION_VERSION) -ge [System.Version]::Parse($version)) {
-        $version = [String]::Join('.', @($versionParts[0], $versionParts[1], $extensionParts[2]));
-    }
+    # if ([System.Version]::Parse($Env:QUERYVERSION_EXTENSION_VERSION) -ge [System.Version]::Parse($version)) {
+    #     $version = [String]::Join('.', @($versionParts[0], $versionParts[1], $extensionParts[2]));
+    # }
 }
 
 Write-Host -Object "[Pipeline] -- Using version: $version" -ForegroundColor Green;
@@ -188,8 +191,14 @@ task VersionExtension {
 
 # Synopsis: This task reads version info if set and configures a build variable
 task GetVersionInfo {
-    Write-Host "[Pipeline] Using EXTENSION_VERSION: $version";
-    Write-Host "`#`#vso[task.setvariable variable=EXTENSION_VERSION;]$version";
+    $baseVersion = dotnet-gitversion /showvariable MajorMinorPatch /nofetch;
+    if (![String]::IsNullOrEmpty($ExtensionTag)) {
+        $commits = dotnet-gitversion /showvariable CommitsSinceVersionSource /nofetch;
+        $baseVersion = (Get-Date).ToString("yyyy.M.$commits");
+    }
+
+    Write-Host "[Pipeline] Using EXTENSION_VERSION: $baseVersion";
+    Write-Host "`#`#vso[task.setvariable variable=EXTENSION_VERSION;]$baseVersion";
 }
 
 # Synopsis: Run validation
