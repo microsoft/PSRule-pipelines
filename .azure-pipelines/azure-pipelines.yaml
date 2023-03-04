@@ -81,21 +81,17 @@ stages:
     displayName: Secret scan
 
     steps:
-    - task: securedevelopmentteam.vss-secure-development-tools.build-task-credscan.CredScan@2
+    - task: securedevelopmentteam.vss-secure-development-tools.build-task-credscan.CredScan@3
       displayName: 'Scan for secrets'
       inputs:
         debugMode: false
-        toolMajorVersion: V2
 
-    - task: securedevelopmentteam.vss-secure-development-tools.build-task-publishsecurityanalysislogs.PublishSecurityAnalysisLogs@2
+    - task: securedevelopmentteam.vss-secure-development-tools.build-task-publishsecurityanalysislogs.PublishSecurityAnalysisLogs@3
       displayName: 'Publish scan logs'
       continueOnError: true
 
-    - task: securedevelopmentteam.vss-secure-development-tools.build-task-postanalysis.PostAnalysis@1
+    - task: securedevelopmentteam.vss-secure-development-tools.build-task-postanalysis.PostAnalysis@2
       displayName: 'Check for failures'
-      inputs:
-        CredScan: true
-        ToolLogsNotFoundAction: Error
 
 # Release pipeline
 - stage: Canary
