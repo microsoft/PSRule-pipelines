@@ -33,9 +33,6 @@ module.exports = (env) => {
       theme: "dark",
       color: "#0072c6"
     },
-    icons: {
-      default: "images/icon128.png"
-    },
     content: {
       details: {
         path: "extension.md"
@@ -61,8 +58,9 @@ module.exports = (env) => {
     },
     files: [
       {
-        path: "images/icon128.png",
-        packagePath: "/images/icon128.png"
+        path: "out/dist/images/icon128.png",
+        packagePath: "/images/icon128.png",
+        assetType: "Microsoft.VisualStudio.Services.Icons.Default"
       },
       {
         path: "out/dist/ps-rule-assert",

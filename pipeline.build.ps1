@@ -139,6 +139,11 @@ task CopyExtension {
         $taskRoot = $task.Split('V')[0];
         CopyExtensionFiles -Path "tasks/$task" -DestinationPath "out/dist/$taskRoot/$task/";
         Copy-Item -Path images/icon128.png -Destination "out/dist/$taskRoot/$task/icon.png" -Force;
+        
+        Push-Location "out/dist/$taskRoot/$task/";
+        exec { & npm init --force }
+        exec { & npm install shelljs }
+        Pop-Location;
     }
 
     # Copy manifests

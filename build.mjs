@@ -12,6 +12,8 @@ await esbuild.build({
   platform: 'node',
   format: 'cjs',
   minify: true,
+  target: 'node6',
+  external: ['shelljs'],
 })
 
 await esbuild.build({
@@ -21,6 +23,9 @@ await esbuild.build({
   platform: 'node',
   format: 'cjs',
   minify: true,
+  target: 'node6',
+  external: ['shelljs'],
+
 })
 
 await esbuild.build({
@@ -30,6 +35,8 @@ await esbuild.build({
   platform: 'node',
   format: 'cjs',
   minify: true,
+  target: 'node10',
+  external: ['shelljs'],
 })
 
 await esbuild.build({
@@ -38,7 +45,9 @@ await esbuild.build({
   outfile: 'out/dist/ps-rule-install/ps-rule-installV1/powershell.js',
   platform: 'node',
   format: 'cjs',
-  minify: true,
+  minify: false,
+  target: 'node10',
+  external: ['shelljs'],
 })
 
 await esbuild.build({
@@ -48,6 +57,8 @@ await esbuild.build({
   platform: 'node',
   format: 'cjs',
   minify: true,
+  target: 'node10',
+  external: ['shelljs'],
 })
 
 await esbuild.build({
@@ -57,4 +68,6 @@ await esbuild.build({
   platform: 'node',
   format: 'cjs',
   minify: true,
+  target: 'node10',
+  external: ['shelljs'],
 })

@@ -6,7 +6,6 @@ import * as path from 'path';
 import * as os from 'os';
 import * as task from 'azure-pipelines-task-lib/task';
 import * as runner from 'azure-pipelines-task-lib/toolrunner';
-import * as uuidV4 from 'uuid/v4';
 
 async function run() {
     try {
@@ -51,7 +50,7 @@ async function run() {
         task.assertAgent('2.115.0');
         const tempDirectory = task.getVariable('agent.tempDirectory');
         task.checkPath(tempDirectory, `${tempDirectory} (agent.tempDirectory)`);
-        const filePath = path.join(tempDirectory, uuidV4() + '.ps1');
+        const filePath = path.join(tempDirectory, 'run_ps_rule_install.ps1');
         fs.writeFileSync(filePath, '\ufeff' + contents.join(os.EOL), { encoding: 'utf8' });
 
         // Run the script.
