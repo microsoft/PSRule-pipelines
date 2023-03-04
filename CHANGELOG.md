@@ -27,8 +27,8 @@ What's changed since v2.7.0:
   - Updated V2 tasks to support Node 16 by @BernieWhite.
     [#693](https://github.com/microsoft/PSRule-pipelines/issues/693)
 - Engineering:
-  - Bump azure-pipelines-task-lib to v4.2.0.
-    [#660](https://github.com/microsoft/PSRule-pipelines/pull/660)
+  - Bump azure-pipelines-task-lib to v4.3.0.
+    [#719](https://github.com/microsoft/PSRule-pipelines/pull/719)
   - Bump Pester to v5.4.0.
     [#666](https://github.com/microsoft/PSRule-pipelines/pull/666)
   - Bump typescript to v4.9.5.
