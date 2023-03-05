@@ -26,6 +26,7 @@ async function run() {
         let input_outputPath: string = task.getPathInput('outputPath', /*required*/ false, /*check*/ false);
         let input_prerelease: boolean = task.getBoolInput('prerelease', /*required*/ false);
         let input_repository: string = task.getInput('repository', /*required*/ false);
+        let input_summary: boolean = task.getBoolInput('summary', /*required*/ false);
         let input_version: string = task.getInput('version', /*required*/ false);
 
         // Write bootstrap commands to a temporary script file
@@ -70,6 +71,12 @@ async function run() {
         }
         if (input_repository !== undefined) {
             contents.push(`$scriptParams['Repository'] = '${input_repository}'`);
+        }
+        if (input_summary !== undefined && input_summary) {
+            contents.push(`$scriptParams['Summary'] = $True;`);
+        }
+        else {
+            contents.push(`$scriptParams['Summary'] = $False;`);
         }
         if (input_version !== undefined) {
             contents.push(`$scriptParams['Version'] = '${input_version}'`);

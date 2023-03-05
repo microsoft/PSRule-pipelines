@@ -60,7 +60,12 @@ param (
     [System.Boolean]$PreRelease = (Get-VstsInput -Name 'prerelease' -AsBool),
 
     # The name of the PowerShell repository where PSRule modules are installed from.
+    [Parameter(Mandatory = $False)]
     [String]$Repository = (Get-VstsInput -Name 'repository'),
+
+    # Determines if a job summary is written.
+    [Parameter(Mandatory = $False)]
+    [System.Boolean]$Summary = (Get-VstsInput -Name 'summary' -AsBool),
 
     # The specific version of PSRule to use.
     [Parameter(Mandatory = $False)]
@@ -275,6 +280,7 @@ Write-Host "[info] Using Option: $Option";
 Write-Host "[info] Using Outcome: $Outcome";
 Write-Host "[info] Using OutputFormat: $OutputFormat";
 Write-Host "[info] Using OutputPath: $OutputPath";
+Write-Host "[info] Using Summary: $Summary";
 
 Write-Host "`#`#[endgroup]";
 
@@ -313,6 +319,9 @@ try {
         $invokeParams['OutputPath'] = $OutputPath;
         WriteDebug ([String]::Concat('-OutputFormat ', $OutputFormat, ' -OutputPath ''', $OutputPath, ''''));
     }
+    if ($Summary) {
+        $Env:PSRULE_OUTPUT_JOBSUMMARYPATH = 'reports/ps_rule_summary.md';
+    }
 
     # Repository
     if ($InputType -eq 'repository') {
@@ -336,6 +345,7 @@ catch [PSRule.Pipeline.RuleException] {
 }
 catch [PSRule.Pipeline.FailPipelineException] {
     Write-Host "`#`#vso[task.logissue type=error]$(Get-VstsLocString -Key 'AssertFailed')";
+    Write-Host "$($_.Exception.ScriptStackTrace)";
     HostExit
 }
 catch {
@@ -344,6 +354,16 @@ catch {
     HostExit
 }
 finally {
+    try {
+        if ($Summary -and (Test-Path -Path 'reports/ps_rule_summary.md')) {
+            Write-Host "`#`#vso[task.uploadsummary]reports/ps_rule_summary.md";
+            $Null = Remove-Item -Path 'reports/ps_rule_summary.md' -Force;
+        }
+    }
+    catch {
+        Write-Host "`#`#vso[task.logissue type=warning]Failed to write job summary: $($_.Exception.Message)";
+        Write-Host "$($_.Exception.ScriptStackTrace)";
+    }
     Pop-Location;
 }
 Write-Host '---';

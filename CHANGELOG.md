@@ -17,6 +17,10 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 
 What's changed since v2.7.0:
 
+- New features:
+  - Added job summaries to each run by @BernieWhite.
+    [#724](https://github.com/microsoft/PSRule-pipelines/issues/724)
+    - Set the `summary` input to `false` to skip generating a job summary.
 - General improvements:
   - **Important change**: Added warning to V1 tasks and update V0 tasks by @BernieWhite.
     [#694](https://github.com/microsoft/PSRule-pipelines/issues/694)

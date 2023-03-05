@@ -66,6 +66,7 @@ steps:
     path: string                                            # Optional. The working directory PSRule is run from.
     prerelease: boolean                                     # Optional. Determine if a pre-release module version is installed.
     repository: string                                      # Optional. The name of the PowerShell repository where PSRule modules are installed from.
+    summary: boolean                                        # Optional. Determines if a job summary is written.
     version: string                                         # Optional. The specific version of PSRule to use.
 ```
 
@@ -113,6 +114,9 @@ steps:
   By default this is the PowerShell Gallery.
   When configured, PowerShell modules are installed from this repository.
   Before calling the `ps-rule-assert`, register and authenticate to the repository if required.
+- **summary**: Determines if a job summary is written.
+  By default, a job summary is generated and attached to the timeline.
+  When set to `false` the job summary is skipped.
 - **version**: The specific version of PSRule to use.
   By default, the latest stable version of PSRule will be used. When set:
   - The specific version of PSRule will be installed and imported for use.
