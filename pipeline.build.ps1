@@ -81,7 +81,7 @@ function UpdateTaskVersion {
     )
     process {
         $v = $Build.Split('.', [System.StringSplitOptions]::RemoveEmptyEntries);
-        $taskVersion = $v[2];
+        $taskVersion = [int]::Parse($v[2]);
         Write-Host "Using task version: $taskVersion"
         Get-ChildItem -Path $Path -Filter task.json -Recurse | ForEach-Object {
             $filePath = $_.FullName;
@@ -191,10 +191,12 @@ task GetVersionInfo {
     Write-Host "[Pipeline] Using EXTENSION_VERSION: $baseVersion";
     Write-Host "`#`#vso[task.setvariable variable=EXTENSION_VERSION;]$baseVersion";
 
-    $taskVersionParts = (dotnet-gitversion /showvariable MajorMinorPatch /nofetch).Split('.', [System.StringSplitOptions]::RemoveEmptyEntries);
-    $taskVersion = "$($taskVersionParts[0]).$($taskVersionParts[1]).$Rev";
+    if ($Rev -ne '0') {
+        $taskVersionParts = (dotnet-gitversion /showvariable MajorMinorPatch /nofetch).Split('.', [System.StringSplitOptions]::RemoveEmptyEntries);
+        $taskVersion = "$($taskVersionParts[0]).$($taskVersionParts[1]).$Rev";
 
-    Write-Host "`#`#vso[build.updatebuildnumber]$taskVersion";
+        Write-Host "`#`#vso[build.updatebuildnumber]$taskVersion";
+    }
 }
 
 # Synopsis: Run validation
