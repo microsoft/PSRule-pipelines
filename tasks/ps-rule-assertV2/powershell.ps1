@@ -320,7 +320,8 @@ try {
         WriteDebug ([String]::Concat('-OutputFormat ', $OutputFormat, ' -OutputPath ''', $OutputPath, ''''));
     }
     if ($Summary) {
-        $Env:PSRULE_OUTPUT_JOBSUMMARYPATH = 'reports/ps_rule_summary.md';
+        $summaryPath = Join-Path -Path $Path -ChildPath 'reports/ps_rule_summary.md';
+        $Env:PSRULE_OUTPUT_JOBSUMMARYPATH = $summaryPath;
     }
 
     # Repository
@@ -355,8 +356,9 @@ catch {
 }
 finally {
     try {
-        if ($Summary -and (Test-Path -Path 'reports/ps_rule_summary.md')) {
-            Write-Host "`#`#vso[task.uploadsummary]reports/ps_rule_summary.md";
+        $summaryPath = Join-Path -Path $Path -ChildPath 'reports/ps_rule_summary.md';
+        if ($Summary -and (Test-Path -Path $summaryPath)) {
+            Write-Host "`#`#vso[task.uploadsummary]$summaryPath";
         }
     }
     catch {
