@@ -151,6 +151,14 @@
       "helpMarkDown": "The name of the PowerShell repository where PSRule modules are installed from."
     },
     {
+      "name": "summary",
+      "type": "boolean",
+      "label": "Summary",
+      "required": false,
+      "defaultValue": true,
+      "helpMarkDown": "Determines if a job summary is written."
+    },
+    {
       "name": "version",
       "type": "string",
       "label": "Version",

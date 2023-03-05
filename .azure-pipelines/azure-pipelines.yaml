@@ -43,11 +43,11 @@ stages:
       displayName: 'Install GitVersion'
 
     # Get extension version
-    - powershell: Invoke-Build GetVersionInfo -Rev '$(Build.BuildNumber)'
+    - pwsh: Invoke-Build GetVersionInfo -Rev '$(Build.BuildNumber)'
       displayName: 'Get extension version'
 
     # Build extension
-    - powershell: Invoke-Build -Configuration $(buildConfiguration) -Build $(Build.BuildNumber)
+    - pwsh: Invoke-Build -Configuration $(buildConfiguration) -Build $(Build.BuildNumber)
       displayName: 'Build extension'
 
     # PSRule results
