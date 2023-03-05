@@ -357,7 +357,6 @@ finally {
     try {
         if ($Summary -and (Test-Path -Path 'reports/ps_rule_summary.md')) {
             Write-Host "`#`#vso[task.uploadsummary]reports/ps_rule_summary.md";
-            $Null = Remove-Item -Path 'reports/ps_rule_summary.md' -Force;
         }
     }
     catch {

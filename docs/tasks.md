@@ -117,6 +117,7 @@ steps:
 - **summary**: Determines if a job summary is written.
   By default, a job summary is generated and attached to the timeline.
   When set to `false` the job summary is skipped.
+  The summary is written to `reports/ps_rule_summary.md`.
 - **version**: The specific version of PSRule to use.
   By default, the latest stable version of PSRule will be used. When set:
   - The specific version of PSRule will be installed and imported for use.
