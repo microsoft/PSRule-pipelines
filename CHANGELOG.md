@@ -35,8 +35,8 @@ What's changed since v2.7.0:
     [#719](https://github.com/microsoft/PSRule-pipelines/pull/719)
   - Bump Pester to v5.4.0.
     [#666](https://github.com/microsoft/PSRule-pipelines/pull/666)
-  - Bump typescript to v4.9.5.
-    [#677](https://github.com/microsoft/PSRule-pipelines/pull/677)
+  - Bump typescript to v5.0.2.
+    [#736](https://github.com/microsoft/PSRule-pipelines/pull/736)
 
 ## v2.7.0
 
