@@ -119,8 +119,8 @@ module.exports = (env) => {
         packagePath: "/ps-rule-assert/ps-rule-assertV2/version.json"
       },
       {
-        path: "out/dist/ps_modules/PSRule/2.7.0",
-        packagePath: "/ps-rule-assert/ps-rule-assertV2/ps_modules/PSRule/2.7.0"
+        path: "out/dist/ps_modules/PSRule/2.8.0",
+        packagePath: "/ps-rule-assert/ps-rule-assertV2/ps_modules/PSRule/2.8.0"
       },
       {
         path: "out/dist/ps_modules/VstsTaskSdk/0.11.0",
