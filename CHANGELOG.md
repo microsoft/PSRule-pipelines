@@ -37,6 +37,9 @@ What's changed since v2.7.0:
     [#666](https://github.com/microsoft/PSRule-pipelines/pull/666)
   - Bump typescript to v5.0.2.
     [#736](https://github.com/microsoft/PSRule-pipelines/pull/736)
+- Bug fixes:
+  - Fixed summary with job summary by @BernieWhite.
+    [#750](https://github.com/microsoft/PSRule-pipelines/issues/750)
 
 ## v2.7.0
 

@@ -322,6 +322,7 @@ try {
     if ($Summary) {
         $summaryPath = Join-Path -Path $Path -ChildPath 'reports/ps_rule_summary.md';
         $Env:PSRULE_OUTPUT_JOBSUMMARYPATH = $summaryPath;
+        $invokeParams['As'] = 'Detail';
     }
 
     # Repository
