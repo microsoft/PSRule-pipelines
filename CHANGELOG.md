@@ -15,6 +15,14 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 
 ## Unreleased
 
+## v2.8.1
+
+What's changed since v2.8.1:
+
+- Engineering:
+  - Bump PSRule to v2.8.1.
+    - See the [change log](https://microsoft.github.io/PSRule/v2/CHANGELOG-v2/#v281)
+
 ## v2.8.0
 
 What's changed since v2.7.0:
