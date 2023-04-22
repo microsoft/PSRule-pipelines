@@ -15,9 +15,15 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 
 ## Unreleased
 
+What's changed since v2.8.1:
+
+- Engineering:
+  - Bump typescript to v5.0.4.
+    [#763](https://github.com/microsoft/PSRule-pipelines/pull/763)
+
 ## v2.8.1
 
-What's changed since v2.8.1:
+What's changed since v2.8.0:
 
 - Engineering:
   - Bump PSRule to v2.8.1.
