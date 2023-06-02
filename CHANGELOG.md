@@ -18,8 +18,8 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 What's changed since v2.8.1:
 
 - Engineering:
-  - Bump typescript to v5.0.4.
-    [#763](https://github.com/microsoft/PSRule-pipelines/pull/763)
+  - Bump typescript to v5.1.3.
+    [#806](https://github.com/microsoft/PSRule-pipelines/pull/806)
 
 ## v2.8.1
 
