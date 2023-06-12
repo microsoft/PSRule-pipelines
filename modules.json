@@ -4,7 +4,7 @@
       "version": "2.2.5"
     },
     "PSRule": {
-      "version": "2.8.1"
+      "version": "2.9.0"
     },
     "VstsTaskSdk": {
       "version": "0.11.0"
@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "Pester": {
-      "version": "5.4.0"
+      "version": "5.4.1"
     },
     "PSScriptAnalyzer": {
       "version": "1.21.0"
