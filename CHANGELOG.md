@@ -18,6 +18,8 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 What's changed since v2.8.1:
 
 - Engineering:
+  - Bump PSRule to v2.9.0.
+    - See the [change log](https://microsoft.github.io/PSRule/v2/CHANGELOG-v2/#v290)
   - Bump typescript to v5.1.3.
     [#806](https://github.com/microsoft/PSRule-pipelines/pull/806)
 
