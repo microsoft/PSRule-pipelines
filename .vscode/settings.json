@@ -8,35 +8,24 @@
     "out/": true
   },
   "editor.insertSpaces": true,
-  "editor.tabSize": 4,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
   "editor.detectIndentation": false,
   "files.insertFinalNewline": true,
+  "yaml.format.singleQuote": true,
   "[yaml]": {
-    "editor.tabSize": 2
+    "editor.formatOnSave": false
+  },
+  "[powershell]": {
+    "editor.tabSize": 4,
+    "editor.formatOnSave": false
   },
   "[markdown]": {
-    "editor.tabSize": 2
-  },
-  "[json]": {
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.insertSpaces": true,
-    "editor.detectIndentation": false
-  },
-  "[jsonc]": {
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.insertSpaces": true,
-    "editor.detectIndentation": false
-  },
-  "[javascript]": {
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.insertSpaces": true,
-    "editor.detectIndentation": false
+    "editor.formatOnSave": false
   },
   "files.associations": {
-    "**/.azure-pipelines/**/*.yaml": "azure-pipelines"
+    "**/.azure-pipelines/**/*.yaml": "azure-pipelines",
+    "**/CODEOWNERS": "text"
   },
   "cSpell.words": [
     "cmdlets",
