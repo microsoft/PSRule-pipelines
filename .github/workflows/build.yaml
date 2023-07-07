@@ -8,10 +8,14 @@
 name: Build
 on:
   push:
-    branches: [ main, 'release/*' ]
+    branches: [main, 'release/*']
   pull_request:
-    branches: [ main, 'release/*' ]
+    branches: [main, 'release/*']
   workflow_dispatch:
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
 
 jobs:
   build:
@@ -19,40 +23,37 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: Checkout
-      uses: actions/checkout@v3
+      - name: Setup node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
 
+      - name: Install dependencies
+        shell: pwsh
+        timeout-minutes: 3
+        run: ./scripts/pipeline-deps.ps1
 
-    - name: Setup node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
+      - name: Build module
+        shell: pwsh
+        timeout-minutes: 5
+        run: Invoke-Build -Configuration Release
 
-    - name: Install dependencies
-      shell: pwsh
-      timeout-minutes: 3
-      run: ./scripts/pipeline-deps.ps1
+      - name: Upload official extension
+        uses: actions/upload-artifact@v3
+        with:
+          name: Extension-official
+          path: ./out/extension/ps-rule.*
+          retention-days: 3
+          if-no-files-found: error
 
-    - name: Build module
-      shell: pwsh
-      timeout-minutes: 5
-      run: Invoke-Build -Configuration Release
-
-    - name: Upload official extension
-      uses: actions/upload-artifact@v3
-      with:
-        name: Extension-official
-        path: ./out/extension/ps-rule.*
-        retention-days: 3
-        if-no-files-found: error
-
-    - name: Upload non-official extension
-      uses: actions/upload-artifact@v3
-      with:
-        name: Extension-non-official
-        path: ./out/extension/bewhite.*
-        retention-days: 3
-        if-no-files-found: error
+      - name: Upload non-official extension
+        uses: actions/upload-artifact@v3
+        with:
+          name: Extension-non-official
+          path: ./out/extension/bewhite.*
+          retention-days: 3
+          if-no-files-found: error

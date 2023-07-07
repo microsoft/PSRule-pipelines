@@ -12,12 +12,16 @@
 name: Analyze
 on:
   push:
-    branches: [ main, 'release/*' ]
+    branches: [main, 'release/*']
   pull_request:
-    branches: [ main, 'release/*' ]
+    branches: [main, 'release/*']
   schedule:
-  - cron: '15 20 * * 0' # At 08:15 PM, on Sunday each week
+    - cron: '15 20 * * 0' # At 08:15 PM, on Sunday each week
   workflow_dispatch:
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
 
 jobs:
   oss:
@@ -26,14 +30,13 @@ jobs:
     permissions:
       contents: read
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: Checkout
-      uses: actions/checkout@v3
-
-    - name: Run PSRule analysis
-      uses: microsoft/ps-rule@v2.9.0
-      with:
-        modules: PSRule.Rules.MSFT.OSS
+      - name: Run PSRule analysis
+        uses: microsoft/ps-rule@v2.9.0
+        with:
+          modules: PSRule.Rules.MSFT.OSS
 
   devskim:
     name: Analyze with DevSkim
@@ -43,14 +46,13 @@ jobs:
       contents: read
       security-events: write
     steps:
-
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Run DevSkim scanner
         uses: microsoft/DevSkim-Action@v1
         with:
-          directory-to-scan: tasks/
+          directory-to-scan: .
 
       - name: Upload results to security tab
         uses: github/codeql-action/upload-sarif@v2
@@ -65,17 +67,16 @@ jobs:
       contents: read
       security-events: write
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: Checkout
-      uses: actions/checkout@v3
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: javascript
 
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v2
-      with:
-        languages: 'javascript'
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v2
 
-    - name: Autobuild
-      uses: github/codeql-action/autobuild@v2
-
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
