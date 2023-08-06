@@ -24,6 +24,8 @@ What's changed since v2.9.0:
     [#834](https://github.com/microsoft/PSRule-pipelines/pull/834)
   - Bump Pester to v5.5.0.
     [#842](https://github.com/microsoft/PSRule-pipelines/pull/842)
+  - Bump tfx-cli to v0.16.0.
+    [#858](https://github.com/microsoft/PSRule-pipelines/pull/858)
 
 ## v2.9.0
 
