@@ -20,8 +20,8 @@ What's changed since v2.9.0:
 - Engineering:
   - Bump azure-pipelines-task-lib to v4.4.0.
     [#828](https://github.com/microsoft/PSRule-pipelines/pull/828)
-  - Bump typescript to v5.1.6.
-    [#834](https://github.com/microsoft/PSRule-pipelines/pull/834)
+  - Bump typescript to v5.2.2.
+    [#871](https://github.com/microsoft/PSRule-pipelines/pull/871)
   - Bump Pester to v5.5.0.
     [#842](https://github.com/microsoft/PSRule-pipelines/pull/842)
   - Bump tfx-cli to v0.16.0.
