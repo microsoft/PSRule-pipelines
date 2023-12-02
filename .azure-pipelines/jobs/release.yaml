@@ -58,7 +58,7 @@ jobs:
   - task: TfxInstaller@3
     displayName: 'Install tfx-cli'
     inputs:
-      version: 'v0.14.x'
+      version: 'v0.16.x'
 
   # Download extension
   - task: DownloadPipelineArtifact@1
