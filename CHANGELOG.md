@@ -18,6 +18,8 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 What's changed since v2.9.0:
 
 - Engineering:
+  - Bump VstsTaskSdk to v0.17.0.
+    [#922](https://github.com/microsoft/PSRule-pipelines/pull/922)
   - Bump azure-pipelines-task-lib to v4.7.0.
     [#907](https://github.com/microsoft/PSRule-pipelines/pull/907)
   - Bump typescript to v5.3.2.
