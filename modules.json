@@ -7,7 +7,7 @@
       "version": "2.9.0"
     },
     "VstsTaskSdk": {
-      "version": "0.17.0"
+      "version": "0.18.1"
     }
   },
   "devDependencies": {
