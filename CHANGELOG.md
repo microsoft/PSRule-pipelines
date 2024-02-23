@@ -20,8 +20,8 @@ What's changed since v2.9.0:
 - Engineering:
   - Bump VstsTaskSdk to v0.18.1.
     [#944](https://github.com/microsoft/PSRule-pipelines/pull/944)
-  - Bump azure-pipelines-task-lib to v4.9.0.
-    [#947](https://github.com/microsoft/PSRule-pipelines/pull/947)
+  - Bump azure-pipelines-task-lib to v4.9.1.
+    [#953](https://github.com/microsoft/PSRule-pipelines/pull/953)
   - Bump typescript to v5.3.3.
     [#924](https://github.com/microsoft/PSRule-pipelines/pull/924)
   - Bump Pester to v5.5.0.
