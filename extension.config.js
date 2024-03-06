@@ -75,7 +75,7 @@ module.exports = (env) => {
         packagePath: "/ps-rule-assert/ps-rule-assertV0/ps_modules/PSRule/1.11.1"
       },
       {
-        path: "out/dist/ps_modules/VstsTaskSdk/0.18.1",
+        path: "out/dist/ps_modules/VstsTaskSdk/0.20.0",
         packagePath: "/ps-rule-assert/ps-rule-assertV0/ps_modules/VstsTaskSdk"
       },
       {
@@ -87,7 +87,7 @@ module.exports = (env) => {
         packagePath: "/ps-rule-install/ps-rule-installV0/ps_modules/PackageManagement"
       },
       {
-        path: "out/dist/ps_modules/VstsTaskSdk/0.18.1",
+        path: "out/dist/ps_modules/VstsTaskSdk/0.20.0",
         packagePath: "/ps-rule-install/ps-rule-installV0/ps_modules/VstsTaskSdk"
       },
       {
@@ -95,7 +95,7 @@ module.exports = (env) => {
         packagePath: "/ps-rule-assert/ps-rule-assertV1/ps_modules/PSRule/1.11.1"
       },
       {
-        path: "out/dist/ps_modules/VstsTaskSdk/0.18.1",
+        path: "out/dist/ps_modules/VstsTaskSdk/0.20.0",
         packagePath: "/ps-rule-assert/ps-rule-assertV1/ps_modules/VstsTaskSdk"
       },
       {
@@ -107,7 +107,7 @@ module.exports = (env) => {
         packagePath: "/ps-rule-install/ps-rule-installV1/ps_modules/PackageManagement"
       },
       {
-        path: "out/dist/ps_modules/VstsTaskSdk/0.18.1",
+        path: "out/dist/ps_modules/VstsTaskSdk/0.20.0",
         packagePath: "/ps-rule-install/ps-rule-installV1/ps_modules/VstsTaskSdk"
       },
       {
@@ -123,7 +123,7 @@ module.exports = (env) => {
         packagePath: "/ps-rule-assert/ps-rule-assertV2/ps_modules/PSRule/2.9.0"
       },
       {
-        path: "out/dist/ps_modules/VstsTaskSdk/0.18.1",
+        path: "out/dist/ps_modules/VstsTaskSdk/0.20.0",
         packagePath: "/ps-rule-assert/ps-rule-assertV2/ps_modules/VstsTaskSdk"
       },
       {
@@ -135,7 +135,7 @@ module.exports = (env) => {
         packagePath: "/ps-rule-install/ps-rule-installV2/ps_modules/PackageManagement"
       },
       {
-        path: "out/dist/ps_modules/VstsTaskSdk/0.18.1",
+        path: "out/dist/ps_modules/VstsTaskSdk/0.20.0",
         packagePath: "/ps-rule-install/ps-rule-installV2/ps_modules/VstsTaskSdk"
       }
     ],
