@@ -26,7 +26,7 @@
     "esbuild": "^0.20.2",
     "eslint": "^8.57.0",
     "typescript": "^5.4.2",
-    "tfx-cli": "^0.16.0"
+    "tfx-cli": "^0.17.0"
   },
   "scripts": {
     "compile": "tsc -p ./",
