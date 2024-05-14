@@ -23,7 +23,7 @@
     "@types/q": "^1.5.8",
     "@typescript-eslint/eslint-plugin": "^7.8.0",
     "@typescript-eslint/parser": "^7.8.0",
-    "esbuild": "^0.21.1",
+    "esbuild": "^0.21.2",
     "eslint": "^8.57.0",
     "typescript": "^5.4.5",
     "tfx-cli": "^0.17.0"
