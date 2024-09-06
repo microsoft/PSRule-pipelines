@@ -18,6 +18,8 @@ See [upgrade notes][1] for helpful information when upgrading from previous vers
 What's changed since v2.9.0:
 
 - Engineering:
+  - **Breaking changes**: Removed depreciated V0 and V1 tasks by @BernieWhite.
+    [#695](https://github.com/microsoft/PSRule-pipelines/issues/695)
   - Bump VstsTaskSdk to v0.20.0.
     [#961](https://github.com/microsoft/PSRule-pipelines/pull/961)
   - Bump azure-pipelines-task-lib to v4.17.0.
