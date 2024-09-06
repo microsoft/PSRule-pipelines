@@ -71,46 +71,6 @@ module.exports = (env) => {
         packagePath: "/ps-rule-install"
       },
       {
-        path: "out/dist/ps_modules/PSRule/1.11.1",
-        packagePath: "/ps-rule-assert/ps-rule-assertV0/ps_modules/PSRule/1.11.1"
-      },
-      {
-        path: "out/dist/ps_modules/VstsTaskSdk/0.20.0",
-        packagePath: "/ps-rule-assert/ps-rule-assertV0/ps_modules/VstsTaskSdk"
-      },
-      {
-        path: "out/dist/ps_modules/PowerShellGet",
-        packagePath: "/ps-rule-install/ps-rule-installV0/ps_modules/PowerShellGet"
-      },
-      {
-        path: "out/dist/ps_modules/PackageManagement",
-        packagePath: "/ps-rule-install/ps-rule-installV0/ps_modules/PackageManagement"
-      },
-      {
-        path: "out/dist/ps_modules/VstsTaskSdk/0.20.0",
-        packagePath: "/ps-rule-install/ps-rule-installV0/ps_modules/VstsTaskSdk"
-      },
-      {
-        path: "out/dist/ps_modules/PSRule/1.11.1",
-        packagePath: "/ps-rule-assert/ps-rule-assertV1/ps_modules/PSRule/1.11.1"
-      },
-      {
-        path: "out/dist/ps_modules/VstsTaskSdk/0.20.0",
-        packagePath: "/ps-rule-assert/ps-rule-assertV1/ps_modules/VstsTaskSdk"
-      },
-      {
-        path: "out/dist/ps_modules/PowerShellGet",
-        packagePath: "/ps-rule-install/ps-rule-installV1/ps_modules/PowerShellGet"
-      },
-      {
-        path: "out/dist/ps_modules/PackageManagement",
-        packagePath: "/ps-rule-install/ps-rule-installV1/ps_modules/PackageManagement"
-      },
-      {
-        path: "out/dist/ps_modules/VstsTaskSdk/0.20.0",
-        packagePath: "/ps-rule-install/ps-rule-installV1/ps_modules/VstsTaskSdk"
-      },
-      {
         path: "out/dist/modules.json",
         packagePath: "/ps-rule-assert/ps-rule-assertV2/modules.json"
       },

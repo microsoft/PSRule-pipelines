@@ -104,21 +104,13 @@ task Dependencies NuGet, {
     Install-Dependencies -Path $PWD/modules.json;
 }
 
-task SaveDependencies NuGet, PSRule, {
-    Import-Module $PWD/scripts/dependencies.psm1;
-    Save-Dependencies -Path $PWD/modules.json -OutputPath out/dist/ps_modules;
-}
-
-# Synopsis: Install PSRule older version of PSRule for V1
-task PSRule NuGet, {
+task SaveDependencies NuGet, {
     if (!(Test-Path -Path out/dist/ps_modules)) {
         $Null = New-Item -Path out/dist/ps_modules -ItemType Directory -Force;
     }
-    if ($Null -eq (Get-InstalledModule -Name PSRule -RequiredVersion 1.11.1 -ErrorAction SilentlyContinue)) {
-        Install-Module -Name PSRule -Repository PSGallery -Scope CurrentUser -RequiredVersion 1.11.1 -Force;
-    }
-    Save-Module -Name PSRule -Repository PSGallery -Path out/dist/ps_modules -RequiredVersion 1.11.1;
-    Import-Module -Name PSRule -Verbose:$False;
+
+    Import-Module $PWD/scripts/dependencies.psm1;
+    Save-Dependencies -Path $PWD/modules.json -OutputPath out/dist/ps_modules;
 }
 
 # Synopsis: Remove temp files.
@@ -158,8 +150,8 @@ task CopyExtension {
 task BuildExtension CopyExtension, VersionExtension, SaveDependencies, {
     Write-Host '> Building extension' -ForegroundColor Green;
     exec { & npm run build }
-    exec { & npm run -S "package" -- --env version=$Build }
-    exec { & npm run -S "package" -- --env version=$Build official=true }
+    exec { & npm run -S "package" -- version=$Build }
+    exec { & npm run -S "package" -- version=$Build official=true }
 }
 
 task VersionExtension {
