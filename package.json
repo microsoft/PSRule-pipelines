@@ -22,7 +22,7 @@
     "@types/mocha": "^10.0.8",
     "@types/node": "^20.16.5",
     "@typescript-eslint/eslint-plugin": "^8.6.0",
-    "@typescript-eslint/parser": "^8.6.0",
+    "@typescript-eslint/parser": "^8.7.0",
     "esbuild": "^0.24.0",
     "eslint": "^9.11.1",
     "tfx-cli": "^0.17.0",
