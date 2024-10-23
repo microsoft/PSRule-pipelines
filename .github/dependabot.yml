@@ -26,3 +26,10 @@ updates:
       - 'dependencies'
     reviewers:
       - 'microsoft/psrule'
+    groups:
+      # Group linting dependencies
+      dev-powershell:
+        patterns:
+          - esbuild
+          - eslint
+          - '@typescript-eslint/*'
