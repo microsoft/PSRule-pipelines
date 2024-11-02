@@ -16,7 +16,7 @@
     "url": "https://github.com/microsoft/PSRule-pipelines/issues"
   },
   "dependencies": {
-    "azure-pipelines-task-lib": "^4.17.2"
+    "azure-pipelines-task-lib": "^4.17.3"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.9",
@@ -26,7 +26,7 @@
     "esbuild": "^0.24.0",
     "eslint": "^9.14.0",
     "tfx-cli": "^0.17.0",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.3"
   },
   "scripts": {
     "compile": "tsc -p ./",
