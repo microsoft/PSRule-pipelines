@@ -21,8 +21,8 @@
   "devDependencies": {
     "@types/mocha": "^10.0.9",
     "@types/node": "^20.16.5",
-    "@typescript-eslint/eslint-plugin": "^8.12.2",
-    "@typescript-eslint/parser": "^8.12.2",
+    "@typescript-eslint/eslint-plugin": "^8.13.0",
+    "@typescript-eslint/parser": "^8.13.0",
     "esbuild": "^0.24.0",
     "eslint": "^9.14.0",
     "tfx-cli": "^0.17.0",
