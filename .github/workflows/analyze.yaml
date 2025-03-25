@@ -3,7 +3,7 @@
 #
 
 # NOTES:
-# This worflow uses PSRule, CodeQL, and DevSkim.
+# This workflow uses PSRule, CodeQL, and DevSkim.
 # You can read more about these linting tools and configuration options here:
 #   PSRule - https://aka.ms/ps-rule and https://github.com/microsoft/PSRule.Rules.MSFT.OSS
 #   CodeQL - https://codeql.github.com/docs/codeql-overview/about-codeql/
@@ -19,6 +19,8 @@ on:
     - cron: '15 20 * * 0' # At 08:15 PM, on Sunday each week
   workflow_dispatch:
 
+permissions: {}
+
 env:
   DOTNET_NOLOGO: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
@@ -31,10 +33,10 @@ jobs:
       contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Run PSRule analysis
-        uses: microsoft/ps-rule@v2.9.0
+        uses: microsoft/ps-rule@46451b8f5258c41beb5ae69ed7190ccbba84112c # v2.9.0
         with:
           modules: PSRule.Rules.MSFT.OSS
 
@@ -47,15 +49,15 @@ jobs:
       security-events: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Run DevSkim scanner
-        uses: microsoft/DevSkim-Action@v1
+        uses: microsoft/DevSkim-Action@a6b6966a33b497cd3ae2ebc406edf8f4cc2feec6 # v1.0.15
         with:
           directory-to-scan: .
 
       - name: Upload results to security tab
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@5f8171a638ada777af81d42b55959a643bb29017 # v3.28.12
         with:
           sarif_file: devskim-results.sarif
 
@@ -68,15 +70,15 @@ jobs:
       security-events: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
+        uses: github/codeql-action/init@5f8171a638ada777af81d42b55959a643bb29017 # v3.28.12
         with:
           languages: javascript
 
       - name: Autobuild
-        uses: github/codeql-action/autobuild@v3
+        uses: github/codeql-action/autobuild@5f8171a638ada777af81d42b55959a643bb29017 # v3.28.12
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+        uses: github/codeql-action/analyze@5f8171a638ada777af81d42b55959a643bb29017 # v3.28.12
