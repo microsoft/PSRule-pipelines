@@ -21,10 +21,10 @@
   "devDependencies": {
     "@types/mocha": "^10.0.10",
     "@types/node": "^20.16.5",
-    "@typescript-eslint/eslint-plugin": "^8.44.0",
+    "@typescript-eslint/eslint-plugin": "^8.46.1",
     "@typescript-eslint/parser": "^8.32.1",
-    "esbuild": "^0.25.10",
-    "eslint": "^9.36.0",
+    "esbuild": "^0.25.11",
+    "eslint": "^9.37.0",
     "tfx-cli": "^0.22.0",
     "typescript": "^5.9.2"
   },
