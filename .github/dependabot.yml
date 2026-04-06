@@ -13,9 +13,12 @@ updates:
     schedule:
       interval: daily
     labels:
-      - 'ci-quality'
-    reviewers:
-      - 'microsoft/psrule'
+      - dependencies
+    groups:
+      github:
+        patterns:
+          - actions/*
+          - github/*
 
   # Maintain dependencies for npm
   - package-ecosystem: npm
@@ -23,9 +26,7 @@ updates:
     schedule:
       interval: daily
     labels:
-      - 'dependencies'
-    reviewers:
-      - 'microsoft/psrule'
+      - dependencies
     groups:
       # Group linting dependencies
       dev-linting:
