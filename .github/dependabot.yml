@@ -27,6 +27,10 @@ updates:
       interval: daily
     labels:
       - dependencies
+    ignore:
+      - dependency-name: '@types/node'
+        versions:
+          - '25.*'
     groups:
       # Group linting dependencies
       dev-linting:
