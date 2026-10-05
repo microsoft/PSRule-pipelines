@@ -16,21 +16,24 @@
     "url": "https://github.com/microsoft/PSRule-pipelines/issues"
   },
   "dependencies": {
-    "azure-pipelines-task-lib": "^5.2.8"
+    "azure-pipelines-task-lib": "^5.2.2"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
     "@types/node": "^24.12.2",
-    "@typescript-eslint/eslint-plugin": "^8.58.0",
-    "@typescript-eslint/parser": "^8.58.0",
+    "@typescript-eslint/eslint-plugin": ">=8.58.0",
+    "@typescript-eslint/parser": ">=8.58.0",
     "esbuild": "^0.28.0",
-    "eslint": "^10.2.0",
-    "tfx-cli": "^0.23.1",
+    "eslint": "^10.11.0",
+    "tfx-cli": "^0.22.1",
     "typescript": "^5.9.3"
   },
   "scripts": {
     "compile": "tsc -p ./",
     "package": "tfx extension create --json --no-color --root out/dist --manifest-js extension.config.cjs --output-path out/extension --env",
     "build": "node build.mjs"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
   }
 }
