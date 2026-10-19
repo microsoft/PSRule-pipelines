@@ -7,15 +7,15 @@
       "version": "2.9.0"
     },
     "VstsTaskSdk": {
-      "version": "0.20.0"
+      "version": "0.21.4"
     }
   },
   "devDependencies": {
     "Pester": {
-      "version": "5.5.0"
+      "version": "6.2.0"
     },
     "PSScriptAnalyzer": {
-      "version": "1.21.0"
+      "version": "1.25.0"
     }
   }
 }
